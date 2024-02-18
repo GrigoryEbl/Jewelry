@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerMovement : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     [SerializeField] private Transform _playerModel;
     [SerializeField] private float _speed;
@@ -44,5 +44,10 @@ public class PlayerMovement : MonoBehaviour
             throw new System.ArgumentOutOfRangeException(nameof(rate));
 
         _flySpeedRate = rate;
+    }
+
+    public void ChangeSpeed(float addedSpeed)
+    {
+        _speed += addedSpeed;
     }
 }
