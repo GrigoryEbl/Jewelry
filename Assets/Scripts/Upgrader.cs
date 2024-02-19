@@ -10,6 +10,9 @@ public class Upgrader : MonoBehaviour
 
     private readonly int _maxLevel = 50;
 
+    private float _multiplier = 1.07f;
+    private float _basePrice = 30;
+
     public float PriceUpgradeEngine { get; private set; }
     public float PriceUpgradeMagnet { get; private set; }
     public float PriceUpgradeCargo { get; private set; }
@@ -23,7 +26,6 @@ public class Upgrader : MonoBehaviour
     {
         if (other.TryGetComponent(out Player player))
         {
-            print(other.name);
             _upgraderView.ShowScreen(true);
         }
     }
@@ -38,18 +40,18 @@ public class Upgrader : MonoBehaviour
 
     private void Init()
     {
-        PriceUpgradeEngine = 10;
-        PriceUpgradeMagnet = 10;
-        PriceUpgradeCargo = 10;
+        PriceUpgradeEngine = _basePrice;
+        PriceUpgradeMagnet = _basePrice;
+        PriceUpgradeCargo = _basePrice;
     }
 
     public void UpgradeEngine()
     {
         if (_car.EngineLevel < _maxLevel && _player.Wallet.Money >= PriceUpgradeEngine)
         {
-            _player.Wallet.TryDecreaseMoney((uint)PriceUpgradeEngine);
+            Pay(PriceUpgradeEngine);
             _car.IncreaseLevelEngine();
-            PriceUpgradeEngine *= 2;
+            PriceUpgradeEngine = CalculateModifyPrice(_car.EngineLevel);
         }
     }
 
@@ -57,9 +59,9 @@ public class Upgrader : MonoBehaviour
     {
         if (_car.MagnetLevel < _maxLevel && _player.Wallet.Money >= PriceUpgradeMagnet)
         {
-            _player.Wallet.TryDecreaseMoney((uint)PriceUpgradeMagnet);
+            Pay(PriceUpgradeMagnet);
             _car.IncreaseLevelMagnet();
-            PriceUpgradeMagnet *= 2;
+            PriceUpgradeMagnet = CalculateModifyPrice(_car.MagnetLevel);
         }
     }
 
@@ -67,9 +69,19 @@ public class Upgrader : MonoBehaviour
     {
         if (_car.CargoLevel < _maxLevel && _player.Wallet.Money >= PriceUpgradeCargo)
         {
-            _player.Wallet.TryDecreaseMoney((uint)PriceUpgradeCargo);
+            Pay(PriceUpgradeCargo);
             _car.IncreaseLevelCargo();
-            PriceUpgradeCargo *= 2;
+            PriceUpgradeCargo = CalculateModifyPrice(_car.CargoLevel);
         }
+    }
+
+    private float CalculateModifyPrice(int degree)
+    {
+        return _basePrice * Mathf.Pow(_multiplier, degree);
+    }
+
+    private void Pay(float price)
+    {
+        _player.Wallet.TryDecreaseMoney((uint)price);
     }
 }

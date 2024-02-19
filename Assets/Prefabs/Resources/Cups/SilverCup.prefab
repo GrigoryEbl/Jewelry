@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 10b4c610983d22c40ab6b243293973de, type: 2}
+  - {fileID: 2100000, guid: d4e54c8c76186114390e3f735875ee15, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -169,7 +169,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 10b4c610983d22c40ab6b243293973de, type: 2}
+  - {fileID: 2100000, guid: d4e54c8c76186114390e3f735875ee15, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 1943870749840001040}
   - component: {fileID: 8770248421250180932}
   m_Layer: 0
-  m_Name: Cup
+  m_Name: SilverCup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,7 +311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f4d13871ac01d4185e8f26bc5523f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 250
+  _price: 40
+  _level: 5
 --- !u!1 &5609867040554123684
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +375,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 10b4c610983d22c40ab6b243293973de, type: 2}
+  - {fileID: 2100000, guid: d4e54c8c76186114390e3f735875ee15, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

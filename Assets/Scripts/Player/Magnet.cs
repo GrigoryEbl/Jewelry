@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Magnet : MonoBehaviour , IAttractor
+public class Magnet : MonoBehaviour, IAttractor
 {
     [SerializeField] private float _force;
     [SerializeField] private float _minCatchDistance;
 
-     private int _maxCargoCount = 1;
+    private int _maxCargoCount = 1;
 
     public int Level { get; private set; }
 
@@ -24,13 +24,16 @@ public class Magnet : MonoBehaviour , IAttractor
 
         if (other.TryGetComponent(out Resource resource) && resource.TryGetComponent(out Rigidbody rigidbody))
         {
-            Vector3 direction = transform.position - resource.transform.position;
-
-            Attract(direction, rigidbody, _force);
-
-            if (Vector3.Distance(resource.transform.position, transform.position) <= _minCatchDistance)
+            if (Level >= resource.Level)
             {
-                Catch(resource, rigidbody);
+                Vector3 direction = transform.position - resource.transform.position;
+
+                Attract(direction, rigidbody, _force);
+
+                if (Vector3.Distance(resource.transform.position, transform.position) <= _minCatchDistance)
+                {
+                    Catch(resource, rigidbody);
+                }
             }
         }
     }
