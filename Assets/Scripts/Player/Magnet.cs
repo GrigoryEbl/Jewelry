@@ -6,6 +6,7 @@ public class Magnet : MonoBehaviour, IAttractor
     [SerializeField] private float _minCatchDistance;
 
     private int _maxCargoCount = 1;
+    private int _attractedResources;
 
     public int Level { get; private set; }
 
@@ -28,19 +29,19 @@ public class Magnet : MonoBehaviour, IAttractor
             {
                 Vector3 direction = transform.position - resource.transform.position;
 
-                Attract(direction, rigidbody, _force);
-
-                if (Vector3.Distance(resource.transform.position, transform.position) <= _minCatchDistance)
+                if (_attractedResources < _maxCargoCount)
                 {
-                    Catch(resource, rigidbody);
+                    Attract(direction, rigidbody, _force);
                 }
+
+                TryCatch(resource, rigidbody);
             }
         }
     }
 
-    private void Catch(Resource resource, Rigidbody rigidbody)
+    private void TryCatch(Resource resource, Rigidbody rigidbody)
     {
-        if (resource != null)
+        if (Vector3.Distance(resource.transform.position, transform.position) <= _minCatchDistance)
         {
             resource.transform.parent = transform;
             rigidbody.isKinematic = true;

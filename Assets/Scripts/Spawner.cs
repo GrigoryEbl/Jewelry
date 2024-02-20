@@ -35,8 +35,6 @@ public class Spawner : MonoBehaviour
                                                          _transform.position.z + RandomPosition.y),
                                                          Quaternion.identity, _transform);
 
-                _spawnedCount++;
-
                 yield return new WaitForSeconds(1f);
             }
 

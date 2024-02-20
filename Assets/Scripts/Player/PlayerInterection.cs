@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInterection : MonoBehaviour, IAttractor
@@ -22,7 +20,6 @@ public class PlayerInterection : MonoBehaviour, IAttractor
             {
                 MoneyCatched?.Invoke(money.Value);
                 Destroy(money.gameObject);
-                
             }
         }
     }
