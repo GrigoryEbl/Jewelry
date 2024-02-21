@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class Magnet : MonoBehaviour, IAttractor
@@ -5,14 +7,14 @@ public class Magnet : MonoBehaviour, IAttractor
     [SerializeField] private float _force;
     [SerializeField] private float _minCatchDistance;
 
-    private int _maxCargoCount = 1;
-    private int _attractedResources;
+    [SerializeField] private int _maxCargoCount;
 
     public int Level { get; private set; }
 
     private void Awake()
     {
         Level = 0;
+        _maxCargoCount = 1;
     }
 
     private void OnTriggerStay(Collider other)
@@ -25,17 +27,13 @@ public class Magnet : MonoBehaviour, IAttractor
 
         if (other.TryGetComponent(out Resource resource) && resource.TryGetComponent(out Rigidbody rigidbody))
         {
-            if (Level >= resource.Level)
-            {
-                Vector3 direction = transform.position - resource.transform.position;
+            if (Level < resource.Level)
+                return;
 
-                if (_attractedResources < _maxCargoCount)
-                {
-                    Attract(direction, rigidbody, _force);
-                }
+            Vector3 direction = transform.position - resource.transform.position;
 
-                TryCatch(resource, rigidbody);
-            }
+            Attract(direction, rigidbody, _force);
+            TryCatch(resource, rigidbody);
         }
     }
 
