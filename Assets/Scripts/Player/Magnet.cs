@@ -6,14 +6,17 @@ public class Magnet : MonoBehaviour, IAttractor
 {
     [SerializeField] private float _force;
     [SerializeField] private float _minCatchDistance;
-
     [SerializeField] private int _maxCargoCount;
 
+    private int _attractedResources;
+    private float _startCatchDistance = 0.4f;
+    
     public int Level { get; private set; }
+    public int CargoLevel => _maxCargoCount;
 
     private void Awake()
     {
-        Level = 0;
+        Level = 3;
         _maxCargoCount = 1;
     }
 
@@ -24,6 +27,9 @@ public class Magnet : MonoBehaviour, IAttractor
 
         if (transform.childCount >= _maxCargoCount)
             return;
+
+        if (transform.childCount < _attractedResources)
+            _minCatchDistance = _startCatchDistance;
 
         if (other.TryGetComponent(out Resource resource) && resource.TryGetComponent(out Rigidbody rigidbody))
         {
@@ -43,6 +49,8 @@ public class Magnet : MonoBehaviour, IAttractor
         {
             resource.transform.parent = transform;
             rigidbody.isKinematic = true;
+            _attractedResources = transform.childCount;
+            AddCathDistance();
         }
     }
 
@@ -59,5 +67,16 @@ public class Magnet : MonoBehaviour, IAttractor
     public void ChangeLevel(int level)
     {
         Level = level;
+    }
+
+    private void AddCathDistance()
+    {
+        _minCatchDistance += 0.03f;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, _minCatchDistance);
     }
 }

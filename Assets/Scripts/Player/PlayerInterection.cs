@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerInterection : MonoBehaviour, IAttractor
 {
     private float _force = 100f;
-    private float _minCatchDistance = 1f;
+    private float _minCatchDistance = 2f;
 
     public event Action<uint> MoneyCatched;
 
