@@ -1,6 +1,6 @@
+using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UpgraderView : MonoBehaviour
 {
@@ -8,6 +8,8 @@ public class UpgraderView : MonoBehaviour
     [SerializeField] private Car _car;
     [SerializeField] private Upgrader _upgrader;
     [SerializeField] private GameObject _upgradeScreen;
+
+    public event Action<bool> OpenPanel;
 
     private void Update()
     {
@@ -23,7 +25,7 @@ public class UpgraderView : MonoBehaviour
 
     public void ShowScreen(bool isActive)
     {
-        print(isActive);
         _upgradeScreen.SetActive(isActive);
+        OpenPanel?.Invoke(isActive);
     }
 }

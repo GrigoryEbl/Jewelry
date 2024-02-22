@@ -71,7 +71,7 @@ public class Magnet : MonoBehaviour, IAttractor
 
     private void AddCathDistance()
     {
-        _minCatchDistance += 0.03f;
+        _minCatchDistance += 0.05f;
     }
 
     private void OnDrawGizmos()
