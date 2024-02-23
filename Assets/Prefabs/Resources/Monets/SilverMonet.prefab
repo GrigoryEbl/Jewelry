@@ -1397,7 +1397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _price: 120
-  _level: 5
+  _level: 25
 --- !u!54 &2894101078598351028
 Rigidbody:
   m_ObjectHideFlags: 0

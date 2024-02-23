@@ -16,7 +16,7 @@ public class Magnet : MonoBehaviour, IAttractor
 
     private void Awake()
     {
-        Level = 3;
+        Level = 1;
         _maxCargoCount = 1;
     }
 

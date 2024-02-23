@@ -12,7 +12,7 @@ public class Wallet : MonoBehaviour
 
     public void TakeMoney(uint money)
     {
-        _money += money * 10000;
+        _money += money;
         MoneyChanched?.Invoke(_money);
     }
 

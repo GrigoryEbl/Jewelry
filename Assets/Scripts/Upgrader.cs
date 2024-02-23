@@ -10,7 +10,7 @@ public class Upgrader : MonoBehaviour
 
     private readonly int _maxLevel = 50;
 
-    private float _multiplier = 1.07f;
+    private float _multiplier = 1.1f;
     private float _basePrice = 30;
 
     public float PriceUpgradeEngine { get; private set; }

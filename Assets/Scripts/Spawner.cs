@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Resource _resourcePrefab;
     [SerializeField] private float _spawnRadius;
     [SerializeField] private int _maxSpawnCount;
-    [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private float _spawnDelay;
 
     private Transform _transform;
     private int _spawnedCount;
@@ -27,11 +27,12 @@ public class Spawner : MonoBehaviour
 
             if (_spawnedCount < _maxSpawnCount)
             {
+                yield return new WaitForSeconds(_spawnDelay);
                 Vector2 RandomPosition = Random.insideUnitCircle * _spawnRadius;
 
                 Instantiate(_resourcePrefab, new Vector3(_transform.position.x + RandomPosition.x, transform.position.y, _transform.position.z + RandomPosition.y), Quaternion.identity, _transform);
 
-                yield return new WaitForSeconds(1f);
+               // yield return new WaitForSeconds(_spawnDelay);
             }
 
             yield return null;
