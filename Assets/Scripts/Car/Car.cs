@@ -7,7 +7,7 @@ public class Car : MonoBehaviour
     [SerializeField] private Movement _engine;
     [SerializeField] private Magnet _magnet;
 
-    private float _addedPowerEngine = 0.15f;
+    private float _addedPowerEngine = 0.20f;
 
     public int EngineLevel { get; private set; }
     public int MagnetLevel { get; private set; }

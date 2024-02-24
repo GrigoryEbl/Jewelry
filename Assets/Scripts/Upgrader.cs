@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +7,13 @@ public class Upgrader : MonoBehaviour
 {
     [SerializeField] private Car _car;
     [SerializeField] private Player _player;
-    [SerializeField] private UpgraderView _upgraderView;
 
     private readonly int _maxLevel = 50;
 
     private float _multiplier = 1.1f;
     private float _basePrice = 30;
+
+    public event Action<bool> UpgradeZoneReach;
 
     public float PriceUpgradeEngine { get; private set; }
     public float PriceUpgradeMagnet { get; private set; }
@@ -26,7 +28,7 @@ public class Upgrader : MonoBehaviour
     {
         if (other.TryGetComponent(out Player player))
         {
-            _upgraderView.ShowScreen(true);
+            UpgradeZoneReach?.Invoke(true);
         }
     }
 
@@ -34,7 +36,7 @@ public class Upgrader : MonoBehaviour
     {
         if (other.TryGetComponent(out Player player))
         {
-            _upgraderView.ShowScreen(false);
+            UpgradeZoneReach?.Invoke(false);
         }
     }
 

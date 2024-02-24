@@ -9,7 +9,8 @@ public class Camera : MonoBehaviour
     [SerializeField] private int _cameraPositionZ;
     [SerializeField] private int _cameraPositionY;
     [SerializeField] private int _zoomValue;
-    [SerializeField] private UpgraderView _upgradeView;
+    [SerializeField] private Upgrader _upgrader;
+
 
     private Vector3 _target;
     private Transform _transform;
@@ -31,17 +32,17 @@ public class Camera : MonoBehaviour
 
     private void OnEnable()
     {
-        _upgradeView.OpenPanel += Zoom;
+        _upgrader.UpgradeZoneReach += Zoom;
     }
 
     private void OnDisable()
     {
-        _upgradeView.OpenPanel -= Zoom;
+        _upgrader.UpgradeZoneReach -= Zoom;
     }
 
-    private void Zoom(bool isOpen)
+    private void Zoom(bool isReach)
     {
-        if (isOpen)
+        if (isReach)
         {
             _cameraPositionZ = _zoomValue;
         }

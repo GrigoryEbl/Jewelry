@@ -5,14 +5,18 @@ using UnityEngine;
 public class UpgraderView : MonoBehaviour
 {
     [SerializeField] private TMP_Text[] _text;
-    [SerializeField] private Car _car;
     [SerializeField] private Upgrader _upgrader;
     [SerializeField] private GameObject _upgradeScreen;
+    [SerializeField] private Car _car;
 
-    public event Action<bool> OpenPanel;
+    private void OnEnable() => _upgrader.UpgradeZoneReach += OnUpgradeZoneReach;
 
-    private void Update()
+    private void OnDisable() => _upgrader.UpgradeZoneReach -= OnUpgradeZoneReach;
+
+    public void OnUpgradeZoneReach(bool isActive)
     {
+        _upgradeScreen.SetActive(isActive);
+
         _text[0].text = "Engine level: " + _car.EngineLevel.ToString();
         _text[1].text = "$" + _upgrader.PriceUpgradeEngine.ToString("F1");
 
@@ -21,11 +25,5 @@ public class UpgraderView : MonoBehaviour
 
         _text[4].text = "Cargo level: " + _car.CargoLevel.ToString();
         _text[5].text = "$" + _upgrader.PriceUpgradeCargo.ToString("F1");
-    }
-
-    public void ShowScreen(bool isActive)
-    {
-        _upgradeScreen.SetActive(isActive);
-        OpenPanel?.Invoke(isActive);
     }
 }

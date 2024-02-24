@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerInterection : MonoBehaviour, IAttractor
+public class MoneyCollector : MonoBehaviour, IAttractor
 {
     private float _force = 100f;
     private float _minCatchDistance = 2f;
