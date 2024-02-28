@@ -1,29 +1,63 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgraderView : MonoBehaviour
 {
-    [SerializeField] private TMP_Text[] _text;
     [SerializeField] private Upgrader _upgrader;
     [SerializeField] private GameObject _upgradeScreen;
     [SerializeField] private Car _car;
 
-    private void OnEnable() => _upgrader.UpgradeZoneReach += OnUpgradeZoneReach;
+    [SerializeField] private TMP_Text _enginePriceText;
+    [SerializeField] private TMP_Text _engineLevelText;
 
-    private void OnDisable() => _upgrader.UpgradeZoneReach -= OnUpgradeZoneReach;
+    [SerializeField] private TMP_Text _magnetPriceText;
+    [SerializeField] private TMP_Text _magnetLevelText;
+    [SerializeField] private Slider _slider;
 
-    public void OnUpgradeZoneReach(bool isActive)
+    [SerializeField] private TMP_Text _cargoPriceText;
+    [SerializeField] private TMP_Text _cargoLevelText;
+
+    private void OnEnable()
+    {
+        _upgrader.UpgradeZoneReach += OnUpgradeZoneReach;
+        _upgrader.CharacteristiscsChange += OnChangeMagnet;
+        _upgrader.CharacteristiscsChange += OnChangeEngine;
+        _upgrader.CharacteristiscsChange += OnChangeCargo;
+    }
+    private void OnDisable()
+    {
+        _upgrader.UpgradeZoneReach -= OnUpgradeZoneReach;
+        _upgrader.CharacteristiscsChange -= OnChangeMagnet;
+        _upgrader.CharacteristiscsChange -= OnChangeEngine;
+        _upgrader.CharacteristiscsChange -= OnChangeCargo;
+    }
+
+   private void OnUpgradeZoneReach(bool isActive)
     {
         _upgradeScreen.SetActive(isActive);
+        OnChangeMagnet();
+        OnChangeEngine();
+        OnChangeCargo();
+    }
 
-        _text[0].text = "Engine level: " + _car.EngineLevel.ToString();
-        _text[1].text = "$" + _upgrader.PriceUpgradeEngine.ToString("F1");
+    private void OnChangeMagnet()
+    {
+        _magnetPriceText.text = $"${_upgrader.PriceUpgradeMagnet.ToString("F0")}";
+        _magnetLevelText.text = $"Magnet level: {_car.MagnetLevel}";
+        _slider.value = _car.MagnetLevel;
+    }
 
-        _text[2].text = "Magnet level: " + _car.MagnetLevel.ToString();
-        _text[3].text = "$" + _upgrader.PriceUpgradeMagnet.ToString("F1");
-
-        _text[4].text = "Cargo level: " + _car.CargoLevel.ToString();
-        _text[5].text = "$" + _upgrader.PriceUpgradeCargo.ToString("F1");
+    private void OnChangeEngine()
+    {
+        _enginePriceText.text = $"${_upgrader.PriceUpgradeEngine.ToString("F0")}";
+        _engineLevelText.text = $"Engine level: {_car.EngineLevel}";
+    }
+    
+    private void OnChangeCargo()
+    {
+        _cargoPriceText.text = $"${_upgrader.PriceUpgradeCargo.ToString("F0")}";
+        _cargoLevelText.text = $"Cargo level: {_car.CargoLevel}";
     }
 }

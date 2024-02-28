@@ -14,6 +14,7 @@ public class Upgrader : MonoBehaviour
     private float _basePrice = 30;
 
     public event Action<bool> UpgradeZoneReach;
+    public event Action CharacteristiscsChange;
 
     public float PriceUpgradeEngine { get; private set; }
     public float PriceUpgradeMagnet { get; private set; }
@@ -54,6 +55,7 @@ public class Upgrader : MonoBehaviour
             Pay(PriceUpgradeEngine);
             _car.IncreaseLevelEngine();
             PriceUpgradeEngine = CalculateModifyPrice(_car.EngineLevel);
+            CharacteristiscsChange?.Invoke();
         }
     }
 
@@ -64,6 +66,7 @@ public class Upgrader : MonoBehaviour
             Pay(PriceUpgradeMagnet);
             _car.IncreaseLevelMagnet();
             PriceUpgradeMagnet = CalculateModifyPrice(_car.MagnetLevel);
+            CharacteristiscsChange?.Invoke();
         }
     }
 
@@ -74,6 +77,7 @@ public class Upgrader : MonoBehaviour
             Pay(PriceUpgradeCargo);
             _car.IncreaseLevelCargo();
             PriceUpgradeCargo = CalculateModifyPrice(_car.CargoLevel);
+            CharacteristiscsChange?.Invoke();
         }
     }
 

@@ -18,6 +18,14 @@ public class Player : MonoBehaviour
         _playerInterection = GetComponent<MoneyCollector>();
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.Escape))
+        {
+            _wallet.TakeMoney(100000);      //DELETE
+        }
+    }
+
     private void OnEnable() => _playerInterection.MoneyCatched += OnMoneyCatch;
 
     private void OnDisable() => _playerInterection.MoneyCatched -= OnMoneyCatch;

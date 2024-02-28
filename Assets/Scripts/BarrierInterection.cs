@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class BarrierInterection : MonoBehaviour
@@ -11,7 +12,7 @@ public class BarrierInterection : MonoBehaviour
 
     public int Price => _price;
 
-    public void OpenNewZone()
+    public void TryOpenNewZone()
     {
         if (_player.Wallet.Money >= Price)
         {
@@ -24,5 +25,5 @@ public class BarrierInterection : MonoBehaviour
     private void Pay(float price)
     {
         _player.Wallet.TryDecreaseMoney((uint)price);
-    } 
+    }
 }
