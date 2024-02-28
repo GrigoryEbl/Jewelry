@@ -1,16 +1,17 @@
 using System;
 using System.Collections;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class Magnet : MonoBehaviour, IAttractor
 {
     [SerializeField] private float _force;
-    [SerializeField] private float _minCatchDistance;
+    [SerializeField] private float _catchDistance;
     [SerializeField] private int _maxCargoCount;
 
     private int _attractedResources;
     private float _startCatchDistance = 0.4f;
-    
+
     public int Level { get; private set; }
     public int CargoLevel => _maxCargoCount;
 
@@ -22,6 +23,8 @@ public class Magnet : MonoBehaviour, IAttractor
 
     private void OnTriggerStay(Collider other)
     {
+        print(other.name);
+
         if (other.transform.parent == transform)
             return;
 
@@ -29,7 +32,7 @@ public class Magnet : MonoBehaviour, IAttractor
             return;
 
         if (transform.childCount < _attractedResources)
-            _minCatchDistance = _startCatchDistance;
+            _catchDistance = _startCatchDistance;
 
         if (other.TryGetComponent(out Resource resource) && resource.TryGetComponent(out Rigidbody rigidbody))
         {
@@ -45,7 +48,7 @@ public class Magnet : MonoBehaviour, IAttractor
 
     private void TryCatch(Resource resource, Rigidbody rigidbody)
     {
-        if (Vector3.Distance(resource.transform.position, transform.position) <= _minCatchDistance)
+        if (Vector3.Distance(resource.transform.position, transform.position) <= _catchDistance)
         {
             resource.transform.parent = transform;
             rigidbody.isKinematic = true;
@@ -71,12 +74,12 @@ public class Magnet : MonoBehaviour, IAttractor
 
     private void AddCathDistance()
     {
-        _minCatchDistance += 0.05f;
+        _catchDistance += 0.05f;
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, _minCatchDistance);
+        Gizmos.DrawWireSphere(transform.position, _catchDistance);
     }
 }

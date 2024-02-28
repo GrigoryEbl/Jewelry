@@ -6,22 +6,23 @@ using UnityEngine.UI;
 
 public class BarrierInterectionView : MonoBehaviour
 {
+    [SerializeField] private BarrierInterection _barrierInterection;
     [SerializeField] private TMP_Text _text;
     [SerializeField] private GameObject _barrierInterectionScreen;
-    [SerializeField] private Player _player;
 
-    private void OnEnable() => _player.BarrierInterectionReach += OnBarrierInterectionReach;
-
-    private void OnDisable() => _player.BarrierInterectionReach -= OnBarrierInterectionReach;
-
-    private void OnBarrierInterectionReach(bool isActive, BarrierInterection barrierInterection)
+    private void OnEnable()
     {
-        ShowInfo(isActive, barrierInterection);
+        _barrierInterection.BarrierReach += ShowInfo;
     }
-    
-    private void ShowInfo(bool isActive, BarrierInterection barrierInterection)
+
+    private void OnDisable()
+    {
+        _barrierInterection.BarrierReach -= ShowInfo;
+    }
+
+    private void ShowInfo(bool isActive)
     {
         _barrierInterectionScreen.SetActive(isActive);
-        _text.text = "$" + barrierInterection.Price;
+        _text.text = "$" + _barrierInterection.Price;
     }
 }

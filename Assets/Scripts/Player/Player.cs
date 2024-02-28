@@ -8,8 +8,6 @@ public class Player : MonoBehaviour
     private Wallet _wallet;
     private MoneyCollector _playerInterection;
 
-    public event Action<bool, BarrierInterection> BarrierInterectionReach;
-
     public Wallet Wallet => _wallet;
 
     private void Awake()
@@ -33,21 +31,5 @@ public class Player : MonoBehaviour
     private void OnMoneyCatch(uint value)
     {
         _wallet.TakeMoney(value);
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if(other.TryGetComponent(out BarrierInterection barrierInterection))
-        {
-            BarrierInterectionReach?.Invoke(true, barrierInterection);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.TryGetComponent(out BarrierInterection barrierInterection))
-        {
-            BarrierInterectionReach?.Invoke(false, barrierInterection);
-        }
     }
 }

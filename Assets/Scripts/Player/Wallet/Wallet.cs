@@ -16,17 +16,17 @@ public class Wallet : MonoBehaviour
         MoneyChanched?.Invoke(_money);
     }
 
-    public void TryDecreaseMoney(uint money)
+    public bool TryDecreaseMoney(uint money)
     {
         if (_money >= money)
         {
             _money -= money;
             MoneyChanched?.Invoke(_money);
+            return true;
         }
         else
         {
             throw new ArgumentException("недостаточно денег");
         }
-
     }
 }

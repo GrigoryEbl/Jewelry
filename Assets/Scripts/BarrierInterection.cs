@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BarrierInterection : MonoBehaviour
 {
@@ -10,20 +12,34 @@ public class BarrierInterection : MonoBehaviour
     [SerializeField] private Transform _barrier;
     [SerializeField] private int _price;
 
+    public event UnityAction<bool> BarrierReach;
+
     public int Price => _price;
 
-    public void TryOpenNewZone()
+    private void OnTriggerStay(Collider other)
     {
-        if (_player.Wallet.Money >= Price)
+        if (other.TryGetComponent(out Player player))
         {
-            Pay(Price);
-            Destroy(_barrier.gameObject);
-            Destroy(gameObject);
+            BarrierReach?.Invoke(true);
         }
     }
 
-    private void Pay(float price)
+    private void OnTriggerExit(Collider other)
     {
-        _player.Wallet.TryDecreaseMoney((uint)price);
+        if (other.TryGetComponent(out Player player))
+        {
+            BarrierReach?.Invoke(false);
+        }
+    }
+
+    private void OnDestroy() => BarrierReach?.Invoke(false);
+
+    public void TryOpenNewZone()
+    {
+        if (_player.Wallet.TryDecreaseMoney((uint)Price))
+        {
+            Destroy(_barrier.gameObject);
+            Destroy(gameObject);
+        }
     }
 }

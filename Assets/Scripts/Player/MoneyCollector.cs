@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class MoneyCollector : MonoBehaviour, IAttractor
 {
-    private float _force = 100f;
-    private float _minCatchDistance = 2f;
+    [SerializeField] private float _force = 400f;
+    [SerializeField] private float _minCatchDistance = 2f;
 
     public event Action<uint> MoneyCatched;
 
