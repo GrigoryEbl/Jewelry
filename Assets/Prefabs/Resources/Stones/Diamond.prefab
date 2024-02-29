@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1177817141438121925}
   - component: {fileID: 650677421164749036}
   - component: {fileID: 1512182021871797244}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 2234105228681338389}
   - component: {fileID: 5342272011518931112}
   - component: {fileID: 1258652721585374524}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Diamond
   m_TagString: Untagged
   m_Icon: {fileID: 0}

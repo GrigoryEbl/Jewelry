@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2115907462513637908}
   - component: {fileID: -2488307625704290850}
   - component: {fileID: -5781000931925385680}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RustIngot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

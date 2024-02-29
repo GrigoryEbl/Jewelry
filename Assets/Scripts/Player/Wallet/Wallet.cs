@@ -1,7 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class Wallet : MonoBehaviour
 {
@@ -10,10 +9,17 @@ public class Wallet : MonoBehaviour
 
     public event Action<uint> MoneyChanched;
 
+    private void OnEnable() => YandexGame.GetDataEvent += GetLoad;
+
+    private void OnDisable() => YandexGame.GetDataEvent -= GetLoad;
+
     public void TakeMoney(uint money)
     {
         _money += money;
         MoneyChanched?.Invoke(_money);
+        YandexGame.savesData.Money = _money;
+        YandexGame.SaveProgress();
+
     }
 
     public bool TryDecreaseMoney(uint money)
@@ -22,11 +28,18 @@ public class Wallet : MonoBehaviour
         {
             _money -= money;
             MoneyChanched?.Invoke(_money);
+            YandexGame.savesData.Money = _money;
+            YandexGame.SaveProgress();
             return true;
         }
         else
         {
             throw new ArgumentException("недостаточно денег");
         }
+    }
+
+    private void GetLoad()
+    {
+        _money = YandexGame.savesData.Money;
     }
 }

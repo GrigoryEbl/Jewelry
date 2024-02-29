@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3816788795466447066}
   - component: {fileID: 9054847113424453528}
   - component: {fileID: 1186557072289428642}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2994061457559891440}
   - component: {fileID: 2907851660692029947}
   - component: {fileID: 1008954038155497031}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 1833543243555312024}
   - component: {fileID: 8770248421250180932}
   - component: {fileID: 790993349059788153}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RustCup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 5931515002348014348}
   - component: {fileID: 5304608170312663600}
   - component: {fileID: 8453762299408264008}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

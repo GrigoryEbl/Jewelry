@@ -18,7 +18,10 @@ namespace YG
 
         // Ваши сохранения
 
-        // ...
+        public uint Money;
+        public int MagnetLevel;
+        public int EngineLevel;
+        public int CargoLevel;
 
         // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
 

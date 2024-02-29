@@ -41,4 +41,13 @@ public class JoystickInput : MonoBehaviour
     {
         LastFrameMoving = Moving;
     }
+
+    public void SetWorkInput(bool isActive)
+    {
+        print(this.name + isActive);
+        if (isActive)
+            return;
+        else
+            this.enabled = false;
+    }
 }

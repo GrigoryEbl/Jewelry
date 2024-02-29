@@ -1,2 +1,2 @@
-Build path: D:/Unity/Release/PluginYG/PluginYG
-Build number: 4
+Build path: C:/Users/Григорий/Documents/GitHub/Jewelry/Build
+Build number: 5

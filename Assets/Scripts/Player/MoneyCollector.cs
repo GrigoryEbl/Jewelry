@@ -1,31 +1,34 @@
 using System;
 using UnityEngine;
 
-public class MoneyCollector : MonoBehaviour, IAttractor
+[RequireComponent(typeof(Attractor))]
+public class MoneyCollector : MonoBehaviour
 {
     [SerializeField] private float _force = 400f;
     [SerializeField] private float _minCatchDistance = 2f;
 
+    private Attractor _attractor;
+    private Transform _transform;
+
     public event Action<uint> MoneyCatched;
+
+    private void Awake()
+    {
+        _transform = transform;
+        _attractor = GetComponent<Attractor>();
+    }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.TryGetComponent(out Money money) && other.TryGetComponent(out Rigidbody rigidbody))
         {
-            Vector3 direction = transform.position - money.transform.position;
+           _attractor.Attract(money.transform,transform, _force, false);
 
-            Attract(direction, rigidbody, _force);
-
-            if (Vector3.Distance(money.transform.position, transform.position) <= _minCatchDistance)
+            if (Vector3.Distance(money.transform.position, _transform.position) <= _minCatchDistance)
             {
                 MoneyCatched?.Invoke(money.Value);
                 Destroy(money.gameObject);
             }
         }
-    }
-
-    public void Attract(Vector3 direction, Rigidbody rigidbody, float force)
-    {
-        rigidbody.velocity = direction * force * Time.deltaTime;
     }
 }

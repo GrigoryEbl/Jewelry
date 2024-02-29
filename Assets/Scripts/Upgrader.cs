@@ -9,8 +9,9 @@ public class Upgrader : MonoBehaviour
     [SerializeField] private Player _player;
 
     private readonly int _maxLevel = 50;
+    private readonly int _maxLevelCargo = 30;
 
-    private float _multiplier = 1.1f;
+    private float _multiplier = 2.1f;
     private float _basePrice = 30;
 
     public event Action<bool> UpgradeZoneReach;
@@ -72,7 +73,7 @@ public class Upgrader : MonoBehaviour
 
     public void UpgradeCargo()
     {
-        if (_car.CargoLevel < _maxLevel && _player.Wallet.Money >= PriceUpgradeCargo)
+        if (_car.CargoLevel < _maxLevelCargo && _player.Wallet.Money >= PriceUpgradeCargo)
         {
             Pay(PriceUpgradeCargo);
             _car.IncreaseLevelCargo();

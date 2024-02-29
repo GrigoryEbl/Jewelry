@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class Utilizer : MonoBehaviour, IAttractor
+[RequireComponent(typeof(Attractor))]
+public class Utilizer : MonoBehaviour
 {
     [SerializeField] private float _force;
     [SerializeField] private float _minCatchDistance;
@@ -10,27 +12,31 @@ public class Utilizer : MonoBehaviour, IAttractor
     [SerializeField] private Money _moneyPrefab;
     [SerializeField] private Transform _spawnMoneyPoint;
 
+    private Attractor _attractor;
+
+    private void Awake()
+    {
+        _attractor = GetComponent<Attractor>();
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.TryGetComponent(out Resource resource) && resource.TryGetComponent(out Rigidbody rigidbody))
         {
-            uint priceResource = resource.Price;
-            Vector3 direction = _utilizePoint.transform.position - resource.transform.position;
-
             rigidbody.isKinematic = false;
 
-            Attract(direction, rigidbody, _force);
-
-            if (Vector3.Distance(resource.transform.position, _utilizePoint.transform.position) <= _minCatchDistance)
-            {
-                Destroy(resource.gameObject);
-                Instantiate(_moneyPrefab, _spawnMoneyPoint.position, Quaternion.identity, null).SetValue(priceResource);
-            }
+            _attractor.Attract(resource.transform, _utilizePoint, _force, true);
+            TryCatch(resource);
         }
     }
 
-    public void Attract(Vector3 direction, Rigidbody rigidbody, float force)
+    private void TryCatch(Resource resource)
     {
-        rigidbody.velocity = direction * force * Time.deltaTime;
+        if (Vector3.Distance(resource.transform.position, _utilizePoint.transform.position) <= _minCatchDistance)
+        {
+            uint priceResource = resource.Price;
+            Destroy(resource.gameObject);
+            Instantiate(_moneyPrefab, _spawnMoneyPoint.position, Quaternion.identity, null).SetValue(priceResource);
+        }
     }
 }

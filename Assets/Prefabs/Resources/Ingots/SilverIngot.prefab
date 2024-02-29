@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2115907462513637908}
   - component: {fileID: -1034813672635097642}
   - component: {fileID: -310732274211473667}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SilverIngot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

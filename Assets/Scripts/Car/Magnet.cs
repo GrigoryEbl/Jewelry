@@ -1,14 +1,18 @@
 using System;
 using System.Collections;
 using System.Runtime.InteropServices;
+using TMPro;
 using UnityEngine;
 
-public class Magnet : MonoBehaviour, IAttractor
+[RequireComponent(typeof(Attractor))]
+public class Magnet : MonoBehaviour
 {
     [SerializeField] private float _force;
     [SerializeField] private float _catchDistance;
     [SerializeField] private int _maxCargoCount;
 
+    private Attractor _attractor;
+    private Transform _transform;
     private int _attractedResources;
     private float _startCatchDistance = 0.4f;
 
@@ -19,47 +23,8 @@ public class Magnet : MonoBehaviour, IAttractor
     {
         Level = 1;
         _maxCargoCount = 1;
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        print(other.name);
-
-        if (other.transform.parent == transform)
-            return;
-
-        if (transform.childCount >= _maxCargoCount)
-            return;
-
-        if (transform.childCount < _attractedResources)
-            _catchDistance = _startCatchDistance;
-
-        if (other.TryGetComponent(out Resource resource) && resource.TryGetComponent(out Rigidbody rigidbody))
-        {
-            if (Level < resource.Level)
-                return;
-
-            Vector3 direction = transform.position - resource.transform.position;
-
-            Attract(direction, rigidbody, _force);
-            TryCatch(resource, rigidbody);
-        }
-    }
-
-    private void TryCatch(Resource resource, Rigidbody rigidbody)
-    {
-        if (Vector3.Distance(resource.transform.position, transform.position) <= _catchDistance)
-        {
-            resource.transform.parent = transform;
-            rigidbody.isKinematic = true;
-            _attractedResources = transform.childCount;
-            AddCathDistance();
-        }
-    }
-
-    public void Attract(Vector3 direction, Rigidbody rigidbody, float force)
-    {
-        rigidbody.velocity = direction * force * Time.deltaTime;
+        _transform = transform;
+        _attractor = GetComponent<Attractor>();
     }
 
     public void ChangeMaxCargoCount()
@@ -70,6 +35,38 @@ public class Magnet : MonoBehaviour, IAttractor
     public void ChangeLevel(int level)
     {
         Level = level;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.transform.parent == _transform)
+            return;
+
+        if (_transform.childCount >= _maxCargoCount)
+            return;
+
+        if (_transform.childCount == 0)
+            _catchDistance = _startCatchDistance;
+
+        if (other.TryGetComponent(out Resource resource) && resource.TryGetComponent(out Rigidbody rigidbody))
+        {
+            if (Level < resource.Level)
+                return;
+
+           _attractor.Attract(resource.transform,_transform, _force, false);
+            TryCatch(resource, rigidbody);
+        }
+    }
+
+    private void TryCatch(Resource resource, Rigidbody rigidbody)
+    {
+        if (Vector3.Distance(resource.transform.position, _transform.position) <= _catchDistance)
+        {
+            resource.transform.parent = _transform;
+            rigidbody.isKinematic = true;
+            _attractedResources = _transform.childCount;
+            AddCathDistance();
+        }
     }
 
     private void AddCathDistance()
