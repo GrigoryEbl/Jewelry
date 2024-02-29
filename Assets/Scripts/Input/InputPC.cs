@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
+[RequireComponent(typeof(Movement))]
 public class InputPC : MonoBehaviour
 {
-    [SerializeField] private Movement _movement;
+    private Movement _movement;
+
+    private void Awake()
+    {
+        _movement = GetComponent<Movement>();
+    }
 
     private void Update()
     {

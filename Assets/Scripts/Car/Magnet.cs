@@ -3,6 +3,7 @@ using System.Collections;
 using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
+using YG;
 
 [RequireComponent(typeof(Attractor))]
 public class Magnet : MonoBehaviour
@@ -17,14 +18,17 @@ public class Magnet : MonoBehaviour
     private float _startCatchDistance = 0.4f;
 
     public int Level { get; private set; }
-    public int CargoLevel => _maxCargoCount;
 
     private void Awake()
     {
-        Level = 1;
-        _maxCargoCount = 1;
         _transform = transform;
         _attractor = GetComponent<Attractor>();
+    }
+
+    public void Init()
+    {
+        Level = YandexGame.savesData.MagnetLevel;
+        _maxCargoCount = YandexGame.savesData.CargoLevel;
     }
 
     public void ChangeMaxCargoCount()

@@ -41,5 +41,6 @@ public class Wallet : MonoBehaviour
     private void GetLoad()
     {
         _money = YandexGame.savesData.Money;
+        MoneyChanched?.Invoke(_money);
     }
 }

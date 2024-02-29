@@ -11,6 +11,7 @@ public class Upgrader : MonoBehaviour
     private readonly int _maxLevel = 50;
     private readonly int _maxLevelCargo = 30;
 
+    private float _addedPowerEngine = 0.20f;
     private float _multiplier = 2.1f;
     private float _basePrice = 30;
 
@@ -54,7 +55,7 @@ public class Upgrader : MonoBehaviour
         if (_car.EngineLevel < _maxLevel && _player.Wallet.Money >= PriceUpgradeEngine)
         {
             Pay(PriceUpgradeEngine);
-            _car.IncreaseLevelEngine();
+            _car.IncreaseLevelEngine(_addedPowerEngine);
             PriceUpgradeEngine = CalculateModifyPrice(_car.EngineLevel);
             CharacteristiscsChange?.Invoke();
         }

@@ -1,8 +1,8 @@
 {
-    "idSave": 13,
+    "idSave": 29,
     "isFirstSession": false,
     "language": "ru",
-    "promptDone": true,
+    "promptDone": false,
     "money": 1,
     "newPlayerName": "Hello!",
     "openLevels": [
@@ -10,8 +10,9 @@
         true,
         false
     ],
-    "Money": 20,
-    "MagnetLevel": 1,
+    "Money": 10,
     "EngineLevel": 1,
-    "CargoLevel": 2
+    "EngineSpeed": 3.0,
+    "MagnetLevel": 1,
+    "CargoLevel": 1
 }

@@ -45,9 +45,10 @@ public class JoystickInput : MonoBehaviour
     public void SetWorkInput(bool isActive)
     {
         print(this.name + isActive);
+
         if (isActive)
             return;
         else
-            this.enabled = false;
+            gameObject.SetActive(false);
     }
 }

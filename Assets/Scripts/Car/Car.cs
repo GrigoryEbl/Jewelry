@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,53 +9,46 @@ public class Car : MonoBehaviour
     [SerializeField] private Movement _engine;
     [SerializeField] private Magnet _magnet;
 
-    private float _addedPowerEngine = 0.20f;
-
     public int EngineLevel { get; private set; }
     public int MagnetLevel { get; private set; }
     public int CargoLevel { get; private set; }
 
-    private void Start()
-    {
-        EngineLevel = 1;
-        MagnetLevel = _magnet.Level;
-        CargoLevel = _magnet.CargoLevel;
-    }
-    private void OnEnable() => YandexGame.GetDataEvent += GetLoad;
+    private void OnEnable() => YandexGame.GetDataEvent += GetData;
 
-    private void OnDisable() => YandexGame.GetDataEvent -= GetLoad;
 
-    private void GetLoad()
-    {
-        EngineLevel = YandexGame.savesData.EngineLevel;
-        MagnetLevel = YandexGame.savesData.MagnetLevel;
-        CargoLevel = YandexGame.savesData.CargoLevel;
-    }
+    private void OnDisable() => YandexGame.GetDataEvent -= GetData;
 
-    public void IncreaseLevelEngine()
+    public void IncreaseLevelEngine(float addedPowerEngine)
     {
         EngineLevel++;
-        _engine.ChangeSpeed(_addedPowerEngine);
-        Save();
+        _engine.Ugrade(addedPowerEngine);
+        SaveData();
     }
 
     public void IncreaseLevelMagnet()
     {
         MagnetLevel++;
         _magnet.ChangeLevel(MagnetLevel);
-        Save();
+        SaveData();
     }
 
     public void IncreaseLevelCargo()
     {
         CargoLevel++;
         _magnet.ChangeMaxCargoCount();
-        Save();
+        SaveData();
     }
 
-    private void Save()
+    private void GetData()
+    {
+        _engine.Init();
+        _magnet.Init();
+    }
+
+    private void SaveData()
     {
         YandexGame.savesData.EngineLevel = EngineLevel;
+        YandexGame.savesData.EngineSpeed = _engine.Speed;
         YandexGame.savesData.MagnetLevel = MagnetLevel;
         YandexGame.savesData.CargoLevel = CargoLevel;
         YandexGame.SaveProgress();
