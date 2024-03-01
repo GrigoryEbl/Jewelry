@@ -1,5 +1,5 @@
 {
-    "idSave": 29,
+    "idSave": 236,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
@@ -10,9 +10,12 @@
         true,
         false
     ],
-    "Money": 10,
-    "EngineLevel": 1,
-    "EngineSpeed": 3.0,
-    "MagnetLevel": 1,
-    "CargoLevel": 1
+    "Money": 67002,
+    "EngineLevel": 5,
+    "EngineSpeed": 4.0,
+    "MagnetLevel": 8,
+    "CargoLevel": 9,
+    "PriceUpgradeEngine": 1225.22998046875,
+    "PriceUpgradeMagnet": 11346.853515625,
+    "PriceUpgradeCargo": 23828.392578125
 }

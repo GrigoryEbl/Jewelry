@@ -24,6 +24,9 @@ namespace YG
         public int MagnetLevel = 1;
         public int CargoLevel = 1;
 
+        public float PriceUpgradeEngine = 30;
+        public float PriceUpgradeMagnet = 30;
+        public float PriceUpgradeCargo = 30;
         // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
 
 

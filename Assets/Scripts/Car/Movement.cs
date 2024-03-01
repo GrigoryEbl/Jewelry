@@ -5,9 +5,9 @@ using YG;
 [RequireComponent(typeof(Rigidbody))]
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private float _speed;
     [SerializeField] private Transform _transform;
 
+    private float _speed;
     private Rigidbody _rigidbody;
 
     public float Speed => _speed;
@@ -46,10 +46,5 @@ public class Movement : MonoBehaviour
     {
         _speed += addedSpeed;
         Level++;
-    }
-
-    internal void GetData()
-    {
-        throw new NotImplementedException();
     }
 }

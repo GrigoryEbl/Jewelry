@@ -5,6 +5,8 @@ using YG;
 public class Wallet : MonoBehaviour
 {
     private uint _money;
+    private int _recordMoney;
+
     public uint Money => _money;
 
     public event Action<uint> MoneyChanched;
@@ -16,6 +18,10 @@ public class Wallet : MonoBehaviour
     public void TakeMoney(uint money)
     {
         _money += money;
+
+        _recordMoney += (int)money;
+        YandexGame.NewLeaderboardScores("Money", _recordMoney);
+        
         MoneyChanched?.Invoke(_money);
         YandexGame.savesData.Money = _money;
         YandexGame.SaveProgress();
@@ -36,6 +42,12 @@ public class Wallet : MonoBehaviour
         {
             throw new ArgumentException("недостаточно денег");
         }
+    }
+
+    public void ResetRecord()
+    {
+        _recordMoney = 0;
+        YandexGame.NewLeaderboardScores("Money", _recordMoney);
     }
 
     private void GetLoad()

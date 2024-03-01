@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1760739841833916271}
   - component: {fileID: 8460964927653445506}
   - component: {fileID: 1935095673227091709}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 7145493101660789246}
   - component: {fileID: 7532240396917761302}
   - component: {fileID: 4516123924406403926}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 7629646919417474518}
   - component: {fileID: 1557910393519063300}
   - component: {fileID: 5443661928192124820}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,8 +304,8 @@ GameObject:
   - component: {fileID: 9003534614240071910}
   - component: {fileID: 8323006861524780826}
   - component: {fileID: 6886910191014683360}
-  m_Layer: 0
-  m_Name: Sphere
+  m_Layer: 6
+  m_Name: Magnet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -355,7 +355,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cc792fcaccd6dbb45af4307b123e3e1f, type: 2}
+  - {fileID: 2100000, guid: d3df9b40e6a377f4aa5a906ac9b6aedc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -388,8 +388,8 @@ GameObject:
   - component: {fileID: 5445641892704900089}
   - component: {fileID: 431876015516451015}
   - component: {fileID: 8566456242403445038}
-  - component: {fileID: 6905789641827740764}
-  m_Layer: 0
+  - component: {fileID: 5134589220688139915}
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -461,7 +461,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6905789641827740764
+--- !u!65 &5134589220688139915
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -480,7 +480,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.01, y: 0.85, z: 0.97}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2552931921235604926
 GameObject:
@@ -491,7 +491,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8326619604315738337}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -533,7 +533,9 @@ GameObject:
   - component: {fileID: 1692389638252087714}
   - component: {fileID: 6191900372913865341}
   - component: {fileID: 3978928359331097951}
-  m_Layer: 0
+  - component: {fileID: 3926899840417581087}
+  - component: {fileID: 8476473122526665114}
+  m_Layer: 6
   m_Name: Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -622,7 +624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1afc5ee233dfa564fb537133dbcd9b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
+  _transform: {fileID: 8689736321114510578}
 --- !u!114 &8042988832982724685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -635,6 +637,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f55c635010b39984a9eb2545045575cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _joystickInput: {fileID: 0}
+  _inputPC: {fileID: 8476473122526665114}
 --- !u!114 &1692389638252087714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -659,7 +663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0afa1df4bbc187e45bd2e3df79054637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _force: 400
+  _force: 20
   _minCatchDistance: 2
 --- !u!114 &3978928359331097951
 MonoBehaviour:
@@ -675,6 +679,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _engine: {fileID: 6707293911966915534}
   _magnet: {fileID: 5838738776866512268}
+--- !u!114 &3926899840417581087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2661311842437228603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 177ae6aa4b111df4ea3f557c426031a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8476473122526665114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2661311842437228603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d6bbd0956059324dbf0d6b2275dd850, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5537908827029793201
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,7 +714,7 @@ GameObject:
   - component: {fileID: 39223250805393197}
   - component: {fileID: 2568852295624511913}
   - component: {fileID: 3152228585885238535}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -770,7 +798,7 @@ GameObject:
   - component: {fileID: 4001175136579386586}
   - component: {fileID: 8807843327051629923}
   - component: {fileID: 396607059442774722}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -876,8 +904,8 @@ GameObject:
   - component: {fileID: 6462417533532042342}
   - component: {fileID: 2476967713661185976}
   - component: {fileID: 3862013373927829410}
-  - component: {fileID: 5620627363485035358}
-  m_Layer: 0
+  - component: {fileID: 4626806949015518269}
+  m_Layer: 6
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -949,7 +977,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5620627363485035358
+--- !u!65 &4626806949015518269
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -968,7 +996,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.01, y: 0.85, z: 0.97}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7180652359651414241
 GameObject:
@@ -982,7 +1010,7 @@ GameObject:
   - component: {fileID: 300709815850798407}
   - component: {fileID: 3375669398569505805}
   - component: {fileID: 3639261338469391173}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1088,6 +1116,7 @@ GameObject:
   - component: {fileID: 5739858293447119531}
   - component: {fileID: 5838738776866512268}
   - component: {fileID: 261322359684014323}
+  - component: {fileID: 9183751954117211968}
   m_Layer: 0
   m_Name: Magnet
   m_TagString: Untagged
@@ -1122,9 +1151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1671341127ffc314b80792ec477407e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _force: 700
+  _force: 20
   _catchDistance: 0.4
-  _maxCargoCount: 0
+  _maxCargoCount: 1
 --- !u!135 &261322359684014323
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1146,6 +1175,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2.58
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9183751954117211968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249068875468879114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 177ae6aa4b111df4ea3f557c426031a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8542777044163435063
 GameObject:
   m_ObjectHideFlags: 0
@@ -1157,7 +1198,7 @@ GameObject:
   - component: {fileID: 3701018191586289344}
   - component: {fileID: 4510651960431592265}
   - component: {fileID: 7509764646197757065}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

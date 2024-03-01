@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 public class Upgrader : MonoBehaviour
 {
@@ -22,10 +23,9 @@ public class Upgrader : MonoBehaviour
     public float PriceUpgradeMagnet { get; private set; }
     public float PriceUpgradeCargo { get; private set; }
 
-    private void Start()
-    {
-        Init();
-    }
+    private void OnEnable() => YandexGame.GetDataEvent += GetData;
+
+    private void OnDisable() => YandexGame.GetDataEvent -= GetData;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -43,13 +43,6 @@ public class Upgrader : MonoBehaviour
         }
     }
 
-    private void Init()
-    {
-        PriceUpgradeEngine = _basePrice;
-        PriceUpgradeMagnet = _basePrice;
-        PriceUpgradeCargo = _basePrice;
-    }
-
     public void UpgradeEngine()
     {
         if (_car.EngineLevel < _maxLevel && _player.Wallet.Money >= PriceUpgradeEngine)
@@ -58,6 +51,7 @@ public class Upgrader : MonoBehaviour
             _car.IncreaseLevelEngine(_addedPowerEngine);
             PriceUpgradeEngine = CalculateModifyPrice(_car.EngineLevel);
             CharacteristiscsChange?.Invoke();
+            SaveData();
         }
     }
 
@@ -69,6 +63,7 @@ public class Upgrader : MonoBehaviour
             _car.IncreaseLevelMagnet();
             PriceUpgradeMagnet = CalculateModifyPrice(_car.MagnetLevel);
             CharacteristiscsChange?.Invoke();
+            SaveData();
         }
     }
 
@@ -80,6 +75,7 @@ public class Upgrader : MonoBehaviour
             _car.IncreaseLevelCargo();
             PriceUpgradeCargo = CalculateModifyPrice(_car.CargoLevel);
             CharacteristiscsChange?.Invoke();
+            SaveData();
         }
     }
 
@@ -91,5 +87,20 @@ public class Upgrader : MonoBehaviour
     private void Pay(float price)
     {
         _player.Wallet.TryDecreaseMoney((uint)price);
+    }
+
+    private void GetData()
+    {
+        PriceUpgradeEngine = YandexGame.savesData.PriceUpgradeEngine;
+        PriceUpgradeMagnet = YandexGame.savesData.PriceUpgradeMagnet;
+        PriceUpgradeCargo = YandexGame.savesData.PriceUpgradeCargo;
+    }
+
+    private void SaveData()
+    {
+        YandexGame.savesData.PriceUpgradeEngine = PriceUpgradeEngine;
+        YandexGame.savesData.PriceUpgradeMagnet = PriceUpgradeMagnet;
+        YandexGame.savesData.PriceUpgradeCargo = PriceUpgradeCargo;
+        YandexGame.SaveProgress();
     }
 }

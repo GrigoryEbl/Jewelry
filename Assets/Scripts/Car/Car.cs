@@ -15,7 +15,6 @@ public class Car : MonoBehaviour
 
     private void OnEnable() => YandexGame.GetDataEvent += GetData;
 
-
     private void OnDisable() => YandexGame.GetDataEvent -= GetData;
 
     public void IncreaseLevelEngine(float addedPowerEngine)
@@ -43,6 +42,10 @@ public class Car : MonoBehaviour
     {
         _engine.Init();
         _magnet.Init();
+
+        MagnetLevel = _magnet.Level;
+        EngineLevel = _engine.Level;
+        CargoLevel = _magnet.MaxCargoCount;
     }
 
     private void SaveData()

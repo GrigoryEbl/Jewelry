@@ -10,14 +10,15 @@ public class Magnet : MonoBehaviour
 {
     [SerializeField] private float _force;
     [SerializeField] private float _catchDistance;
-    [SerializeField] private int _maxCargoCount;
 
+    private int _maxCargoCount;
     private Attractor _attractor;
     private Transform _transform;
     private int _attractedResources;
     private float _startCatchDistance = 0.4f;
 
     public int Level { get; private set; }
+    public int MaxCargoCount => _maxCargoCount;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class Magnet : MonoBehaviour
     {
         Level = YandexGame.savesData.MagnetLevel;
         _maxCargoCount = YandexGame.savesData.CargoLevel;
+        print("magnet init");
     }
 
     public void ChangeMaxCargoCount()
@@ -57,7 +59,7 @@ public class Magnet : MonoBehaviour
             if (Level < resource.Level)
                 return;
 
-           _attractor.Attract(resource.transform,_transform, _force, false);
+            _attractor.Attract(resource.transform, _transform, _force, false);
             TryCatch(resource, rigidbody);
         }
     }
