@@ -9,6 +9,8 @@ public class Car : MonoBehaviour
     [SerializeField] private Movement _engine;
     [SerializeField] private Magnet _magnet;
 
+    private SetterFork _setterFork;
+    private SetterWheels _setterWheels;
     public int EngineLevel { get; private set; }
     public int MagnetLevel { get; private set; }
     public int CargoLevel { get; private set; }
@@ -17,10 +19,17 @@ public class Car : MonoBehaviour
 
     private void OnDisable() => YandexGame.GetDataEvent -= GetData;
 
+    private void Awake()
+    {
+        _setterFork = GetComponent<SetterFork>();
+        _setterWheels = GetComponent<SetterWheels>();
+    }
+
     public void IncreaseLevelEngine(float addedPowerEngine)
     {
         EngineLevel++;
         _engine.Ugrade(addedPowerEngine);
+        _setterWheels.ChangeWheels(EngineLevel);
         SaveData();
     }
 
@@ -35,6 +44,7 @@ public class Car : MonoBehaviour
     {
         CargoLevel++;
         _magnet.ChangeMaxCargoCount();
+        _setterFork.ChangeFork(CargoLevel);
         SaveData();
     }
 

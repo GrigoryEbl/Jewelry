@@ -27,6 +27,14 @@ namespace YG
         public float PriceUpgradeEngine = 30;
         public float PriceUpgradeMagnet = 30;
         public float PriceUpgradeCargo = 30;
+
+        public bool IsRustForkActive = true;
+        public bool IsSilverForkActive = false;
+        public bool IsGoldForkActive = false;
+
+        public bool IsLowWheelsActive = true;
+        public bool IsMiddleWheelsActive = false;
+        public bool IsHighWheelsActive = false;
         // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
 
 

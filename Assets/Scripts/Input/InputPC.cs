@@ -8,6 +8,8 @@ public class InputPC : MonoBehaviour
 {
     private Movement _movement;
 
+    public bool Moving => Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0;
+
     private void Awake()
     {
         _movement = GetComponent<Movement>();
@@ -15,14 +17,18 @@ public class InputPC : MonoBehaviour
 
     private void Update()
     {
+        if (!Moving)
+        {
+            _movement.Stop();
+            return;
+        }
+
         Vector3 rawDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         _movement.Move(rawDirection);
     }
 
     public void SetWorkInput(bool isActive)
     {
-        print(this.name + isActive);
-
         if (isActive)
             return;
         else

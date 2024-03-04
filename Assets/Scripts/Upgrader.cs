@@ -13,7 +13,7 @@ public class Upgrader : MonoBehaviour
     private readonly int _maxLevelCargo = 30;
 
     private float _addedPowerEngine = 0.20f;
-    private float _multiplier = 2.1f;
+    private float _multiplier = 1.1f;
     private float _basePrice = 30;
 
     public event Action<bool> UpgradeZoneReach;
