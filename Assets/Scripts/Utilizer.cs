@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -14,6 +14,7 @@ public class Utilizer : MonoBehaviour
 
     private Attractor _attractor;
 
+    public event Action MoneyExit;
     private void Awake()
     {
         _attractor = GetComponent<Attractor>();
@@ -37,6 +38,7 @@ public class Utilizer : MonoBehaviour
             uint priceResource = resource.Price;
             Destroy(resource.gameObject);
             Instantiate(_moneyPrefab, _spawnMoneyPoint.position, Quaternion.identity, null).SetValue(priceResource);
+            MoneyExit?.Invoke();
         }
     }
 }

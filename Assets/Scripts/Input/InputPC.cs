@@ -8,7 +8,7 @@ public class InputPC : MonoBehaviour
 {
     private Movement _movement;
 
-    public bool Moving => Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0;
+    public bool Moving => Input.anyKey;
 
     private void Awake()
     {
@@ -17,13 +17,14 @@ public class InputPC : MonoBehaviour
 
     private void Update()
     {
-        if (!Moving)
+        if (Moving == false)
         {
             _movement.Stop();
             return;
         }
 
         Vector3 rawDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
         _movement.Move(rawDirection);
     }
 
