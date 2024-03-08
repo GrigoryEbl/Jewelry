@@ -8,9 +8,12 @@ public class Car : MonoBehaviour
 {
     [SerializeField] private Movement _engine;
     [SerializeField] private Magnet _magnet;
+    [SerializeField] private Transform _startPosition;
 
     private SetterFork _setterFork;
     private SetterWheels _setterWheels;
+    private SetterMagnet _setterMagnet;
+
     public int EngineLevel { get; private set; }
     public int MagnetLevel { get; private set; }
     public int CargoLevel { get; private set; }
@@ -23,6 +26,7 @@ public class Car : MonoBehaviour
     {
         _setterFork = GetComponent<SetterFork>();
         _setterWheels = GetComponent<SetterWheels>();
+        _setterMagnet = GetComponent<SetterMagnet>();
     }
 
     public void IncreaseLevelEngine(float addedPowerEngine)
@@ -37,6 +41,7 @@ public class Car : MonoBehaviour
     {
         MagnetLevel++;
         _magnet.ChangeLevel(MagnetLevel);
+        _setterMagnet.ChangeMagnet(MagnetLevel, CargoLevel);
         SaveData();
     }
 
@@ -44,8 +49,14 @@ public class Car : MonoBehaviour
     {
         CargoLevel++;
         _magnet.ChangeMaxCargoCount();
+        _setterMagnet.ChangeMagnet(MagnetLevel, CargoLevel);
         _setterFork.ChangeFork(CargoLevel);
         SaveData();
+    }
+
+    public void SetStartPosition()
+    {
+        transform.position = _startPosition.position;
     }
 
     private void GetData()

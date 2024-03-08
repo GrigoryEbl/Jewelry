@@ -13,6 +13,7 @@ public class BarrierInterectionView : MonoBehaviour
     private void OnEnable()
     {
         _barrierInterection.BarrierReach += ShowInfo;
+        _barrierInterectionScreen.SetActive(false);
     }
 
     private void OnDisable()

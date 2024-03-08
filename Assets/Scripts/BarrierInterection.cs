@@ -13,7 +13,6 @@ public class BarrierInterection : MonoBehaviour
     [SerializeField] private int _price;
 
     public event UnityAction<bool> BarrierReach;
-
     public int Price => _price;
 
     private void OnTriggerStay(Collider other)
@@ -32,14 +31,11 @@ public class BarrierInterection : MonoBehaviour
         }
     }
 
-    private void OnDestroy() => BarrierReach?.Invoke(false);
-
     public void TryOpenNewZone()
     {
         if (_player.Wallet.TryDecreaseMoney((uint)Price))
         {
-            Destroy(_barrier.gameObject);
-            Destroy(gameObject);
+            _barrier.gameObject.SetActive(false);
         }
     }
 }

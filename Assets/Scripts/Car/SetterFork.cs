@@ -9,8 +9,8 @@ public class SetterFork : MonoBehaviour
     [SerializeField] private GameObject _forkSilver;
     [SerializeField] private GameObject _forkGold;
 
-    private int _levelToSilverFork = 15;
-    private int _levelToGoldFork = 25;
+    private int _levelToSilverFork = 5;
+    private int _levelToGoldFork = 10;
 
     private void OnEnable() => YandexGame.GetDataEvent += GetLoad;
 

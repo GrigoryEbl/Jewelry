@@ -1,4 +1,6 @@
 ﻿
+using UnityEngine;
+
 namespace YG
 {
     [System.Serializable]
@@ -35,6 +37,17 @@ namespace YG
         public bool IsLowWheelsActive = true;
         public bool IsMiddleWheelsActive = false;
         public bool IsHighWheelsActive = false;
+
+        public bool IsLowMagnegActive = true;
+        public bool IslowMagnetHighChainActive = false;
+        public bool IsMiddleMagnetActive = false;
+        public bool IsMiddleMagnetHighChainActive = false;
+        public bool IsHighMagnetActive = false;
+        public bool IsHighMagnetLowChainActive = false;
+
+        public bool IsBarrierJailActive = true;
+        public bool IsBarrierForgeActive = true;
+        public bool IsBarrierThroneActive = true;
         // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
 
 
