@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3903841563357756865
+--- !u!1 &4603618198122586175
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5097569268916365739}
-  - component: {fileID: 3179049208942614046}
-  - component: {fileID: 3542649758106028752}
-  - component: {fileID: 3876353260388974657}
-  - component: {fileID: 4903270725046642405}
-  - component: {fileID: 2860445384031203422}
+  - component: {fileID: 1070165523649716864}
+  - component: {fileID: 1546444869481432803}
+  - component: {fileID: 1683430353239099509}
+  - component: {fileID: 1523888213435507096}
+  - component: {fileID: 7305831307476976868}
+  - component: {fileID: 363257473021778727}
   m_Layer: 0
-  m_Name: RustIngot
+  m_Name: SivlerIngot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5097569268916365739
+--- !u!4 &1070165523649716864
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3903841563357756865}
+  m_GameObject: {fileID: 4603618198122586175}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -538.61, y: 1.36, z: -24.89}
+  m_LocalPosition: {x: -537.978, y: 1.36, z: -24.89}
   m_LocalScale: {x: 6.9426684, y: 6.9426684, z: 6.9426684}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3179049208942614046
+--- !u!33 &1546444869481432803
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3903841563357756865}
+  m_GameObject: {fileID: 4603618198122586175}
   m_Mesh: {fileID: 4300000, guid: fad9b13ed24334b4a8ef6d7d52da89df, type: 3}
---- !u!23 &3542649758106028752
+--- !u!23 &1683430353239099509
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3903841563357756865}
+  m_GameObject: {fileID: 4603618198122586175}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8fd78f6851e13fb4aaf5ca164c95370a, type: 2}
+  - {fileID: 2100000, guid: d4e54c8c76186114390e3f735875ee15, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,13 +86,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3876353260388974657
+--- !u!64 &1523888213435507096
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3903841563357756865}
+  m_GameObject: {fileID: 4603618198122586175}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -108,27 +108,27 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: fad9b13ed24334b4a8ef6d7d52da89df, type: 3}
---- !u!114 &4903270725046642405
+--- !u!114 &7305831307476976868
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3903841563357756865}
+  m_GameObject: {fileID: 4603618198122586175}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18f4d13871ac01d4185e8f26bc5523f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _price: 70
-  _level: 30
---- !u!54 &2860445384031203422
+  _price: 280
+  _level: 40
+--- !u!54 &363257473021778727
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3903841563357756865}
+  m_GameObject: {fileID: 4603618198122586175}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
