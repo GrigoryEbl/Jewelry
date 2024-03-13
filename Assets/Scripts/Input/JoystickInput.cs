@@ -41,12 +41,4 @@ public class JoystickInput : MonoBehaviour
     {
         LastFrameMoving = Moving;
     }
-
-    public void SetWorkInput(bool isActive)
-    {
-        if (isActive)
-            return;
-        else
-            gameObject.SetActive(false);
-    }
 }

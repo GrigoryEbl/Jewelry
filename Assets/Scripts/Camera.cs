@@ -11,7 +11,6 @@ public class Camera : MonoBehaviour
     [SerializeField] private int _zoomValue;
     [SerializeField] private Upgrader _upgrader;
 
-
     private Vector3 _target;
     private Transform _transform;
     private int _positionZ;

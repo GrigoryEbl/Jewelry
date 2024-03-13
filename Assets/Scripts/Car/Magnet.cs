@@ -30,7 +30,6 @@ public class Magnet : MonoBehaviour
     {
         Level = YandexGame.savesData.MagnetLevel;
         _maxCargoCount = YandexGame.savesData.CargoLevel;
-        print("magnet init");
     }
 
     public void ChangeMaxCargoCount()

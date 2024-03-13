@@ -28,9 +28,9 @@ public class Movement : MonoBehaviour
 
     public void Move(Vector3 direction)
     {
-        _transform.LookAt(_transform.position + direction);
-        _rigidbody.velocity = direction.normalized * _speed;
-
+        _transform.LookAt(_transform.position + direction.normalized);
+        _rigidbody.velocity = direction * _speed;
+        print("MOOOOOVEEEEEE");
         IsMoving = true;
     }
 

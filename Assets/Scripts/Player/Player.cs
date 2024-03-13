@@ -16,17 +16,6 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        if(YandexGame.EnvironmentData.isMobile)
-        {
-            _joystickInput.SetWorkInput(true);
-            _inputPC.SetWorkInput(false);
-        }
-        else if(YandexGame.EnvironmentData.isDesktop)
-        {
-            _joystickInput.SetWorkInput(false);
-            _inputPC.SetWorkInput(true);
-        }
-
         _wallet = GetComponent<Wallet>();
         _moneyCollector = GetComponent<MoneyCollector>();
     }

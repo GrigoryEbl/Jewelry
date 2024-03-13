@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using YG;
 
@@ -12,6 +13,9 @@ public class InputPC : MonoBehaviour
 
     private void Awake()
     {
+        if (YandexGame.EnvironmentData.isMobile)
+            this.enabled = false;
+
         _movement = GetComponent<Movement>();
     }
 
@@ -26,13 +30,5 @@ public class InputPC : MonoBehaviour
         Vector3 rawDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
         _movement.Move(rawDirection);
-    }
-
-    public void SetWorkInput(bool isActive)
-    {
-        if (isActive)
-            return;
-        else
-            this.enabled = false;
     }
 }

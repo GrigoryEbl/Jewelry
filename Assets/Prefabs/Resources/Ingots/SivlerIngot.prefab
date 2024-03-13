@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1523888213435507096}
   - component: {fileID: 7305831307476976868}
   - component: {fileID: 363257473021778727}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SivlerIngot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
