@@ -30,7 +30,6 @@ public class Movement : MonoBehaviour
     {
         _transform.LookAt(_transform.position + direction.normalized);
         _rigidbody.velocity = direction * _speed;
-        print("MOOOOOVEEEEEE");
         IsMoving = true;
     }
 
@@ -38,7 +37,6 @@ public class Movement : MonoBehaviour
     {
         if (_rigidbody != null)
             _rigidbody.velocity = Vector3.zero;
-
         IsMoving = false;
     }
 

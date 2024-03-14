@@ -6,9 +6,6 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _text;
-    [SerializeField] private TMP_Text _textFPS;
-
     private float fps;
 
     void OnGUI()
