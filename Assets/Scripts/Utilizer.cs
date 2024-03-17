@@ -11,6 +11,7 @@ public class Utilizer : MonoBehaviour
     [SerializeField] private Transform _utilizePoint;
     [SerializeField] private Money _moneyPrefab;
     [SerializeField] private Transform _spawnMoneyPoint;
+    [SerializeField] private MoneyStacker _moneyStacker;
 
     private Attractor _attractor;
 
@@ -36,7 +37,9 @@ public class Utilizer : MonoBehaviour
         {
             uint priceResource = resource.Price;
             Destroy(resource.gameObject);
-         Instantiate(_moneyPrefab, _spawnMoneyPoint.position, Quaternion.identity, null).SetValue(priceResource);
+            var newMoney = Instantiate(_moneyPrefab, _spawnMoneyPoint.position, Quaternion.identity, null);
+                newMoney.SetValue(priceResource);
+            _moneyStacker.Stacking(newMoney.transform);
         }
     }
 }

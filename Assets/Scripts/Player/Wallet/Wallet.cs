@@ -10,19 +10,28 @@ public class Wallet : MonoBehaviour
     public uint Money => _money;
 
     public event Action<uint> MoneyChanched;
+    public event Action<uint> MoneyAdded;
 
     private void OnEnable() => YandexGame.GetDataEvent += GetLoad;
 
     private void OnDisable() => YandexGame.GetDataEvent -= GetLoad;
 
-    public void TakeMoney(uint money)
+    private void Update()
     {
-        _money += money;
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            _money = 0;     //DELETE
+        }
+    }
 
-        _recordMoney += (int)money;
+    public void TakeMoney(uint addedMoney)
+    {
+        _money += addedMoney;
+        _recordMoney += (int)addedMoney;
         YandexGame.NewLeaderboardScores("Money", _recordMoney);
         
         MoneyChanched?.Invoke(_money);
+        MoneyAdded?.Invoke(addedMoney);
         YandexGame.savesData.Money = _money;
         YandexGame.SaveProgress();
 

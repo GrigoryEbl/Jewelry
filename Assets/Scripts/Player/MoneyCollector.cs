@@ -20,7 +20,7 @@ public class MoneyCollector : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.TryGetComponent(out Money money) && other.TryGetComponent(out Rigidbody rigidbody))
+        if (other.TryGetComponent(out Money money))
         {
            _attractor.Attract(money.transform,transform, _force, false);
 

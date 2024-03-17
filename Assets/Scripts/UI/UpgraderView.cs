@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +11,7 @@ public class UpgraderView : MonoBehaviour
     [SerializeField] private Upgrader _upgrader;
     [SerializeField] private GameObject _upgradeScreen;
     [SerializeField] private Car _car;
+    [SerializeField] private float _speedSlider;
 
     [SerializeField] private TMP_Text _enginePriceText;
     [SerializeField] private TMP_Text _engineLevelText;
@@ -34,7 +38,7 @@ public class UpgraderView : MonoBehaviour
         _upgrader.CharacteristiscsChange -= OnChangeCargo;
     }
 
-   private void OnUpgradeZoneReach(bool isActive)
+    private void OnUpgradeZoneReach(bool isActive)
     {
         _upgradeScreen.SetActive(isActive);
         OnChangeMagnet();
@@ -46,7 +50,7 @@ public class UpgraderView : MonoBehaviour
     {
         _magnetPriceText.text = $"${_upgrader.PriceUpgradeMagnet.ToString("F0")}";
         _magnetLevelText.text = $"Magnet level: {_car.MagnetLevel}";
-        _slider.value = _car.MagnetLevel;
+        StartCoroutine(Slide(_car.MagnetLevel));
     }
 
     private void OnChangeEngine()
@@ -54,10 +58,19 @@ public class UpgraderView : MonoBehaviour
         _enginePriceText.text = $"${_upgrader.PriceUpgradeEngine.ToString("F0")}";
         _engineLevelText.text = $"Engine level: {_car.EngineLevel}";
     }
-    
+
     private void OnChangeCargo()
     {
         _cargoPriceText.text = $"${_upgrader.PriceUpgradeCargo.ToString("F0")}";
         _cargoLevelText.text = $"Cargo level: {_car.CargoLevel}";
+    }
+
+    private IEnumerator Slide(int target)
+    {
+        while (_slider.value != target)
+        {
+            _slider.value = Mathf.MoveTowards(_slider.value, target, _speedSlider * Time.deltaTime);
+            yield return null;
+        }
     }
 }
