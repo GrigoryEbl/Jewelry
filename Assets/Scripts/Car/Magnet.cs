@@ -11,14 +11,14 @@ public class Magnet : MonoBehaviour
     [SerializeField] private float _force;
     [SerializeField] private float _catchDistance;
 
-    private int _maxCargoCount;
+    private int _maxCapacityCount;
     private Attractor _attractor;
     private Transform _transform;
-    private int _attractedResources;
     private float _startCatchDistance = 0.4f;
+    private float _addedCathDistance = 0.05f;
 
     public int Level { get; private set; }
-    public int MaxCargoCount => _maxCargoCount;
+    public int MaxCapacityCount => _maxCapacityCount;
 
     private void Awake()
     {
@@ -29,12 +29,12 @@ public class Magnet : MonoBehaviour
     public void Init()
     {
         Level = YandexGame.savesData.MagnetLevel;
-        _maxCargoCount = YandexGame.savesData.CargoLevel;
+        _maxCapacityCount = YandexGame.savesData.CapacityLevel;
     }
 
-    public void ChangeMaxCargoCount()
+    public void ChangeMaxCapacityCount()
     {
-        _maxCargoCount++;
+        _maxCapacityCount++;
     }
 
     public void ChangeLevel(int level)
@@ -47,7 +47,7 @@ public class Magnet : MonoBehaviour
         if (other.transform.parent == _transform)
             return;
 
-        if (_transform.childCount >= _maxCargoCount)
+        if (_transform.childCount >= _maxCapacityCount)
             return;
 
         if (_transform.childCount == 0)
@@ -69,14 +69,13 @@ public class Magnet : MonoBehaviour
         {
             resource.transform.parent = _transform;
             rigidbody.isKinematic = true;
-            _attractedResources = _transform.childCount;
             AddCathDistance();
         }
     }
 
     private void AddCathDistance()
     {
-        _catchDistance += 0.05f;
+        _catchDistance += _addedCathDistance;
     }
 
     private void OnDrawGizmos()

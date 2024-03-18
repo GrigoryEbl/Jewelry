@@ -11,12 +11,11 @@ public class WheelRotator : MonoBehaviour
     private void Update()
     {
         if (_movement.IsMoving)
+        {
             foreach (Transform wheel in _wheelsModels)
             {
                 wheel.transform.Rotate(new Vector3(1, 0, 0) * _movement.Speed);
             }
+        }
     }
-
-
-
 }

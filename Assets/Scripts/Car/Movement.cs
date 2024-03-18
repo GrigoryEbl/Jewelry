@@ -40,7 +40,7 @@ public class Movement : MonoBehaviour
         IsMoving = false;
     }
 
-    public void Ugrade(float addedSpeed)
+    public void Upgrade(float addedSpeed)
     {
         _speed += addedSpeed;
         Level++;

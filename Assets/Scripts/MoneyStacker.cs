@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-using UnityEngine.UIElements;
 
 public class MoneyStacker : MonoBehaviour
 {
@@ -10,7 +7,6 @@ public class MoneyStacker : MonoBehaviour
     [SerializeField] private float _speed;
 
     private Transform[] _places;
-    private float _minCatchDistance = 0.01f;
 
     private void Start()
     {
@@ -42,9 +38,6 @@ public class MoneyStacker : MonoBehaviour
         while (true)
         {
             money.position = Vector3.MoveTowards(money.position, target.position, _speed * Time.deltaTime);
-
-            //if (Vector3.Distance(money.position, target.position) <= _minCatchDistance)
-            //    break;
 
             yield return null;
         }

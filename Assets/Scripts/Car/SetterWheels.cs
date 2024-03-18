@@ -9,23 +9,25 @@ public class SetterWheels : MonoBehaviour
     [SerializeField] private GameObject _middleWheels;
     [SerializeField] private GameObject _highWheels;
 
-    private int _levelToMiddleWheels = 15;
-    private int _levelToHighWheels = 25;
+    [SerializeField] private int _levelToMiddleWheels = 15;
+    [SerializeField] private int _levelToHighWheels = 25;
+
+    public int LevelToMiddleWheels => _levelToMiddleWheels;
 
     private void OnEnable() => YandexGame.GetDataEvent += GetLoad;
 
     private void OnDisable() => YandexGame.GetDataEvent -= GetLoad;
 
-    public void ChangeWheels(int engineLevel)
+    public void TryChangeWheels(int wheelsLevel)
     {
-        if (engineLevel == _levelToMiddleWheels)
+        if (wheelsLevel == _levelToMiddleWheels)
         {
            _lowWheels.SetActive(false);
             _middleWheels.SetActive(true);
             SaveData();
         }
 
-        if (engineLevel == _levelToHighWheels)
+        if (wheelsLevel == _levelToHighWheels)
         {
             _middleWheels.SetActive(false);
             _highWheels.SetActive(true);

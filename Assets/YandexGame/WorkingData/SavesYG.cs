@@ -24,26 +24,26 @@ namespace YG
         public int EngineLevel = 1;
         public float EngineSpeed = 3f;
         public int MagnetLevel = 1;
-        public int CargoLevel = 1;
+        public int CapacityLevel = 1;
 
         public float PriceUpgradeEngine = 30;
         public float PriceUpgradeMagnet = 30;
         public float PriceUpgradeCargo = 30;
 
-        public bool IsRustForkActive = true;
-        public bool IsSilverForkActive = false;
-        public bool IsGoldForkActive = false;
+        public bool IsLowHandActive = true;
+        public bool IsMiddleHandActive = false;
+        public bool IsHighHandActive = false;
 
         public bool IsLowWheelsActive = true;
         public bool IsMiddleWheelsActive = false;
         public bool IsHighWheelsActive = false;
 
         public bool IsLowMagnegActive = true;
-        public bool IslowMagnetHighChainActive = false;
+        public bool IslowMagnetLongChainActive = false;
         public bool IsMiddleMagnetActive = false;
-        public bool IsMiddleMagnetHighChainActive = false;
+        public bool IsMiddleMagnetLongChainActive = false;
         public bool IsHighMagnetActive = false;
-        public bool IsHighMagnetLowChainActive = false;
+        public bool IsHighMagnetShortChainActive = false;
 
         public bool IsBarrierJailActive = true;
         public bool IsBarrierForgeActive = true;

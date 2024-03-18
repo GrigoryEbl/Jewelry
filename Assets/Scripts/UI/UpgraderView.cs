@@ -1,8 +1,7 @@
-using System;
 using System.Collections;
+using System.Diagnostics;
+using System.IO;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,64 +12,105 @@ public class UpgraderView : MonoBehaviour
     [SerializeField] private Car _car;
     [SerializeField] private float _speedSlider;
 
-    [SerializeField] private TMP_Text _enginePriceText;
-    [SerializeField] private TMP_Text _engineLevelText;
 
+    [Header("Magnet")]
     [SerializeField] private TMP_Text _magnetPriceText;
     [SerializeField] private TMP_Text _magnetLevelText;
-    [SerializeField] private Slider _slider;
+    [SerializeField] private Slider _sliderMagnet;
+    [SerializeField] private SetterMagnet _setterMagnet;
+    [SerializeField] private Image _imageMiddleMagnet;
+    [SerializeField] private Image _imageHighMagnet;
 
-    [SerializeField] private TMP_Text _cargoPriceText;
-    [SerializeField] private TMP_Text _cargoLevelText;
+    [Header("Wheels")]
+    [SerializeField] private TMP_Text _enginePriceText;
+    [SerializeField] private TMP_Text _engineLevelText;
+    [SerializeField] private Slider _sliderWheels;
+    [SerializeField] private SetterWheels _setterWheels;
+    [SerializeField] private Image _imageMiddleWheel;
+    [SerializeField] private Image _imageHighWheel;
+
+    [Header("Capacity")]
+    [SerializeField] private TMP_Text _capacityPriceText;
+    [SerializeField] private TMP_Text _capacityLevelText;
+    [SerializeField] private Slider _sliderCapacity;
+    [SerializeField] private SetterHand _setterFork;
+    [SerializeField] private Image _imageMiddleFork;
+    [SerializeField] private Image _imageHighFork;
+
+    private void Awake()
+    {
+        OnChangeMagnet();
+        OnChangeWheels();
+        OnChangeCapacity();
+    }
 
     private void OnEnable()
     {
         _upgrader.UpgradeZoneReach += OnUpgradeZoneReach;
         _upgrader.CharacteristiscsChange += OnChangeMagnet;
-        _upgrader.CharacteristiscsChange += OnChangeEngine;
-        _upgrader.CharacteristiscsChange += OnChangeCargo;
+        _upgrader.CharacteristiscsChange += OnChangeWheels;
+        _upgrader.CharacteristiscsChange += OnChangeCapacity;
     }
+
     private void OnDisable()
     {
         _upgrader.UpgradeZoneReach -= OnUpgradeZoneReach;
         _upgrader.CharacteristiscsChange -= OnChangeMagnet;
-        _upgrader.CharacteristiscsChange -= OnChangeEngine;
-        _upgrader.CharacteristiscsChange -= OnChangeCargo;
+        _upgrader.CharacteristiscsChange -= OnChangeWheels;
+        _upgrader.CharacteristiscsChange -= OnChangeCapacity;
     }
 
     private void OnUpgradeZoneReach(bool isActive)
     {
         _upgradeScreen.SetActive(isActive);
         OnChangeMagnet();
-        OnChangeEngine();
-        OnChangeCargo();
+        OnChangeWheels();
+        OnChangeCapacity();
     }
 
     private void OnChangeMagnet()
     {
-        _magnetPriceText.text = $"${_upgrader.PriceUpgradeMagnet.ToString("F0")}";
-        _magnetLevelText.text = $"Magnet level: {_car.MagnetLevel}";
-        StartCoroutine(Slide(_car.MagnetLevel));
+        ChangeText(_magnetPriceText, _upgrader.PriceUpgradeMagnet, _magnetLevelText, _car.MagnetLevel, "Magnet");
+        StartCoroutine(Slide(_sliderMagnet, _car.MagnetLevel));
+        SetImageDetail(_car.MagnetLevel, _setterMagnet.LevelToMiddleMagnet, _imageMiddleMagnet, _imageHighMagnet);
     }
 
-    private void OnChangeEngine()
+    private void OnChangeWheels()
     {
-        _enginePriceText.text = $"${_upgrader.PriceUpgradeEngine.ToString("F0")}";
-        _engineLevelText.text = $"Engine level: {_car.EngineLevel}";
+        ChangeText(_enginePriceText, _upgrader.PriceUpgradeWheels, _engineLevelText, _car.WheelsLevel, "Wheels");
+        StartCoroutine(Slide(_sliderWheels, _car.WheelsLevel));
+        SetImageDetail(_car.WheelsLevel, _setterFork.LevelToMiddleCapacity, _imageMiddleWheel, _imageHighWheel);
     }
 
-    private void OnChangeCargo()
+    private void OnChangeCapacity()
     {
-        _cargoPriceText.text = $"${_upgrader.PriceUpgradeCargo.ToString("F0")}";
-        _cargoLevelText.text = $"Cargo level: {_car.CargoLevel}";
+        ChangeText(_capacityPriceText, _upgrader.PriceUpgradeCapacity, _capacityLevelText, _car.CapacityLevel, "Capacity");
+        StartCoroutine(Slide(_sliderCapacity, _car.CapacityLevel));
+        SetImageDetail(_car.CapacityLevel, _setterFork.LevelToMiddleCapacity, _imageMiddleFork, _imageHighFork);
     }
 
-    private IEnumerator Slide(int target)
+    private void ChangeText(TMP_Text price, float priceInfo, TMP_Text level, int levelInfo, string nameDetail)
     {
-        while (_slider.value != target)
+        price.text = $"${priceInfo.ToString("F0")}";
+        level.text = $"{nameDetail}: {levelInfo}";
+    }
+
+    private void SetImageDetail(int levelinfo, int levelToMiddleDetail, Image middleDetail, Image highDetail)
+    {
+        if (levelinfo >= levelToMiddleDetail)
         {
-            _slider.value = Mathf.MoveTowards(_slider.value, target, _speedSlider * Time.deltaTime);
+            middleDetail.gameObject.SetActive(false);
+            highDetail.gameObject.SetActive(true);
+        }
+    }
+
+    private IEnumerator Slide(Slider slider, int target)
+    {
+        while (slider.value != target)
+        {
+            slider.value = Mathf.MoveTowards(slider.value, target, _speedSlider * Time.deltaTime);
             yield return null;
         }
     }
+
 }

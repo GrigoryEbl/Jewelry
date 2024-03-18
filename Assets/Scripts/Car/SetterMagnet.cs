@@ -6,54 +6,56 @@ using YG;
 public class SetterMagnet : MonoBehaviour
 {
     [SerializeField] private GameObject _lowMagnet;
-    [SerializeField] private GameObject _lowMagnetHighChain;
+    [SerializeField] private GameObject _lowMagnetLongChain;
 
-    [SerializeField] private GameObject _middleMagnetHighChain;
+    [SerializeField] private GameObject _middleMagnetLongChain;
     [SerializeField] private GameObject _middleMagnet;
 
-    [SerializeField] private GameObject _highMagnetLowChain;
+    [SerializeField] private GameObject _highMagnetShortChain;
     [SerializeField] private GameObject _highMagnet;
 
-    private int _levelToMiddleMagnet = 5;
-    private int _levelToHighMagnet = 10;
+    [SerializeField] private int _levelToMiddleMagnet = 15;
+    [SerializeField] private int _levelToHighMagnet = 25;
+
+    public int LevelToMiddleMagnet => _levelToMiddleMagnet;
 
     private void OnEnable() => YandexGame.GetDataEvent += GetLoad;
 
     private void OnDisable() => YandexGame.GetDataEvent -= GetLoad;
 
-    public void ChangeMagnet(int magnetLevel, int cargoLevel)
+    public void ChangeMagnet(int magnetLevel, int capacityLevel)
     {
-        if (magnetLevel < _levelToMiddleMagnet && cargoLevel >= _levelToHighMagnet)
+        if (magnetLevel < _levelToMiddleMagnet && capacityLevel >= _levelToHighMagnet)
         {
             _lowMagnet.SetActive(false);
-            _lowMagnetHighChain.SetActive(true);
+            _lowMagnetLongChain.SetActive(true);
         }
 
-        if (magnetLevel == Mathf.Clamp(magnetLevel, _levelToMiddleMagnet, _levelToHighMagnet - 1) && cargoLevel < _levelToHighMagnet)
+        if (magnetLevel == Mathf.Clamp(magnetLevel, _levelToMiddleMagnet, _levelToHighMagnet - 1) && capacityLevel < _levelToHighMagnet)
         {
             _lowMagnet.SetActive(false);
-            _lowMagnetHighChain.SetActive(false);
+            _lowMagnetLongChain.SetActive(false);
             _middleMagnet.SetActive(true);
         }
-        else if (magnetLevel == Mathf.Clamp(magnetLevel, _levelToMiddleMagnet, _levelToHighMagnet - 1) && cargoLevel >= _levelToHighMagnet)
+        else if (magnetLevel == Mathf.Clamp(magnetLevel, _levelToMiddleMagnet, _levelToHighMagnet - 1) && capacityLevel >= _levelToHighMagnet)
         {
             _lowMagnet.SetActive(false);
-            _lowMagnetHighChain.SetActive(false);
+            _lowMagnetLongChain.SetActive(false);
             _middleMagnet.SetActive(false);
-            _middleMagnetHighChain.SetActive(true);
+            _middleMagnetLongChain.SetActive(true);
         }
 
-        if (magnetLevel >= _levelToHighMagnet && cargoLevel < _levelToHighMagnet)
+        if (magnetLevel >= _levelToHighMagnet && capacityLevel < _levelToHighMagnet)
         {
-            _middleMagnetHighChain.SetActive(false);
+            _middleMagnetLongChain.SetActive(false);
             _middleMagnet.SetActive(false);
-            _highMagnetLowChain.SetActive(true);
+            _highMagnetShortChain.SetActive(true);
         }
-        else if (magnetLevel >= _levelToHighMagnet && cargoLevel >= _levelToHighMagnet)
+        else if (magnetLevel >= _levelToHighMagnet && capacityLevel >= _levelToHighMagnet)
         {
-            _middleMagnetHighChain.SetActive(false);
+            _middleMagnetLongChain.SetActive(false);
             _middleMagnet.SetActive(false);
-            _highMagnetLowChain.SetActive(false);
+            _highMagnetShortChain.SetActive(false);
             _highMagnet.SetActive(true);
         }
 
@@ -63,25 +65,25 @@ public class SetterMagnet : MonoBehaviour
     private void SaveData()
     {
         YandexGame.savesData.IsLowMagnegActive = _lowMagnet.activeSelf;
-        YandexGame.savesData.IslowMagnetHighChainActive = _lowMagnetHighChain.activeSelf;
+        YandexGame.savesData.IslowMagnetLongChainActive = _lowMagnetLongChain.activeSelf;
 
         YandexGame.savesData.IsMiddleMagnetActive = _middleMagnet.activeSelf;
-        YandexGame.savesData.IsMiddleMagnetHighChainActive = _middleMagnetHighChain.activeSelf;
+        YandexGame.savesData.IsMiddleMagnetLongChainActive = _middleMagnetLongChain.activeSelf;
 
         YandexGame.savesData.IsHighMagnetActive = _highMagnet.activeSelf;
-        YandexGame.savesData.IsHighMagnetLowChainActive = _highMagnetLowChain.activeSelf;
+        YandexGame.savesData.IsHighMagnetShortChainActive = _highMagnetShortChain.activeSelf;
         YandexGame.SaveProgress();
     }
 
     private void GetLoad()
     {
         _lowMagnet.SetActive(YandexGame.savesData.IsLowMagnegActive);
-        _lowMagnetHighChain.SetActive(YandexGame.savesData.IslowMagnetHighChainActive);
+        _lowMagnetLongChain.SetActive(YandexGame.savesData.IslowMagnetLongChainActive);
 
         _middleMagnet.SetActive(YandexGame.savesData.IsMiddleMagnetActive);
-        _middleMagnetHighChain.SetActive(YandexGame.savesData.IsMiddleMagnetHighChainActive);
+        _middleMagnetLongChain.SetActive(YandexGame.savesData.IsMiddleMagnetLongChainActive);
 
         _highMagnet.SetActive(YandexGame.savesData.IsHighMagnetActive);
-        _highMagnetLowChain.SetActive(YandexGame.savesData.IsHighMagnetLowChainActive);
+        _highMagnetShortChain.SetActive(YandexGame.savesData.IsHighMagnetShortChainActive);
     }
 }

@@ -9,19 +9,18 @@ public class Upgrader : MonoBehaviour
     [SerializeField] private Car _car;
     [SerializeField] private Player _player;
 
-    private readonly int _maxLevel = 50;
-    private readonly int _maxLevelCargo = 30;
+    [SerializeField] private float _multiplier = 1.1f;
+    [SerializeField] private float _basePrice = 30;
+    [SerializeField] private float _addedPowerEngine = 0.20f;
 
-    private float _addedPowerEngine = 0.20f;
-    private float _multiplier = 1.1f;
-    private float _basePrice = 30;
+    private readonly int _maxLevel = 30;
 
     public event Action<bool> UpgradeZoneReach;
     public event Action CharacteristiscsChange;
 
-    public float PriceUpgradeEngine { get; private set; }
+    public float PriceUpgradeWheels { get; private set; }
     public float PriceUpgradeMagnet { get; private set; }
-    public float PriceUpgradeCargo { get; private set; }
+    public float PriceUpgradeCapacity { get; private set; }
 
     private void OnEnable() => YandexGame.GetDataEvent += GetData;
 
@@ -45,11 +44,11 @@ public class Upgrader : MonoBehaviour
 
     public void UpgradeEngine()
     {
-        if (_car.EngineLevel < _maxLevel && _player.Wallet.Money >= PriceUpgradeEngine)
+        if (_car.WheelsLevel < _maxLevel && _player.TryToPay(PriceUpgradeWheels))
         {
-            Pay(PriceUpgradeEngine);
-            _car.IncreaseLevelEngine(_addedPowerEngine);
-            PriceUpgradeEngine = CalculateModifyPrice(_car.EngineLevel);
+            Pay(PriceUpgradeWheels);
+            _car.IncreaseLevelWheels(_addedPowerEngine);
+            PriceUpgradeWheels = CalculateModifyPrice(_car.WheelsLevel);
             CharacteristiscsChange?.Invoke();
             SaveData();
         }
@@ -57,7 +56,7 @@ public class Upgrader : MonoBehaviour
 
     public void UpgradeMagnet()
     {
-        if (_car.MagnetLevel < _maxLevel && _player.Wallet.Money >= PriceUpgradeMagnet)
+        if (_car.MagnetLevel < _maxLevel && _player.TryToPay(PriceUpgradeMagnet))
         {
             Pay(PriceUpgradeMagnet);
             _car.IncreaseLevelMagnet();
@@ -69,11 +68,11 @@ public class Upgrader : MonoBehaviour
 
     public void UpgradeCargo()
     {
-        if (_car.CargoLevel < _maxLevelCargo && _player.Wallet.Money >= PriceUpgradeCargo)
+        if (_car.CapacityLevel < _maxLevel && _player.TryToPay(PriceUpgradeCapacity))
         {
-            Pay(PriceUpgradeCargo);
-            _car.IncreaseLevelCargo();
-            PriceUpgradeCargo = CalculateModifyPrice(_car.CargoLevel);
+            Pay(PriceUpgradeCapacity);
+            _car.IncreaseLevelCapacity();
+            PriceUpgradeCapacity = CalculateModifyPrice(_car.CapacityLevel);
             CharacteristiscsChange?.Invoke();
             SaveData();
         }
@@ -91,16 +90,16 @@ public class Upgrader : MonoBehaviour
 
     private void GetData()
     {
-        PriceUpgradeEngine = YandexGame.savesData.PriceUpgradeEngine;
+        PriceUpgradeWheels = YandexGame.savesData.PriceUpgradeEngine;
         PriceUpgradeMagnet = YandexGame.savesData.PriceUpgradeMagnet;
-        PriceUpgradeCargo = YandexGame.savesData.PriceUpgradeCargo;
+        PriceUpgradeCapacity = YandexGame.savesData.PriceUpgradeCargo;
     }
 
     private void SaveData()
     {
-        YandexGame.savesData.PriceUpgradeEngine = PriceUpgradeEngine;
+        YandexGame.savesData.PriceUpgradeEngine = PriceUpgradeWheels;
         YandexGame.savesData.PriceUpgradeMagnet = PriceUpgradeMagnet;
-        YandexGame.savesData.PriceUpgradeCargo = PriceUpgradeCargo;
+        YandexGame.savesData.PriceUpgradeCargo = PriceUpgradeCapacity;
         YandexGame.SaveProgress();
     }
 }

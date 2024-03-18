@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -7,13 +5,7 @@ public class WalletView : MonoBehaviour
 {
     [SerializeField] private GameObject _addedMoneyTextPrefab;
     [SerializeField] private Wallet _wallet;
-
-    private TMP_Text _text;
-
-    private void Awake()
-    {
-        _text = GetComponentInChildren<TMP_Text>();
-    }
+    [SerializeField] private TMP_Text _text;
 
     private void OnEnable()
     {
@@ -27,9 +19,9 @@ public class WalletView : MonoBehaviour
         _wallet.MoneyAdded -= OnAddMoney;
     }
 
-    private void OnMoneyChange(uint money)
+    private void OnMoneyChange(uint value)
     {
-        _text.text = "$" + money.ToString();
+        _text.text = "$" + value.ToString();
     }
 
     private void OnAddMoney(uint addedMoney)

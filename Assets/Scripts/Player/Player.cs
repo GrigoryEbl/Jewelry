@@ -32,8 +32,17 @@ public class Player : MonoBehaviour
 
     private void OnDisable() => _moneyCollector.MoneyCatched -= OnMoneyCatch;
 
+    public bool TryToPay(float price)
+    {
+        if (Wallet.Money >= price)
+            return true;
+
+        return false;
+    }
+
     private void OnMoneyCatch(uint value)
     {
         _wallet.TakeMoney(value);
     }
+
 }

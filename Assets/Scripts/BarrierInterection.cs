@@ -11,7 +11,7 @@ public class BarrierInterection : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private Transform _barrier;
     [SerializeField] private int _price;
-    [SerializeField] private ParticleSystem _explision;
+    [SerializeField] private ParticleSystem _explosion;
 
     public event UnityAction<bool> BarrierReach;
     public int Price => _price;
@@ -37,7 +37,7 @@ public class BarrierInterection : MonoBehaviour
         if (_player.Wallet.TryDecreaseMoney((uint)Price))
         {
             _barrier.gameObject.SetActive(false);
-            _explision.Play();
+            _explosion.Play();
         }
     }
 }

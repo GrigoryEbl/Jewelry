@@ -6,17 +6,17 @@ using YG;
 
 public class Car : MonoBehaviour
 {
-    [SerializeField] private Movement _engine;
+    [SerializeField] private Movement _wheels;
     [SerializeField] private Magnet _magnet;
     [SerializeField] private Transform _startPosition;
 
-    private SetterFork _setterFork;
+    private SetterHand _setterCapacity;
     private SetterWheels _setterWheels;
     private SetterMagnet _setterMagnet;
 
-    public int EngineLevel { get; private set; }
+    public int WheelsLevel { get; private set; }
     public int MagnetLevel { get; private set; }
-    public int CargoLevel { get; private set; }
+    public int CapacityLevel { get; private set; }
 
     private void OnEnable() => YandexGame.GetDataEvent += GetData;
 
@@ -24,16 +24,16 @@ public class Car : MonoBehaviour
 
     private void Awake()
     {
-        _setterFork = GetComponent<SetterFork>();
+        _setterCapacity = GetComponent<SetterHand>();
         _setterWheels = GetComponent<SetterWheels>();
         _setterMagnet = GetComponent<SetterMagnet>();
     }
 
-    public void IncreaseLevelEngine(float addedPowerEngine)
+    public void IncreaseLevelWheels(float addedSpeedWheels)
     {
-        EngineLevel++;
-        _engine.Ugrade(addedPowerEngine);
-        _setterWheels.ChangeWheels(EngineLevel);
+        WheelsLevel++;
+        _wheels.Upgrade(addedSpeedWheels);
+        _setterWheels.TryChangeWheels(WheelsLevel);
         SaveData();
     }
 
@@ -41,16 +41,16 @@ public class Car : MonoBehaviour
     {
         MagnetLevel++;
         _magnet.ChangeLevel(MagnetLevel);
-        _setterMagnet.ChangeMagnet(MagnetLevel, CargoLevel);
+        _setterMagnet.ChangeMagnet(MagnetLevel, CapacityLevel);
         SaveData();
     }
 
-    public void IncreaseLevelCargo()
+    public void IncreaseLevelCapacity()
     {
-        CargoLevel++;
-        _magnet.ChangeMaxCargoCount();
-        _setterMagnet.ChangeMagnet(MagnetLevel, CargoLevel);
-        _setterFork.ChangeFork(CargoLevel);
+        CapacityLevel++;
+        _magnet.ChangeMaxCapacityCount();
+        _setterMagnet.ChangeMagnet(MagnetLevel, CapacityLevel);
+        _setterCapacity.ChangeHand(CapacityLevel);
         SaveData();
     }
 
@@ -61,20 +61,20 @@ public class Car : MonoBehaviour
 
     private void GetData()
     {
-        _engine.Init();
+        _wheels.Init();
         _magnet.Init();
 
         MagnetLevel = _magnet.Level;
-        EngineLevel = _engine.Level;
-        CargoLevel = _magnet.MaxCargoCount;
+        WheelsLevel = _wheels.Level;
+        CapacityLevel = _magnet.MaxCapacityCount;
     }
 
     private void SaveData()
     {
-        YandexGame.savesData.EngineLevel = EngineLevel;
-        YandexGame.savesData.EngineSpeed = _engine.Speed;
+        YandexGame.savesData.EngineLevel = WheelsLevel;
+        YandexGame.savesData.EngineSpeed = _wheels.Speed;
         YandexGame.savesData.MagnetLevel = MagnetLevel;
-        YandexGame.savesData.CargoLevel = CargoLevel;
+        YandexGame.savesData.CapacityLevel = CapacityLevel;
         YandexGame.SaveProgress();
     }
 }
