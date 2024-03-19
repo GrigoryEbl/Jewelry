@@ -95,7 +95,7 @@ public class UpgraderView : MonoBehaviour
     private void ChangeText(TMP_Text price, float priceInfo, TMP_Text level, int levelInfo, string nameDetail)
     {
         price.text = $"${priceInfo.ToString("F0")}";
-        level.text = $"{nameDetail}: {levelInfo}";
+        level.text = $"{levelInfo}";
     }
 
     private void SetImageDetail(int levelinfo, int levelToMiddleDetail, Image middleDetail, Image highDetail)
@@ -109,11 +109,6 @@ public class UpgraderView : MonoBehaviour
 
     private void Slide(Slider slider, int target)
     {
-        //while (slider.value != target)
-        //{
-        //    slider.value = Mathf.MoveTowards(slider.value, target, _speedSlider * Time.deltaTime);
-        //    yield return null;
-        //}
         slider.value = target;
     }
 
