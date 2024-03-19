@@ -36,8 +36,8 @@ public class BarrierInterection : MonoBehaviour
     {
         if (_player.Wallet.TryDecreaseMoney((uint)Price))
         {
-            _barrier.gameObject.SetActive(false);
             _explosion.Play();
+            _barrier.gameObject.SetActive(false);
         }
     }
 }

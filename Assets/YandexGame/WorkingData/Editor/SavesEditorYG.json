@@ -1,5 +1,5 @@
 {
-    "idSave": 15799,
+    "idSave": 17191,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
@@ -10,19 +10,19 @@
         true,
         false
     ],
-    "Money": 0,
-    "EngineLevel": 1,
-    "EngineSpeed": 3.0,
+    "Money": 75549,
+    "EngineLevel": 19,
+    "EngineSpeed": 8.400002479553223,
     "MagnetLevel": 1,
     "CapacityLevel": 1,
-    "PriceUpgradeEngine": 30.0,
+    "PriceUpgradeEngine": 4385.7578125,
     "PriceUpgradeMagnet": 30.0,
     "PriceUpgradeCargo": 30.0,
     "IsLowHandActive": true,
     "IsMiddleHandActive": false,
     "IsHighHandActive": false,
-    "IsLowWheelsActive": true,
-    "IsMiddleWheelsActive": false,
+    "IsLowWheelsActive": false,
+    "IsMiddleWheelsActive": true,
     "IsHighWheelsActive": false,
     "IsLowMagnegActive": true,
     "IslowMagnetLongChainActive": false,
@@ -30,7 +30,7 @@
     "IsMiddleMagnetLongChainActive": false,
     "IsHighMagnetActive": false,
     "IsHighMagnetShortChainActive": false,
-    "IsBarrierJailActive": true,
-    "IsBarrierForgeActive": true,
-    "IsBarrierThroneActive": true
+    "IsBarrierJailActive": false,
+    "IsBarrierForgeActive": false,
+    "IsBarrierThroneActive": false
 }

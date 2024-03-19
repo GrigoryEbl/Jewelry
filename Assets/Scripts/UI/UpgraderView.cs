@@ -12,7 +12,6 @@ public class UpgraderView : MonoBehaviour
     [SerializeField] private Car _car;
     [SerializeField] private float _speedSlider;
 
-
     [Header("Magnet")]
     [SerializeField] private TMP_Text _magnetPriceText;
     [SerializeField] private TMP_Text _magnetLevelText;
@@ -23,7 +22,7 @@ public class UpgraderView : MonoBehaviour
 
     [Header("Wheels")]
     [SerializeField] private TMP_Text _enginePriceText;
-    [SerializeField] private TMP_Text _engineLevelText;
+    [SerializeField] private TMP_Text _wheelsLevelText;
     [SerializeField] private Slider _sliderWheels;
     [SerializeField] private SetterWheels _setterWheels;
     [SerializeField] private Image _imageMiddleWheel;
@@ -71,22 +70,26 @@ public class UpgraderView : MonoBehaviour
     private void OnChangeMagnet()
     {
         ChangeText(_magnetPriceText, _upgrader.PriceUpgradeMagnet, _magnetLevelText, _car.MagnetLevel, "Magnet");
-        StartCoroutine(Slide(_sliderMagnet, _car.MagnetLevel));
+        Slide(_sliderMagnet, _car.MagnetLevel);
         SetImageDetail(_car.MagnetLevel, _setterMagnet.LevelToMiddleMagnet, _imageMiddleMagnet, _imageHighMagnet);
+        ChangePanelToMaxLevel(_car.MagnetLevel, _magnetLevelText);
     }
 
     private void OnChangeWheels()
     {
-        ChangeText(_enginePriceText, _upgrader.PriceUpgradeWheels, _engineLevelText, _car.WheelsLevel, "Wheels");
-        StartCoroutine(Slide(_sliderWheels, _car.WheelsLevel));
+        ChangeText(_enginePriceText, _upgrader.PriceUpgradeWheels, _wheelsLevelText, _car.WheelsLevel, "Wheels");
+        Slide(_sliderWheels, _car.WheelsLevel);
         SetImageDetail(_car.WheelsLevel, _setterFork.LevelToMiddleCapacity, _imageMiddleWheel, _imageHighWheel);
+        ChangePanelToMaxLevel(_car.WheelsLevel, _wheelsLevelText);
     }
 
     private void OnChangeCapacity()
     {
         ChangeText(_capacityPriceText, _upgrader.PriceUpgradeCapacity, _capacityLevelText, _car.CapacityLevel, "Capacity");
-        StartCoroutine(Slide(_sliderCapacity, _car.CapacityLevel));
+       Slide(_sliderCapacity, _car.CapacityLevel);
         SetImageDetail(_car.CapacityLevel, _setterFork.LevelToMiddleCapacity, _imageMiddleFork, _imageHighFork);
+
+        ChangePanelToMaxLevel(_car.CapacityLevel, _capacityLevelText);
     }
 
     private void ChangeText(TMP_Text price, float priceInfo, TMP_Text level, int levelInfo, string nameDetail)
@@ -104,13 +107,21 @@ public class UpgraderView : MonoBehaviour
         }
     }
 
-    private IEnumerator Slide(Slider slider, int target)
+    private void Slide(Slider slider, int target)
     {
-        while (slider.value != target)
-        {
-            slider.value = Mathf.MoveTowards(slider.value, target, _speedSlider * Time.deltaTime);
-            yield return null;
-        }
+        //while (slider.value != target)
+        //{
+        //    slider.value = Mathf.MoveTowards(slider.value, target, _speedSlider * Time.deltaTime);
+        //    yield return null;
+        //}
+        slider.value = target;
     }
 
+    private void ChangePanelToMaxLevel(int level, TMP_Text text)
+    {
+        if (level >= _upgrader.MaxLevel)
+        {
+            text.text = "Max.";
+        }
+    }
 }

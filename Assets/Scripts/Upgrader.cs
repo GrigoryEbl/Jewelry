@@ -15,6 +15,8 @@ public class Upgrader : MonoBehaviour
 
     private readonly int _maxLevel = 30;
 
+    public int MaxLevel => _maxLevel;
+
     public event Action<bool> UpgradeZoneReach;
     public event Action CharacteristiscsChange;
 
