@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class BarrierInterectionView : MonoBehaviour
 {
     [SerializeField] private BarrierInterection _barrierInterection;
-    [SerializeField] private TMP_Text _text;
     [SerializeField] private GameObject _barrierInterectionScreen;
+    [SerializeField] private TMP_Text _PriceText;
 
     private void OnEnable()
     {
@@ -24,6 +24,6 @@ public class BarrierInterectionView : MonoBehaviour
     private void ShowInfo(bool isActive)
     {
         _barrierInterectionScreen.SetActive(isActive);
-        _text.text = "$" + _barrierInterection.Price;
+        _PriceText.text = "$" + _barrierInterection.Price;
     }
 }

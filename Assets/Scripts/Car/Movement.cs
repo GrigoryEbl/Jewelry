@@ -11,6 +11,7 @@ public class Movement : MonoBehaviour
     private Rigidbody _rigidbody;
 
     public float Speed => _speed;
+    public float CurrentSpeed { get; private set; }
     public int Level { get; private set; }
     public bool IsMoving { get; private set; }
 
@@ -30,6 +31,7 @@ public class Movement : MonoBehaviour
     {
         _transform.LookAt(_transform.position + direction.normalized);
         _rigidbody.velocity = direction * _speed;
+        CurrentSpeed = _rigidbody.velocity.sqrMagnitude ;
         IsMoving = true;
     }
 
