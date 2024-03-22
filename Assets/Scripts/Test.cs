@@ -7,6 +7,7 @@ public class Test : MonoBehaviour
 {
     [SerializeField] private Movement _movement;
     [SerializeField] private TMP_Text _speed;
+    [SerializeField] private TMP_Text _currSpeed;
     [SerializeField] private TMP_Text _fpsText;
     [SerializeField] private TMP_Text _timeText;
 
@@ -15,7 +16,8 @@ public class Test : MonoBehaviour
     private void Update()
     {
         _fps = 1.0f / Time.deltaTime;
-        _speed.text = $"Speed: {_movement.Speed}"; 
+        _speed.text = $"Speed: {_movement.Speed}";
+        _currSpeed.text = $"CurrSpeed: {_movement.CurrentSpeed}";
         _fpsText.text = $"FPS:{(int)_fps}";
         _timeText.text = $"Play time: {Time.time.ToString("F2")}";
     }

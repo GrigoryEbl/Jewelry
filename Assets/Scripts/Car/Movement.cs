@@ -31,7 +31,7 @@ public class Movement : MonoBehaviour
     {
         _transform.LookAt(_transform.position + direction.normalized);
         _rigidbody.velocity = direction * _speed;
-        CurrentSpeed = _rigidbody.velocity.sqrMagnitude ;
+        CurrentSpeed = _rigidbody.velocity.magnitude;
         IsMoving = true;
     }
 
