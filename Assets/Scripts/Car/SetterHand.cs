@@ -12,6 +12,8 @@ public class SetterHand : MonoBehaviour
     [SerializeField] private int _levelToMiddleCapacity = 15;
     [SerializeField] private int _levelToHighCapacity = 25;
 
+    [SerializeField] private PlayerEffect _playerEffect;
+
     public int LevelToMiddleCapacity => _levelToMiddleCapacity;
 
     private void OnEnable() => YandexGame.GetDataEvent += GetLoad;
@@ -25,6 +27,7 @@ public class SetterHand : MonoBehaviour
             _lowHand.SetActive(false);
             _middleHand.SetActive(true);
             SaveData();
+            _playerEffect.Play();
         }
 
         if (capacityLevel == _levelToHighCapacity)
@@ -32,6 +35,7 @@ public class SetterHand : MonoBehaviour
            _middleHand.SetActive(false);
             _highHand.SetActive(true);
             SaveData();
+            _playerEffect.Play();
         }
     }
 

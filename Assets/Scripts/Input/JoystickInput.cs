@@ -6,9 +6,7 @@ public class JoystickInput : MonoBehaviour
     [SerializeField] private Movement _movement;
     [SerializeField] private Joystick _joystick;
 
-    public bool LastFrameMoving { get; private set; }
     public bool Moving => _joystick.Direction != Vector2.zero;
-    public bool StoppedMoving => !Moving && LastFrameMoving;
     
     public event Action Moved;
 
@@ -24,20 +22,15 @@ public class JoystickInput : MonoBehaviour
 
     public void Update()
     {
-        if (!Moving)
+        if (Moving == false)
         {
             _movement.Stop();
             return;
         }
 
-        Vector3 rawDirection = new Vector3(_joystick.Direction.x, 0, _joystick.Direction.y);
+        Vector3 direction = new Vector3(_joystick.Direction.x, 0, _joystick.Direction.y);
 
-        _movement.Move(rawDirection);
+        _movement.Move(direction);
         Moved?.Invoke();
-    }
-
-    private void LateUpdate()
-    {
-        LastFrameMoving = Moving;
     }
 }

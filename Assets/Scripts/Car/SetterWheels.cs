@@ -12,6 +12,8 @@ public class SetterWheels : MonoBehaviour
     [SerializeField] private int _levelToMiddleWheels = 15;
     [SerializeField] private int _levelToHighWheels = 25;
 
+    [SerializeField] private PlayerEffect _playerEffect;
+
     public int LevelToMiddleWheels => _levelToMiddleWheels;
 
     private void OnEnable() => YandexGame.GetDataEvent += GetLoad;
@@ -25,6 +27,7 @@ public class SetterWheels : MonoBehaviour
            _lowWheels.SetActive(false);
             _middleWheels.SetActive(true);
             SaveData();
+            _playerEffect.Play();
         }
 
         if (wheelsLevel == _levelToHighWheels)
@@ -32,6 +35,7 @@ public class SetterWheels : MonoBehaviour
             _middleWheels.SetActive(false);
             _highWheels.SetActive(true);
             SaveData();
+            _playerEffect.Play();
         }
     }
 

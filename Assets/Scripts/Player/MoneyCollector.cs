@@ -6,6 +6,7 @@ public class MoneyCollector : MonoBehaviour
 {
     [SerializeField] private float _force = 400f;
     [SerializeField] private float _minCatchDistance = 2f;
+    [SerializeField] private PlayerEffect _playerEffect;
 
     private Attractor _attractor;
     private Transform _transform;
@@ -28,6 +29,7 @@ public class MoneyCollector : MonoBehaviour
             {
                 MoneyCatched?.Invoke(money.Value);
                 Destroy(money.gameObject);
+                _playerEffect.Play();
             }
         }
     }

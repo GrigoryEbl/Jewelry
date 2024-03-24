@@ -17,6 +17,8 @@ public class SetterMagnet : MonoBehaviour
     [SerializeField] private int _levelToMiddleMagnet = 15;
     [SerializeField] private int _levelToHighMagnet = 25;
 
+    [SerializeField] private PlayerEffect _playerEffect;
+
     public int LevelToMiddleMagnet => _levelToMiddleMagnet;
 
     private void OnEnable() => YandexGame.GetDataEvent += GetLoad;
@@ -58,6 +60,9 @@ public class SetterMagnet : MonoBehaviour
             _highMagnetShortChain.SetActive(false);
             _highMagnet.SetActive(true);
         }
+
+        if(magnetLevel == _levelToMiddleMagnet || magnetLevel == _levelToHighMagnet)
+            _playerEffect.Play();
 
         SaveData();
     }

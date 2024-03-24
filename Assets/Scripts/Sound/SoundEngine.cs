@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundEngine : MonoBehaviour
 {
-    [SerializeField] private JoystickInput _joystickInput;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private float _maxPitch;
-    [SerializeField] private float _normalPitch;
+    [SerializeField] private float _minPitch;
 
     private Movement _movement;
 
@@ -19,12 +16,15 @@ public class SoundEngine : MonoBehaviour
 
     private void Update()
     {
-
-        _audioSource.pitch = Mathf.InverseLerp(_normalPitch, _maxPitch, _movement.CurrentSpeed) * _maxPitch;
-
-        if(_movement.IsMoving == false)
+        if (_movement.IsMoving)
         {
-            _audioSource.pitch = _normalPitch;
+            _audioSource.pitch = Mathf.InverseLerp(_minPitch, _maxPitch, _movement.CurrentSpeed) * _maxPitch;
+            //_audioSource.pitch = Mathf.Lerp(_normalPitch, _maxPitch, _movement.CurrentSpeed);
+            //_audioSource.pitch = _movement.CurrentSpeed / _maxPitch;
+        }
+        else
+        { 
+            _audioSource.pitch = _minPitch;
         }
     }
 }

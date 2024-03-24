@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
@@ -47,8 +44,9 @@ public class Car : MonoBehaviour
 
     public void IncreaseLevelCapacity()
     {
+        int addedCapacity = 1;
         CapacityLevel++;
-        _magnet.ChangeMaxCapacityCount();
+        _magnet.ChangeMaxCapacityCount(addedCapacity);
         _setterMagnet.ChangeMagnet(MagnetLevel, CapacityLevel);
         _setterCapacity.ChangeHand(CapacityLevel);
         SaveData();

@@ -1,13 +1,11 @@
-using System;
 using UnityEngine;
 using YG;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private Transform _transform;
-
-    private float _speed;
+    private Transform _transform;
+    [SerializeField] private float _speed;
     private Rigidbody _rigidbody;
 
     public float Speed => _speed;
@@ -29,8 +27,9 @@ public class Movement : MonoBehaviour
 
     public void Move(Vector3 direction)
     {
-        _transform.LookAt(_transform.position + direction.normalized);
+        _transform.LookAt(_transform.position + direction);
         _rigidbody.velocity = direction * _speed;
+
         CurrentSpeed = _rigidbody.velocity.magnitude;
         IsMoving = true;
     }

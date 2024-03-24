@@ -13,6 +13,8 @@ public class Spawner : MonoBehaviour
     private Transform _transform;
     private int _spawnedCount;
 
+    public Resource Resource => _resourcePrefab;
+
     private void Start()
     {
         _transform = transform;
@@ -25,7 +27,7 @@ public class Spawner : MonoBehaviour
         {
             _spawnedCount = transform.childCount;
 
-            if (_spawnedCount < _maxSpawnCount)
+            if (_spawnedCount < _maxSpawnCount + 1)
             {
                 yield return new WaitForSeconds(_spawnDelay);
                 Vector2 RandomPosition = Random.insideUnitCircle * _spawnRadius;

@@ -7,7 +7,6 @@ using YG;
 public class Player : MonoBehaviour
 {
     [SerializeField] private JoystickInput _joystickInput;
-    [SerializeField] private InputPC _inputPC;
 
     private Wallet _wallet;
     private MoneyCollector _moneyCollector;
