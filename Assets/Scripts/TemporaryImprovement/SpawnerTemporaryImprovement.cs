@@ -3,21 +3,26 @@ using UnityEngine;
 public class SpawnerTemporaryImprovement : MonoBehaviour
 {
     [SerializeField] private TemporaryImprovement _temporaryImprovementPrefab;
-    [SerializeField] private Transform[] _spawnPoints;
-    [SerializeField] private Timer _timer;
-    [SerializeField] private float _spawnDelay;
+    [SerializeField] private Transform _points;
+
+    private Transform[] _spawnPoints;
+    private Timer _timer;
+    private float _spawnDelay = 120f;
 
     private void OnEnable() => _timer.TimeEmpty += Spawn;
     private void OnDisable() => _timer.TimeEmpty -= Spawn;
 
     private void Awake()
     {
+        _timer = GetComponent<Timer>();
+        _spawnPoints = new Transform[_points.childCount];
         _timer.StartCoroutine(_timer.Work(_spawnDelay));
+        SetSpawnPoints();
     }
 
     public void Spawn()
     {
-        var newTemporaryImprovement = Instantiate(_temporaryImprovementPrefab, SelectSpawnPoint(),Quaternion.identity);
+        var newTemporaryImprovement = Instantiate(_temporaryImprovementPrefab, SelectSpawnPoint(), Quaternion.identity);
         _timer.StartCoroutine(_timer.Work(_spawnDelay));
     }
 
@@ -25,5 +30,13 @@ public class SpawnerTemporaryImprovement : MonoBehaviour
     {
         Vector3 spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)].position;
         return spawnPoint;
+    }
+
+    private void SetSpawnPoints()
+    {
+        for (int i = 0; i < _points.childCount; i++)
+        {
+            _spawnPoints[i] = _points.GetChild(i).transform;
+        }
     }
 }

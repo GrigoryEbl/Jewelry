@@ -23,7 +23,7 @@ public class MoneyCollector : MonoBehaviour
     {
         if (other.TryGetComponent(out Money money))
         {
-           _attractor.Attract(money.transform,transform, _force, false);
+            _attractor.Attract(money.transform, _transform, _force, false);
 
             if (Vector3.Distance(money.transform.position, _transform.position) <= _minCatchDistance)
             {

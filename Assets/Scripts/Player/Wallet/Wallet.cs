@@ -16,14 +16,6 @@ public class Wallet : MonoBehaviour
 
     private void OnDisable() => YandexGame.GetDataEvent -= GetLoad;
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            _money = 0;     //DELETE
-        }
-    }
-
     public void TakeMoney(uint addedMoney)
     {
         _money += addedMoney;

@@ -19,8 +19,6 @@ public class SoundEngine : MonoBehaviour
         if (_movement.IsMoving)
         {
             _audioSource.pitch = Mathf.InverseLerp(_minPitch, _maxPitch, _movement.CurrentSpeed) * _maxPitch;
-            //_audioSource.pitch = Mathf.Lerp(_normalPitch, _maxPitch, _movement.CurrentSpeed);
-            //_audioSource.pitch = _movement.CurrentSpeed / _maxPitch;
         }
         else
         { 

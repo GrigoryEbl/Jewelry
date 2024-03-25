@@ -1,5 +1,3 @@
-using DG.Tweening;
-using System.IO;
 using UnityEngine;
 
 public class WheelRotator : MonoBehaviour

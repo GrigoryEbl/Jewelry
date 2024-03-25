@@ -35,7 +35,6 @@ public class BarrierInterection : MonoBehaviour
 
     private void OnDisable()
     {
-
         _playerEffect.DeferredPlay();
     }
 
