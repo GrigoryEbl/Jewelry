@@ -24,7 +24,6 @@ public class TimerView : MonoBehaviour
             if (_imagesDetails[i].name == _temporaryImprovement.NameUpgradeDetail)
             {
                 _imagesDetails[i].gameObject.SetActive(true);
-                return;
             }
         }
     }
