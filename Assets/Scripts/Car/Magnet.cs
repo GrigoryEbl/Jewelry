@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using YG;
 
@@ -13,6 +14,8 @@ public class Magnet : MonoBehaviour
     private Transform _transform;
     private float _startCatchDistance = 0.4f;
     private float _addedCathDistance = 0.05f;
+
+    public Action<int> ResourceCatched;
 
     public int Level { get; private set; }
     public int MaxCapacityCount => _maxCapacityCount;
@@ -68,6 +71,7 @@ public class Magnet : MonoBehaviour
             rigidbody.isKinematic = true;
             AddCathDistance();
             _playerEffect.Play();
+            ResourceCatched?.Invoke(_transform.childCount);
         }
     }
 
