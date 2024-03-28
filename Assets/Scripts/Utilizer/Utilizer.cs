@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Attractor))]
 public class Utilizer : MonoBehaviour
@@ -28,6 +25,7 @@ public class Utilizer : MonoBehaviour
             rigidbody.isKinematic = false;
 
             _attractor.Attract(resource.transform, _utilizePoint, _force, true);
+            _playerEffect.Play();
             TryCatch(resource);
         }
     }
@@ -36,7 +34,6 @@ public class Utilizer : MonoBehaviour
     {
         if (Vector3.Distance(resource.transform.position, _utilizePoint.transform.position) <= _minCatchDistance)
         {
-            _playerEffect.Play();
             uint priceResource = resource.Price;
             Destroy(resource.gameObject);
             var newMoney = Instantiate(_moneyPrefab, _spawnMoneyPoint.position, Quaternion.identity, null);

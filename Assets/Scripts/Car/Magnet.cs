@@ -41,9 +41,6 @@ public class Magnet : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.TryGetComponent(out Utilizer utilizer))
-            return;
-
         if (other.transform.parent == _transform)
             return;
 
@@ -67,10 +64,10 @@ public class Magnet : MonoBehaviour
     {
         if (Vector3.Distance(resource.transform.position, _transform.position) <= _catchDistance)
         {
-            _playerEffect.Play();
             resource.transform.parent = _transform;
             rigidbody.isKinematic = true;
             AddCathDistance();
+            _playerEffect.Play();
         }
     }
 
