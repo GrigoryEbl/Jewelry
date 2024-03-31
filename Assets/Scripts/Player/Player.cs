@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent (typeof(Wallet))]
+[RequireComponent (typeof(MoneyCollector))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private JoystickInput _joystickInput;

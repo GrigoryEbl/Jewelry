@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent (typeof(Timer))]
 public class SpawnerTemporaryImprovement : MonoBehaviour
 {
     [SerializeField] private TemporaryImprovement _temporaryImprovementPrefab;

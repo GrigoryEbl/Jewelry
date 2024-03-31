@@ -22,7 +22,7 @@ namespace YG
 
         public uint Money = 0;
         public int EngineLevel = 1;
-        public float EngineSpeed = 3f;
+        public float EngineSpeed = 4f;
         public int MagnetLevel = 1;
         public int CapacityLevel = 1;
 

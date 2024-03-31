@@ -3,8 +3,9 @@ using UnityEngine;
 public class WheelRotator : MonoBehaviour
 {
     [SerializeField] private Transform[] _wheelsModels;
-
     [SerializeField] private Movement _movement;
+
+    private Vector3 _direction = new Vector3(1, 0, 0);
 
     private void Update()
     {
@@ -12,7 +13,7 @@ public class WheelRotator : MonoBehaviour
         {
             foreach (Transform wheel in _wheelsModels)
             {
-                wheel.transform.Rotate(new Vector3(1, 0, 0) * _movement.Speed);
+                wheel.transform.Rotate(_direction * _movement.Speed);
             }
         }
     }

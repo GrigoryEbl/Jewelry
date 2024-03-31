@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 530952341892791272}
   - component: {fileID: 1114471499783322795}
   - component: {fileID: 6185850264576675426}
+  - component: {fileID: 3033795678169357255}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -476,10 +477,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: YG.YandexGame, Assembly-CSharp
-        m_MethodName: _RewardedShow
-        m_Mode: 3
+      - m_Target: {fileID: 3033795678169357255}
+        m_TargetAssemblyTypeName: RewardAdPlay, Assembly-CSharp
+        m_MethodName: ShowAd
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -488,6 +489,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &3033795678169357255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329376043667854729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82d6143c5a1ecd24181f76910f971423, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &347931697431260058
 GameObject:
   m_ObjectHideFlags: 0

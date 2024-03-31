@@ -8,6 +8,7 @@ public class Wallet : MonoBehaviour
     private int _recordMoney;
 
     public uint Money => _money;
+    private string _lbName = "Money";
 
     public event Action<uint> MoneyChanched;
     public event Action<uint> MoneyAdded;
@@ -20,7 +21,7 @@ public class Wallet : MonoBehaviour
     {
         _money += addedMoney;
         _recordMoney += (int)addedMoney;
-        YandexGame.NewLeaderboardScores("Money", _recordMoney);
+        YandexGame.NewLeaderboardScores(_lbName, _recordMoney);
         
         MoneyChanched?.Invoke(_money);
         MoneyAdded?.Invoke(addedMoney);

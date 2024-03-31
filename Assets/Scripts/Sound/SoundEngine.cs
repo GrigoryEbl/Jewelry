@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent (typeof(Movement))]
 public class SoundEngine : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;

@@ -15,7 +15,7 @@ public class Magnet : MonoBehaviour
     private float _startCatchDistance = 0.4f;
     private float _addedCathDistance = 0.05f;
 
-    public Action<int> ResourceCatched;
+    public Action<int> ResourceChangedCount;
 
     public int Level { get; private set; }
     public int MaxCapacityCount => _maxCapacityCount;
@@ -50,17 +50,19 @@ public class Magnet : MonoBehaviour
         if (_transform.childCount >= _maxCapacityCount)
             return;
 
-        if (_transform.childCount == 0)
-            _catchDistance = _startCatchDistance;
-
         if (other.TryGetComponent(out Resource resource) && resource.TryGetComponent(out Rigidbody rigidbody))
         {
             if (Level < resource.Level)
                 return;
 
-            _attractor.Attract(resource.transform, _transform, _force, false);
+            _attractor.Attract(resource.transform, _transform, _force);
             TryCatch(resource, rigidbody);
         }
+
+        if (_transform.childCount == 0)
+            _catchDistance = _startCatchDistance;
+
+        ResourceChangedCount?.Invoke(_transform.childCount);
     }
 
     private void TryCatch(Resource resource, Rigidbody rigidbody)
@@ -71,7 +73,6 @@ public class Magnet : MonoBehaviour
             rigidbody.isKinematic = true;
             AddCathDistance();
             _playerEffect.Play();
-            ResourceCatched?.Invoke(_transform.childCount);
         }
     }
 

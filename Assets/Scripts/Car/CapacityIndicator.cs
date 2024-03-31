@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class CapacityIndicator : MonoBehaviour
 {
-    [SerializeField] private Magnet _hand;
+    [SerializeField] private Magnet _magnet;
     [SerializeField] private Transform[] _lamps;
 
-    private void OnEnable() => _hand.ResourceCatched += ChangeIndicator;
+    private void OnEnable() => _magnet.ResourceChangedCount += ChangeIndicator;
 
-    private void OnDisable() => _hand.ResourceCatched -= ChangeIndicator;
+    private void OnDisable() => _magnet.ResourceChangedCount -= ChangeIndicator;
 
     private void ChangeIndicator(int resourceCount)
     {
@@ -22,7 +22,7 @@ public class CapacityIndicator : MonoBehaviour
     private float CalculatePercent(int value)
     {
         int multiplier = 100;
-        float percent = ((float)value / (float)_hand.MaxCapacityCount) * multiplier;
+        float percent = ((float)value / (float)_magnet.MaxCapacityCount) * multiplier;
         return percent;
     }
 }

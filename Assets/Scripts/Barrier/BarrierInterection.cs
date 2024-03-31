@@ -1,8 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,6 +10,8 @@ public class BarrierInterection : MonoBehaviour
     [SerializeField] private PlayerEffect _playerEffect;
 
     public event UnityAction<bool> BarrierReach;
+    public event UnityAction NewZoneOpened;
+
     public int Price => _price;
 
     private void OnTriggerStay(Collider other)
@@ -36,6 +33,7 @@ public class BarrierInterection : MonoBehaviour
     private void OnDisable()
     {
         _playerEffect.DeferredPlay();
+        NewZoneOpened?.Invoke();
     }
 
     public void TryOpenNewZone()

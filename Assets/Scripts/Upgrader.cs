@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
@@ -9,13 +7,15 @@ public class Upgrader : MonoBehaviour
     [SerializeField] private Car _car;
     [SerializeField] private Player _player;
 
-    [SerializeField] private float _multiplier = 1.1f;
+    [SerializeField] private float _multiplier;
     [SerializeField] private float _basePrice = 30;
     [SerializeField] private float _addedPowerEngine = 0.20f;
 
     private readonly int _maxLevel = 30;
 
     public int MaxLevel => _maxLevel;
+    private int _levelToUpMultiplier = 10;
+    private float _multiplierExtra = 0.03f;
 
     public event Action<bool> UpgradeZoneReach;
     public event Action CharacteristiscsChange;
@@ -82,6 +82,9 @@ public class Upgrader : MonoBehaviour
 
     private float CalculateModifyPrice(int degree)
     {
+        if (degree >= _levelToUpMultiplier)
+            return _basePrice * Mathf.Pow(_multiplier + _multiplierExtra, degree);
+
         return _basePrice * Mathf.Pow(_multiplier, degree);
     }
 

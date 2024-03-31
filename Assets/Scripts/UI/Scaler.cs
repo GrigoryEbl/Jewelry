@@ -21,13 +21,13 @@ public class Scaler : MonoBehaviour
             if (_images[i].name == _temporaryImprovement.NameUpgradeDetail)
             {
                 _images[i].gameObject.SetActive(true);
-                PlayAnim(_images[i]);
+                Play(_images[i]);
                 return;
             }
         }
     }
 
-    private void PlayAnim(Image image)
+    private void Play(Image image)
     {
         image.rectTransform.DOScale(_scale, _duration).SetLoops(_repeats, _loopType).SetEase(Ease.Linear);
     }

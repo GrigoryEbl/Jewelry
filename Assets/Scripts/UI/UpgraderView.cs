@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Diagnostics;
-using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,7 +21,7 @@ public class UpgraderView : MonoBehaviour
     [Header("Wheels")]
     [SerializeField] private TMP_Text _enginePriceText;
     [SerializeField] private TMP_Text _wheelsLevelText;
-    [SerializeField]  private TMP_Text _wheelsLabel;
+    [SerializeField] private TMP_Text _wheelsLabel;
     [SerializeField] private Slider _sliderWheels;
     [SerializeField] private SetterWheels _setterWheels;
     [SerializeField] private Image _imageMiddleWheel;
@@ -89,7 +86,7 @@ public class UpgraderView : MonoBehaviour
     private void OnChangeCapacity()
     {
         ChangeText(_capacityPriceText, _upgrader.PriceUpgradeCapacity, _capacityLevelText, _car.CapacityLevel, _capacityLabel);
-       Slide(_sliderCapacity, _car.CapacityLevel);
+        Slide(_sliderCapacity, _car.CapacityLevel);
         SetImageDetail(_car.CapacityLevel, _setterFork.LevelToMiddleCapacity, _imageMiddleFork, _imageHighFork);
 
         ChangePanelToMaxLevel(_car.CapacityLevel, _capacityLevelText);
@@ -97,9 +94,9 @@ public class UpgraderView : MonoBehaviour
 
     private void ChangeText(TMP_Text price, float priceInfo, TMP_Text level, int levelInfo, TMP_Text label)
     {
-        if(levelInfo >= _upgrader.MaxLevel)
+        if (levelInfo >= _upgrader.MaxLevel)
         {
-            label.enabled = false; 
+            label.enabled = false;
             level.enabled = false;
             Instantiate(_maxPrefab, label.transform);
         }

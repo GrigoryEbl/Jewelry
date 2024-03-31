@@ -1,6 +1,9 @@
 using UnityEngine;
 using YG;
 
+[RequireComponent(typeof(SetterHand))]
+[RequireComponent(typeof(SetterWheels))]
+[RequireComponent(typeof(SetterMagnet))]
 public class Car : MonoBehaviour
 {
     [SerializeField] private Movement _wheels;

@@ -12,6 +12,7 @@ public class Utilizer : MonoBehaviour
     [SerializeField] private PlayerEffect _playerEffect;
 
     private Attractor _attractor;
+    private bool _isCatch;
 
     private void Awake()
     {
@@ -23,9 +24,7 @@ public class Utilizer : MonoBehaviour
         if (other.TryGetComponent(out Resource resource) && resource.TryGetComponent(out Rigidbody rigidbody))
         {
             rigidbody.isKinematic = false;
-
-            _attractor.Attract(resource.transform, _utilizePoint, _force, true);
-            _playerEffect.Play();
+            _attractor.Attract(resource.transform, _utilizePoint, _force);
             TryCatch(resource);
         }
     }
@@ -37,8 +36,15 @@ public class Utilizer : MonoBehaviour
             uint priceResource = resource.Price;
             Destroy(resource.gameObject);
             var newMoney = Instantiate(_moneyPrefab, _spawnMoneyPoint.position, Quaternion.identity, null);
-                newMoney.SetValue(priceResource);
+            newMoney.SetValue(priceResource);
             _moneyStacker.Stacking(newMoney.transform);
+            _isCatch = true;
+        }
+
+        if (_isCatch)
+        {
+            _playerEffect.Play();
+            _isCatch = false;
         }
     }
 }
