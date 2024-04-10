@@ -1,36 +1,39 @@
 using TMPro;
 using UnityEngine;
+using Wallet;
 
-public class WalletView : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private GameObject _addedMoneyTextPrefab;
-    [SerializeField] private Wallet _wallet;
-    [SerializeField] private TMP_Text _text;
-
-    private void OnEnable()
+    public class WalletView : MonoBehaviour
     {
-        _wallet.MoneyChanched += OnMoneyChange;
-        _wallet.MoneyAdded += OnAddMoney;
-    }
+        [SerializeField] private GameObject _addedMoneyTextPrefab;
+        [SerializeField] private PlayerWallet _wallet;
+        [SerializeField] private TMP_Text _text;
 
-    private void OnDisable()
-    {
-        _wallet.MoneyChanched -= OnMoneyChange;
-        _wallet.MoneyAdded -= OnAddMoney;
-    }
-
-    private void OnMoneyChange(uint value)
-    {
-        _text.text = "$" + value.ToString();
-    }
-
-    private void OnAddMoney(uint addedMoney)
-    {
-        if (_addedMoneyTextPrefab.TryGetComponent(out TMP_Text text))
+        private void OnEnable()
         {
-            text.text = "+" + addedMoney.ToString();
-            Instantiate(_addedMoneyTextPrefab, _text.transform);
+            _wallet.MoneyChanched += OnMoneyChange;
+            _wallet.MoneyAdded += OnAddMoney;
+        }
+
+        private void OnDisable()
+        {
+            _wallet.MoneyChanched -= OnMoneyChange;
+            _wallet.MoneyAdded -= OnAddMoney;
+        }
+
+        private void OnMoneyChange(uint value)
+        {
+            _text.text = "$" + value.ToString();
+        }
+
+        private void OnAddMoney(uint addedMoney)
+        {
+            if (_addedMoneyTextPrefab.TryGetComponent(out TMP_Text text))
+            {
+                text.text = "+" + addedMoney.ToString();
+                Instantiate(_addedMoneyTextPrefab, _text.transform);
+            }
         }
     }
-
 }

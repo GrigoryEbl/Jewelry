@@ -23,7 +23,7 @@
 
 //Update is called once per frame
 //	void Update () {
-	
+
 //		 Mouse Click - Check if mouse over button to prevent spawning particle effects while hovering or using UI buttons.
 //		if (!MouseOverButton)
 //{

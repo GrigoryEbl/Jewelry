@@ -1,45 +1,48 @@
 using System.Collections;
 using UnityEngine;
 
-public class MoneyStacker : MonoBehaviour
+namespace Utilize
 {
-    [SerializeField] private Transform _moneyStack;
-    [SerializeField] private float _speed;
-
-    private Transform[] _places;
-
-    private void Start()
+    public class MoneyStacker : MonoBehaviour
     {
-        _places = new Transform[_moneyStack.childCount];
+        [SerializeField] private Transform _moneyStack;
+        [SerializeField] private float _speed;
 
-        for (int i = 0; i < _moneyStack.childCount; i++)
-        {
-            _places[i] = _moneyStack.GetChild(i);
-        }
-    }
+        private Transform[] _places;
 
-    public void Stacking(Transform money)
-    {
-        for (int i = 0; i < _places.Length; i++)
+        private void Start()
         {
-            if (_places[i].childCount == 0)
+            _places = new Transform[_moneyStack.childCount];
+
+            for (int i = 0; i < _moneyStack.childCount; i++)
             {
-                money.transform.SetParent(_places[i]);
-
-                StartCoroutine(MoveToPlace(money, _places[i]));
-
-                return;
+                _places[i] = _moneyStack.GetChild(i);
             }
         }
-    }
 
-    private IEnumerator MoveToPlace(Transform money, Transform target)
-    {
-        while (true)
+        public void Stacking(Transform money)
         {
-            money.position = Vector3.MoveTowards(money.position, target.position, _speed * Time.deltaTime);
+            for (int i = 0; i < _places.Length; i++)
+            {
+                if (_places[i].childCount == 0)
+                {
+                    money.transform.SetParent(_places[i]);
 
-            yield return null;
+                    StartCoroutine(MoveToPlace(money, _places[i]));
+
+                    return;
+                }
+            }
+        }
+
+        private IEnumerator MoveToPlace(Transform money, Transform target)
+        {
+            while (true)
+            {
+                money.position = Vector3.MoveTowards(money.position, target.position, _speed * Time.deltaTime);
+
+                yield return null;
+            }
         }
     }
 }

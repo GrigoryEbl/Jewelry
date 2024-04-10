@@ -1,13 +1,16 @@
 using UnityEngine;
 
-public class Money : MonoBehaviour
+namespace Wallet
 {
-    private uint _value;
-
-    public uint Value => _value;
-
-    public void SetValue(uint value)
+    public class Money : MonoBehaviour
     {
-        _value = value;
+        private uint _value;
+
+        public uint Value => _value;
+
+        public void SetValue(uint value)
+        {
+            _value = value;
+        }
     }
 }

@@ -9,8 +9,8 @@ namespace Polyperfect.Common
     [DefaultExecutionOrder(-50)]
     public class AnimationDelay : MonoBehaviour
     {
-        [Tooltip("Delay to start the animation after")] [SerializeField] float ConstantDelay = 0f;
-        [Tooltip("An additional random delay to be added")] [SerializeField] float RandomDelay = 0f;
+        [Tooltip("Delay to start the animation after")][SerializeField] float ConstantDelay = 0f;
+        [Tooltip("An additional random delay to be added")][SerializeField] float RandomDelay = 0f;
         public UnityEvent OnAnimStart;
         IEnumerator Start()
         {

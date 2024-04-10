@@ -1,50 +1,56 @@
+using Item;
+using Sounds;
 using UnityEngine;
+using Wallet;
 
-[RequireComponent(typeof(Attractor))]
-public class Utilizer : MonoBehaviour
+namespace Utilize
 {
-    [SerializeField] private float _force;
-    [SerializeField] private float _minCatchDistance;
-    [SerializeField] private Transform _utilizePoint;
-    [SerializeField] private Money _moneyPrefab;
-    [SerializeField] private Transform _spawnMoneyPoint;
-    [SerializeField] private MoneyStacker _moneyStacker;
-    [SerializeField] private PlayerEffect _playerEffect;
-
-    private Attractor _attractor;
-    private bool _isCatch;
-
-    private void Awake()
+    [RequireComponent(typeof(Attractor))]
+    public class Utilizer : MonoBehaviour
     {
-        _attractor = GetComponent<Attractor>();
-    }
+        [SerializeField] private float _force;
+        [SerializeField] private float _minCatchDistance;
+        [SerializeField] private Transform _utilizePoint;
+        [SerializeField] private Money _moneyPrefab;
+        [SerializeField] private Transform _spawnMoneyPoint;
+        [SerializeField] private MoneyStacker _moneyStacker;
+        [SerializeField] private PlayerEffect _playerEffect;
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.TryGetComponent(out Resource resource) && resource.TryGetComponent(out Rigidbody rigidbody))
+        private Attractor _attractor;
+        private bool _isCatch;
+
+        private void Awake()
         {
-            rigidbody.isKinematic = false;
-            _attractor.Attract(resource.transform, _utilizePoint, _force);
-            TryCatch(resource);
-        }
-    }
-
-    private void TryCatch(Resource resource)
-    {
-        if (Vector3.Distance(resource.transform.position, _utilizePoint.transform.position) <= _minCatchDistance)
-        {
-            uint priceResource = resource.Price;
-            Destroy(resource.gameObject);
-            var newMoney = Instantiate(_moneyPrefab, _spawnMoneyPoint.position, Quaternion.identity, null);
-            newMoney.SetValue(priceResource);
-            _moneyStacker.Stacking(newMoney.transform);
-            _isCatch = true;
+            _attractor = GetComponent<Attractor>();
         }
 
-        if (_isCatch)
+        private void OnTriggerStay(Collider other)
         {
-            _playerEffect.Play();
-            _isCatch = false;
+            if (other.TryGetComponent(out CollectedItem item) && item.TryGetComponent(out Rigidbody rigidbody))
+            {
+                rigidbody.isKinematic = false;
+                _attractor.Attract(item.transform, _utilizePoint, _force);
+                Catch(item);
+            }
+        }
+
+        private void Catch(CollectedItem item)
+        {
+            if (Vector3.Distance(item.transform.position, _utilizePoint.transform.position) <= _minCatchDistance)
+            {
+                uint priceResource = item.Price;
+                Destroy(item.gameObject);
+                var newMoney = Instantiate(_moneyPrefab, _spawnMoneyPoint.position, Quaternion.identity, null);
+                newMoney.SetValue(priceResource);
+                _moneyStacker.Stacking(newMoney.transform);
+                _isCatch = true;
+            }
+
+            if (_isCatch)
+            {
+                _playerEffect.Play();
+                _isCatch = false;
+            }
         }
     }
 }

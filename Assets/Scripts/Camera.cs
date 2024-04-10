@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using UnityEngine;
 
 public class Camera : MonoBehaviour
@@ -28,12 +29,12 @@ public class Camera : MonoBehaviour
 
     private void OnEnable()
     {
-        _upgrader.UpgradeZoneReach += Zoom;
+        _upgrader.UpgradeZoneReached += Zoom;
     }
 
     private void OnDisable()
     {
-        _upgrader.UpgradeZoneReach -= Zoom;
+        _upgrader.UpgradeZoneReached -= Zoom;
     }
 
     private void Zoom(bool isReach)

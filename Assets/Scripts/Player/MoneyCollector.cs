@@ -1,35 +1,40 @@
+using Sounds;
 using System;
 using UnityEngine;
+using Wallet;
 
-[RequireComponent(typeof(Attractor))]
-public class MoneyCollector : MonoBehaviour
+namespace Domain
 {
-    [SerializeField] private float _force = 400f;
-    [SerializeField] private float _minCatchDistance = 2f;
-    [SerializeField] private PlayerEffect _playerEffect;
-
-    private Attractor _attractor;
-    private Transform _transform;
-
-    public event Action<uint> MoneyCatched;
-
-    private void Awake()
+    [RequireComponent(typeof(Attractor))]
+    public class MoneyCollector : MonoBehaviour
     {
-        _transform = transform;
-        _attractor = GetComponent<Attractor>();
-    }
+        [SerializeField] private float _force = 400f;
+        [SerializeField] private float _minCatchDistance = 2f;
+        [SerializeField] private PlayerEffect _playerEffect;
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.TryGetComponent(out Money money))
+        private Attractor _attractor;
+        private Transform _transform;
+
+        public event Action<uint> MoneyCatched;
+
+        private void Awake()
         {
-            _attractor.Attract(money.transform, _transform, _force);
+            _transform = transform;
+            _attractor = GetComponent<Attractor>();
+        }
 
-            if (Vector3.Distance(money.transform.position, _transform.position) <= _minCatchDistance)
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.TryGetComponent(out Money money))
             {
-                MoneyCatched?.Invoke(money.Value);
-                Destroy(money.gameObject);
-                _playerEffect.Play();
+                _attractor.Attract(money.transform, _transform, _force);
+
+                if (Vector3.Distance(money.transform.position, _transform.position) <= _minCatchDistance)
+                {
+                    MoneyCatched?.Invoke(money.Value);
+                    Destroy(money.gameObject);
+                    _playerEffect.Play();
+                }
             }
         }
     }

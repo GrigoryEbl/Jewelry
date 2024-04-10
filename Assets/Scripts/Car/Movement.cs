@@ -1,49 +1,54 @@
+using Assets.Scripts;
 using UnityEngine;
 using YG;
 
-[RequireComponent(typeof(Rigidbody))]
-public class Movement : MonoBehaviour
+namespace PlayerCar
 {
-    private Transform _transform;
-    [SerializeField] private float _speed;
-    private Rigidbody _rigidbody;
-
-    public float Speed => _speed;
-    public float CurrentSpeed { get; private set; }
-    public int Level { get; private set; }
-    public bool IsMoving { get; private set; }
-
-    private void Awake()
+    [RequireComponent(typeof(Rigidbody))]
+    public class Movement : MonoBehaviour
     {
-        _transform = transform;
-        _rigidbody = GetComponent<Rigidbody>();
-    }
+        private Transform _transform;
+        [SerializeField] private float _speed;
+        private Rigidbody _rigidbody;
 
-    public void Init()
-    {
-        _speed = YandexGame.savesData.EngineSpeed;
-        Level = YandexGame.savesData.EngineLevel;
-    }
+        public float Speed => _speed;
+        public float CurrentSpeed { get; private set; }
+        public int Level { get; private set; }
+        public bool IsMoving { get; private set; }
 
-    public void Move(Vector3 direction)
-    {
-        _transform.LookAt(_transform.position + direction);
-        _rigidbody.velocity = direction * _speed;
+        private void Awake()
+        {
+            _transform = transform;
+            _rigidbody = GetComponent<Rigidbody>();
+        }
 
-        CurrentSpeed = _rigidbody.velocity.magnitude;
-        IsMoving = true;
-    }
+        public void Init()
+        {
+            _speed = YandexGame.savesData.EngineSpeed;
+            Level = YandexGame.savesData.EngineLevel;
+        }
 
-    public void Stop()
-    {
-        if (_rigidbody != null)
-            _rigidbody.velocity = Vector3.zero;
-        IsMoving = false;
-    }
+        public void Move(Vector3 direction)
+        {
+            _transform.LookAt(_transform.position + direction);
+            _rigidbody.velocity = direction * _speed;
 
-    public void Upgrade(float addedSpeed)
-    {
-        _speed += addedSpeed;
-        Level++;
+            CurrentSpeed = _rigidbody.velocity.magnitude;
+            IsMoving = true;
+        }
+
+        public void Stop()
+        {
+            if (_rigidbody != null)
+                _rigidbody.velocity = Vector3.zero;
+
+            IsMoving = false;
+        }
+
+        public void Upgrade(float addedSpeed)
+        {
+            _speed += addedSpeed;
+            Level++;
+        }
     }
 }

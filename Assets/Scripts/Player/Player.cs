@@ -1,45 +1,33 @@
+using PlayerInput;
 using UnityEngine;
+using Wallet;
 
-[RequireComponent (typeof(Wallet))]
-[RequireComponent (typeof(MoneyCollector))]
-public class Player : MonoBehaviour
+namespace Domain.Player
 {
-    [SerializeField] private JoystickInput _joystickInput;
-
-    private Wallet _wallet;
-    private MoneyCollector _moneyCollector;
-
-    public Wallet Wallet => _wallet;
-
-    private void Awake()
+    [RequireComponent(typeof(PlayerWallet))]
+    [RequireComponent(typeof(MoneyCollector))]
+    public class Player : MonoBehaviour
     {
-        _wallet = GetComponent<Wallet>();
-        _moneyCollector = GetComponent<MoneyCollector>();
-    }
+        [SerializeField] private JoystickInput _joystickInput;
 
-    private void Update()
-    {
-        if(Input.GetKeyUp(KeyCode.Escape))
+        private PlayerWallet _wallet;
+        private MoneyCollector _moneyCollector;
+
+        public PlayerWallet Wallet => _wallet;
+
+        private void Awake()
         {
-            _wallet.TakeMoney(100000);      //DELETE
+            _wallet = GetComponent<PlayerWallet>();
+            _moneyCollector = GetComponent<MoneyCollector>();
+        }
+
+        private void OnEnable() => _moneyCollector.MoneyCatched += OnMoneyCatch;
+
+        private void OnDisable() => _moneyCollector.MoneyCatched -= OnMoneyCatch;
+
+        private void OnMoneyCatch(uint value)
+        {
+            _wallet.TakeMoney(value);
         }
     }
-
-    private void OnEnable() => _moneyCollector.MoneyCatched += OnMoneyCatch;
-
-    private void OnDisable() => _moneyCollector.MoneyCatched -= OnMoneyCatch;
-
-    public bool TryToPay(float price)
-    {
-        if (Wallet.Money >= price)
-            return true;
-
-        return false;
-    }
-
-    private void OnMoneyCatch(uint value)
-    {
-        _wallet.TakeMoney(value);
-    }
-
 }

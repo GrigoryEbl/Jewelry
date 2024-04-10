@@ -1,7 +1,7 @@
-using UnityEngine;
-using System.Runtime.InteropServices;
-using UnityEngine.Events;
 using System;
+using System.Runtime.InteropServices;
+using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using YG.Utils.LB;
 
@@ -134,7 +134,7 @@ namespace YG
 
         static void Message(string message)
         {
-            if (Instance.infoYG.debug) 
+            if (Instance.infoYG.debug)
                 Debug.Log(message);
         }
 
@@ -151,7 +151,7 @@ namespace YG
                 firstSceneLoad = false;
             else if (infoYG.AdWhenLoadingScene)
                 _FullscreenShow();
-        }  
+        }
 
         #region For ECS
 #if UNITY_EDITOR
@@ -191,7 +191,7 @@ namespace YG
 
         #endregion Methods
 
-        
+
 
         // Sending messages
 

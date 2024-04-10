@@ -1,7 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Text.RegularExpressions;
 using UnityEditor;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using UnityEngine;
 
 namespace YG.Insides
 {

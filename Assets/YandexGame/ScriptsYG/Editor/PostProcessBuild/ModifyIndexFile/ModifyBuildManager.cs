@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Reflection;
+using System.Diagnostics;
 using System.IO;
+using System.Reflection;
+using System.Text;
 using UnityEditor;
 using YG.Insides;
-using System.Text;
-using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 
 namespace YG.EditorScr.BuildModify

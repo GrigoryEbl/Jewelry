@@ -7,8 +7,8 @@ namespace Polyperfect.Common
     [DefaultExecutionOrder(-100)]
     public class AnimationOffset : MonoBehaviour
     {
-        [Tooltip("Seconds to offset the animation")] [SerializeField] float ConstantOffset = 0f;
-        [Tooltip("An additional random offset to be added")] [SerializeField] float RandomOffset = 0f;
+        [Tooltip("Seconds to offset the animation")][SerializeField] float ConstantOffset = 0f;
+        [Tooltip("An additional random offset to be added")][SerializeField] float RandomOffset = 0f;
 
         void Start()
         {
@@ -20,7 +20,7 @@ namespace Polyperfect.Common
 
         void HandleOffset()
         {
-            GetComponent<Animator>().Update(ConstantOffset+Random.Range(0f,RandomOffset));
+            GetComponent<Animator>().Update(ConstantOffset + Random.Range(0f, RandomOffset));
         }
 
         void OnValidate()

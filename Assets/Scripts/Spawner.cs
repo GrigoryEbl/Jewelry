@@ -1,9 +1,10 @@
+using Item;
 using System.Collections;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private Resource _resourcePrefab;
+    [SerializeField] private CollectedItem _itemPrefab;
     [SerializeField] private float _spawnRadius;
     [SerializeField] private int _maxSpawnCount;
     [SerializeField] private float _spawnDelay;
@@ -11,7 +12,7 @@ public class Spawner : MonoBehaviour
     private Transform _transform;
     private int _spawnedCount;
 
-    public Resource Resource => _resourcePrefab;
+    public CollectedItem Item => _itemPrefab;
 
     private void Start()
     {
@@ -28,9 +29,9 @@ public class Spawner : MonoBehaviour
             if (_spawnedCount < _maxSpawnCount + 1)
             {
                 yield return new WaitForSeconds(_spawnDelay);
-                Vector2 RandomPosition = Random.insideUnitCircle * _spawnRadius;
+                Vector2 randomPosition = Random.insideUnitCircle * _spawnRadius;
 
-                Instantiate(_resourcePrefab, new Vector3(_transform.position.x + RandomPosition.x, _transform.position.y, _transform.position.z + RandomPosition.y), Quaternion.identity, _transform);
+                Instantiate(_itemPrefab, new Vector3(_transform.position.x + randomPosition.x, _transform.position.y, _transform.position.z + randomPosition.y), Quaternion.identity, _transform);
             }
 
             yield return null;

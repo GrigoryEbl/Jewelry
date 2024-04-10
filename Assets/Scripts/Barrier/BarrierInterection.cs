@@ -1,47 +1,65 @@
+using Domain.Player;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BarrierInterection : MonoBehaviour
+namespace Barrier
 {
-    [SerializeField] private Player _player;
-    [SerializeField] private Transform _barrier;
-    [SerializeField] private int _price;
-    [SerializeField] private ParticleSystem _explosion;
-    [SerializeField] private PlayerEffect _playerEffect;
-
-    public event UnityAction<bool> BarrierReach;
-    public event UnityAction NewZoneOpened;
-
-    public int Price => _price;
-
-    private void OnTriggerStay(Collider other)
+    [RequireComponent(typeof(BoxCollider))]
+    public class BarrierInterection : MonoBehaviour
     {
-        if (other.TryGetComponent(out Player player))
+        [SerializeField] private Player _player;
+        [SerializeField] private Transform _barrier;
+        [SerializeField] private int _price;
+        [SerializeField] private ParticleSystem _explosion;
+
+        private BoxCollider _boxCollider;
+
+        public event UnityAction<bool> BarrierReached;
+        public event UnityAction NewZoneOpened;
+
+        public int Price => _price;
+
+        private void Awake()
         {
-            BarrierReach?.Invoke(true);
+            _boxCollider = GetComponent<BoxCollider>();
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.TryGetComponent(out Player player))
+        private void OnTriggerStay(Collider other)
         {
-            BarrierReach?.Invoke(false);
+            if (other.TryGetComponent(out Player player))
+            {
+                BarrierReached?.Invoke(true);
+            }
         }
-    }
 
-    private void OnDisable()
-    {
-        _playerEffect.DeferredPlay();
-        NewZoneOpened?.Invoke();
-    }
-
-    public void TryOpenNewZone()
-    {
-        if (_player.Wallet.TryDecreaseMoney((uint)Price))
+        private void OnTriggerExit(Collider other)
         {
-            _explosion.Play();
-            _barrier.gameObject.SetActive(false);
+            if (other.TryGetComponent(out Player player))
+            {
+                BarrierReached?.Invoke(false);
+            }
+        }
+
+        public void SetActive(bool isActive)
+        {
+            _barrier.gameObject.SetActive(isActive);
+            _boxCollider.enabled = isActive;
+        }
+
+        public void OpenNewZone()
+        {
+            if (_player.Wallet.TryDecreaseMoney((uint)Price))
+            {
+                _explosion.Play();
+                _barrier.gameObject.SetActive(false);
+                _boxCollider.enabled = false;
+                NewZoneOpened?.Invoke();
+            }
+        }
+
+        public bool GetActiveInfo()
+        {
+            return _barrier.gameObject.activeSelf;
         }
     }
 }

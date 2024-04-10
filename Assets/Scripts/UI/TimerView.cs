@@ -1,29 +1,33 @@
+using TemporaryImprovement;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimerView : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private Image _image;
-    [SerializeField] private Timer _timer;
-    [SerializeField] private Image[] _imagesDetails;
-    [SerializeField] private TemporaryImprovement _temporaryImprovement;
-
-    private void OnEnable() => _temporaryImprovement.Improvement += SetImage;
-
-    private void OnDisable() => _temporaryImprovement.Improvement -= SetImage;
-
-    private void Update()
+    public class TimerView : MonoBehaviour
     {
-        _image.fillAmount = _timer.Time / _timer.StartTime;
-    }
+        [SerializeField] private Image _image;
+        [SerializeField] private Timer _timer;
+        [SerializeField] private Image[] _imagesDetails;
+        [SerializeField] private TemporaryImprovementController _temporaryImprovement;
 
-    private void SetImage()
-    {
-        for (int i = 0; i < _temporaryImprovement.Details.Length; i++)
+        private void OnEnable() => _temporaryImprovement.Improved += SetImage;
+
+        private void OnDisable() => _temporaryImprovement.Improved -= SetImage;
+
+        private void Update()
         {
-            if (_imagesDetails[i].name == _temporaryImprovement.NameUpgradeDetail)
+            _image.fillAmount = _timer.Time / _timer.StartTime;
+        }
+
+        private void SetImage()
+        {
+            for (int i = 0; i < _temporaryImprovement.Details.Length; i++)
             {
-                _imagesDetails[i].gameObject.SetActive(true);
+                if (_imagesDetails[i].name == _temporaryImprovement.NameUpgradeDetail)
+                {
+                    _imagesDetails[i].gameObject.SetActive(true);
+                }
             }
         }
     }

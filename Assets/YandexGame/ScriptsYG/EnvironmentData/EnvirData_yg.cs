@@ -41,7 +41,7 @@ namespace YG
         }
         public void _RequesEnvirData() => RequesEnvirData(true);
 
-        public void SetEnvirData(string data) 
+        public void SetEnvirData(string data)
         {
             EnvironmentData = JsonUtility.FromJson<JsonEnvironmentData>(data);
             GetDataInvoke();

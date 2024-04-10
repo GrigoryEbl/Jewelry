@@ -1,15 +1,18 @@
 using TMPro;
 using UnityEngine;
 
-public class ResourceLevelView : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private TMP_Text _level;
-
-    private Spawner _spawner;
-
-    private void Start()
+    public class ResourceLevelView : MonoBehaviour
     {
-        _spawner = GetComponentInParent<Spawner>();
-        _level.text = _spawner.Resource.Level.ToString();
+        [SerializeField] private TMP_Text _level;
+
+        private Spawner _spawner;
+
+        private void Start()
+        {
+            _spawner = GetComponentInParent<Spawner>();
+            _level.text = _spawner.Item.Level.ToString();
+        }
     }
 }

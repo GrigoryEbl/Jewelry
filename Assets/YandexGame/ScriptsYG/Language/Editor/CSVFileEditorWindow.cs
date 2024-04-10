@@ -1,9 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
 using UnityEditor;
-using System.Collections.Generic;
+using UnityEngine;
 using YG.Utils.Lang;
 #if YG_TEXT_MESH_PRO
-using TMPro;
 #endif
 
 namespace YG.Insides

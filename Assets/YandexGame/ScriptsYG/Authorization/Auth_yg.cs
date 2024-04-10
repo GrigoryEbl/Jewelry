@@ -124,7 +124,7 @@ namespace YG
             GetDataInvoke();
         }
 
-        
+
         [DllImport("__Internal")]
         private static extern void OpenAuthDialog();
 

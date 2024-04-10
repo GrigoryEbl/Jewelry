@@ -21,7 +21,7 @@
 //	public float buttonsSizeX;
 //	public float buttonsSizeY;
 //	public float buttonsDistance;
-	
+
 //	void Start ()
 //	{
 //		effectScript = GameObject.Find("ETFXFireProjectile").GetComponent<ETFXFireProjectile>();
@@ -47,7 +47,7 @@
 //	{
 //		Rect button1 = new Rect(buttonsX, buttonsY, buttonsSizeX, buttonsSizeY);
 //		Rect button2 = new Rect(buttonsX + buttonsDistance, buttonsY, buttonsSizeX, buttonsSizeY);
-		
+
 //		if(button1.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y)) ||
 //		   button2.Contains(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y)))
 //		{

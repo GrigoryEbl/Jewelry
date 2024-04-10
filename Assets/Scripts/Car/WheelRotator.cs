@@ -1,19 +1,22 @@
 using UnityEngine;
 
-public class WheelRotator : MonoBehaviour
+namespace PlayerCar
 {
-    [SerializeField] private Transform[] _wheelsModels;
-    [SerializeField] private Movement _movement;
-
-    private Vector3 _direction = new Vector3(1, 0, 0);
-
-    private void Update()
+    public class WheelRotator : MonoBehaviour
     {
-        if (_movement.IsMoving)
+        [SerializeField] private Transform[] _wheelsModels;
+        [SerializeField] private Movement _movement;
+
+        private Vector3 _direction = new Vector3(1, 0, 0);
+
+        private void Update()
         {
-            foreach (Transform wheel in _wheelsModels)
+            if (_movement.IsMoving)
             {
-                wheel.transform.Rotate(_direction * _movement.Speed);
+                foreach (Transform wheel in _wheelsModels)
+                {
+                    wheel.transform.Rotate(_direction * _movement.Speed);
+                }
             }
         }
     }

@@ -1,16 +1,24 @@
 using UnityEngine;
 
-public class LampsEnabler : MonoBehaviour
+namespace Barrier
 {
-    [SerializeField] private BarrierInterection _barrierInterection;
-    [SerializeField] private GameObject _lamps;
-
-    private void OnEnable() => _barrierInterection.NewZoneOpened += LampsActive;
-
-    private void OnDisable() => _barrierInterection.NewZoneOpened -= LampsActive;
-
-    private void LampsActive()
+    public class LampsEnabler : MonoBehaviour
     {
-        _lamps.SetActive(true);
+        [SerializeField] private BarrierInterection _barrierInterection;
+        [SerializeField] private GameObject _lamps;
+
+        private void OnEnable() => _barrierInterection.NewZoneOpened += TurnLamps;
+
+        private void OnDisable() => _barrierInterection.NewZoneOpened -= TurnLamps;
+
+        private void Start()
+        {
+            _lamps.SetActive(!_barrierInterection.GetActiveInfo());
+        }
+
+        private void TurnLamps()
+        {
+            _lamps.SetActive(true);
+        }
     }
 }

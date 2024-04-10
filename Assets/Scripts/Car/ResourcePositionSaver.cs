@@ -1,34 +1,38 @@
 using UnityEngine;
 
-public class ResourcePositionSaver : MonoBehaviour
+namespace PlayerCar
 {
-    private Transform _transform;
-    private float _returnedDistance = 10f;
-    private float _startTime = 30f;
-    private float _time = 30f;
-
-    private void Awake()
+    public class ResourcePositionSaver : MonoBehaviour
     {
-        _transform = transform;
-    }
+        private Transform _transform;
+        private float _returnedDistance = 10f;
+        private float _startTime = 30f;
+        private float _time = 30f;
 
-    private void Update()
-    {
-        _time -= Time.deltaTime;
-        if (_time <= 0)
-            TryReturnResource();
-    }
-
-    private void TryReturnResource()
-    {
-        for (int i = 0; i < _transform.childCount; i++)
+        private void Awake()
         {
-            if (Vector3.Distance(_transform.GetChild(i).position, _transform.position) >= _returnedDistance)
-            {
-                _transform.GetChild(i).position = _transform.position;
-            }
+            _transform = transform;
         }
 
-        _time = _startTime;
+        private void Update()
+        {
+            _time -= Time.deltaTime;
+
+            if (_time <= 0)
+                ReturnResource();
+        }
+
+        private void ReturnResource()
+        {
+            for (int i = 0; i < _transform.childCount; i++)
+            {
+                if (Vector3.Distance(_transform.GetChild(i).position, _transform.position) >= _returnedDistance)
+                {
+                    _transform.GetChild(i).position = _transform.position;
+                }
+            }
+
+            _time = _startTime;
+        }
     }
 }
