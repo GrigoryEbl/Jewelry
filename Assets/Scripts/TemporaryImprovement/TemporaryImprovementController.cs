@@ -1,5 +1,6 @@
 using Domain.Player;
-using PlayerCar;
+using Assets.Scripts.Car;
+using Assets.Scripts.Car.Details;
 using UnityEngine;
 using UnityEngine.Events;
 

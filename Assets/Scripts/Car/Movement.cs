@@ -2,7 +2,7 @@ using Assets.Scripts;
 using UnityEngine;
 using YG;
 
-namespace PlayerCar
+namespace Assets.Scripts.Car
 {
     [RequireComponent(typeof(Rigidbody))]
     public class Movement : MonoBehaviour

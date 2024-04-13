@@ -1,5 +1,5 @@
 using Domain.Player;
-using PlayerCar;
+using Assets.Scripts.Car;
 using System;
 using UnityEngine;
 using YG;
@@ -10,7 +10,7 @@ namespace Assets.Scripts
     {
         private readonly int _maxLevel = 30;
 
-        [SerializeField] private Car _car;
+        [SerializeField] private PlayerCar _car;
         [SerializeField] private Player _player;
         [SerializeField] private float _multiplier;
         [SerializeField] private float _basePrice = 30;
@@ -102,6 +102,5 @@ namespace Assets.Scripts
             YandexGame.savesData.PriceUpgradeCargo = PriceUpgradeCapacity;
             YandexGame.SaveProgress();
         }
-
     }
 }

@@ -2,24 +2,17 @@ using UnityEngine;
 
 namespace Assets.Scripts.UI
 {
-    [RequireComponent(typeof(MagnetView))]
-    [RequireComponent(typeof(WheelsView))]
-    [RequireComponent(typeof(CapacityView))]
     public class UpgraderView : MonoBehaviour
     {
         [SerializeField] private Upgrader _upgrader;
-        [SerializeField] private GameObject _upgradeScreen;
 
-        private MagnetView _magnetView;
-        private WheelsView _wheelsView;
-        private CapacityView _capacityView;
+        [SerializeField] private GameObject _magnetPanel;
+        [SerializeField] private GameObject _wheelsPanel;
+        [SerializeField] private GameObject _capacityPanel;
 
-        private void Awake()
-        {
-            _magnetView = GetComponent<MagnetView>();
-            _wheelsView = GetComponent<WheelsView>();
-            _capacityView = GetComponent<CapacityView>();
-        }
+        [SerializeField] private MagnetEventHandlerView _magnetView;
+        [SerializeField] private WheelsEventHandlerView _wheelsView;
+        [SerializeField] private CapacityEventHandlerView _capacityView;
 
         private void OnEnable()
         {
@@ -39,7 +32,10 @@ namespace Assets.Scripts.UI
 
         private void OnUpgradeZoneReach(bool isActive)
         {
-            _upgradeScreen.SetActive(isActive);
+            _magnetPanel.SetActive(isActive);
+            _wheelsPanel.SetActive(isActive);
+            _capacityPanel.SetActive(isActive);
+
             _magnetView.OnInfoChange();
             _wheelsView.OnInfoChange();
             _capacityView.OnInfoChange();

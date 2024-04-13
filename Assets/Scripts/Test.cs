@@ -1,4 +1,5 @@
-using PlayerCar;
+using Assets.Scripts.Car;
+using Assets.Scripts.Car.Details;
 using TMPro;
 using UnityEngine;
 

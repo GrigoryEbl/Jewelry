@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PlayerCar
+namespace Assets.Scripts.Car
 {
     public class WheelRotator : MonoBehaviour
     {
