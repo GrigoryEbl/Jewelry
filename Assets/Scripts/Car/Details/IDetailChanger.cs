@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.Car.Details
 {
-    public interface IChanger
+    public interface IDetailChanger
     {
         void Change(int level, int capacityLevel);
     }

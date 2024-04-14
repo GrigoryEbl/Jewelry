@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Car.Details
 {
-    public class DetailChanger : MonoBehaviour, IChanger
+    public class DetailChanger : MonoBehaviour, IDetailChanger
     {
         private const int _levelToMiddleDetail = 15;
         private const int _levelToHighDetail = 25;
