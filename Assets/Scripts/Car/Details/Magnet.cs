@@ -2,12 +2,13 @@ using Item;
 using Sounds;
 using System;
 using UnityEngine;
+using Wallet;
 using YG;
 
 namespace Assets.Scripts.Car.Details
 {
     [RequireComponent(typeof(Attractor))]
-    public class Magnet : MonoBehaviour
+    public class Magnet : MonoBehaviour, IImprovable
     {
         [SerializeField] private float _force;
         [SerializeField] private float _catchDistance;
@@ -46,6 +47,11 @@ namespace Assets.Scripts.Car.Details
             Level = level;
         }
 
+        public void Upgrade()
+        {
+            Level++;
+        }
+
         private void OnTriggerStay(Collider other)
         {
             if (other.transform.parent == _transform)
@@ -60,7 +66,7 @@ namespace Assets.Scripts.Car.Details
                     return;
 
                 _attractor.Attract(item.transform, _transform, _force);
-                Catch(item, rigidbody);
+                Catch(item.transform, rigidbody);
             }
 
             if (_transform.childCount == 0)
@@ -69,11 +75,11 @@ namespace Assets.Scripts.Car.Details
             ResourceChangedCount?.Invoke(_transform.childCount);
         }
 
-        private void Catch(CollectedItem item, Rigidbody rigidbody)
+        private void Catch(Transform item, Rigidbody rigidbody)
         {
-            if (Vector3.Distance(item.transform.position, _transform.position) <= _catchDistance)
+            if (Vector3.Distance(item.position, _transform.position) <= _catchDistance)
             {
-                item.transform.parent = _transform;
+                item.parent = _transform;
                 rigidbody.isKinematic = true;
                 AddCathDistance();
                 _playerEffect.Play();

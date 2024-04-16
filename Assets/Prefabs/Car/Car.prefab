@@ -3248,12 +3248,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3673015731623594986}
-  - {fileID: 5951703792210203250}
-  - {fileID: 2786638370876567383}
-  - {fileID: 7821653789465989252}
   - {fileID: 4600243290208568247}
   - {fileID: 4792653479445881746}
+  - {fileID: 2786638370876567383}
+  - {fileID: 7821653789465989252}
+  - {fileID: 3673015731623594986}
+  - {fileID: 5951703792210203250}
   m_Father: {fileID: 4240024898287455304}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7113675441253003657
@@ -4922,7 +4922,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1258752606028357223
 Transform:
   m_ObjectHideFlags: 0
@@ -6173,9 +6173,6 @@ GameObject:
   - component: {fileID: 1337622337906420912}
   - component: {fileID: 4999361602310387798}
   - component: {fileID: 3094083228523831823}
-  - component: {fileID: 8714847792833018398}
-  - component: {fileID: 8033832737067827071}
-  - component: {fileID: 518270449671002664}
   - component: {fileID: 6093051618091745285}
   - component: {fileID: 3893082234820560072}
   - component: {fileID: 2666383420294624090}
@@ -6294,6 +6291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cbe973920b05b94d851041f011bab5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _money: 0
 --- !u!114 &1337622337906420912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6324,6 +6322,9 @@ MonoBehaviour:
   _wheels: {fileID: 8561391754834349358}
   _magnet: {fileID: 6422697127184754785}
   _startPosition: {fileID: 0}
+  _capacityChanger: {fileID: 0}
+  _wheelsChanger: {fileID: 0}
+  _magnetChanger: {fileID: 0}
 --- !u!114 &3094083228523831823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6336,63 +6337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177ae6aa4b111df4ea3f557c426031a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8714847792833018398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4872815425175387048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eb919fc86c4f7f45b85bcd8ef0bedf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lowHand: {fileID: 3985325520227588370}
-  _middleHand: {fileID: 1122877206325447087}
-  _highHand: {fileID: 5775063701775877373}
-  _levelToMiddleCapacity: 15
-  _levelToHighCapacity: 25
-  _playerEffect: {fileID: 5013013400221814121}
---- !u!114 &8033832737067827071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4872815425175387048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ec1e4b29a634c7409fcde1344303ae6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lowWheels: {fileID: 6847916036260775663}
-  _middleWheels: {fileID: 8751848782252921062}
-  _highWheels: {fileID: 6780567900191463505}
-  _levelToMiddleWheels: 15
-  _levelToHighWheels: 25
-  _playerEffect: {fileID: 4319943713244735348}
---- !u!114 &518270449671002664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4872815425175387048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ff6af868d91342488b4f0183d04cecc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lowMagnet: {fileID: 3791054840498608397}
-  _lowMagnetLongChain: {fileID: 5316847213661993256}
-  _middleMagnetLongChain: {fileID: 7478165619998001726}
-  _middleMagnet: {fileID: 3307876854330979821}
-  _highMagnetShortChain: {fileID: 6472626750138910920}
-  _highMagnet: {fileID: 4157663532720640336}
-  _levelToMiddleMagnet: 15
-  _levelToHighMagnet: 25
-  _playerEffect: {fileID: 7113675441253003657}
 --- !u!114 &6093051618091745285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8124,7 +8068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2698176023497824848
 Transform:
   m_ObjectHideFlags: 0
@@ -11922,9 +11866,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2698176023497824848}
-  - {fileID: 4187819999220835003}
   - {fileID: 1258752606028357223}
+  - {fileID: 4187819999220835003}
+  - {fileID: 2698176023497824848}
   m_Father: {fileID: 4240024898287455304}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &8717529933504356047
@@ -13644,6 +13588,10 @@ PrefabInstance:
     - target: {fileID: 7226749416189409151, guid: 6915bf3e8349a6a4fafb50dbcc0b29c0, type: 3}
       propertyPath: m_Name
       value: ForkL1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7226749416189409151, guid: 6915bf3e8349a6a4fafb50dbcc0b29c0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

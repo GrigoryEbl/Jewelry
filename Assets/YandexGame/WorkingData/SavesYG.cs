@@ -36,15 +36,20 @@
         public bool IsHighWheelsActive = false;
 
         public bool IsLowMagnegActive = true;
-        public bool IslowMagnetLongChainActive = false;
+        public bool IslowMagnetModifyVariantActive = false;
         public bool IsMiddleMagnetActive = false;
-        public bool IsMiddleMagnetLongChainActive = false;
+        public bool IsMiddleMagnetModifyVariantActive = false;
         public bool IsHighMagnetActive = false;
-        public bool IsHighMagnetShortChainActive = false;
+        public bool IsHighMagnetModifyVariantActive = false;
 
         public bool IsBarrierJailActive = true;
         public bool IsBarrierForgeActive = true;
         public bool IsBarrierThroneActive = true;
+
+        public bool[] IsMagnetModelsActive = new bool[6];
+        public bool[] IsWheelsModelsActive = new bool[3];
+        public bool[] IsHandModelsActive = new bool[3];
+
         // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
 
 
@@ -52,7 +57,9 @@
         public SavesYG()
         {
             // Допустим, задать значения по умолчанию для отдельных элементов массива
-
+            IsMagnetModelsActive[0] = true;
+            IsWheelsModelsActive[0] = true;
+            IsHandModelsActive[0] = true;
             openLevels[1] = true;
         }
     }

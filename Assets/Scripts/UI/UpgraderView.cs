@@ -10,24 +10,24 @@ namespace Assets.Scripts.UI
         [SerializeField] private GameObject _wheelsPanel;
         [SerializeField] private GameObject _capacityPanel;
 
-        [SerializeField] private MagnetEventHandlerView _magnetView;
-        [SerializeField] private WheelsEventHandlerView _wheelsView;
-        [SerializeField] private CapacityEventHandlerView _capacityView;
+        [SerializeField] private DetailView _magnetView;
+        [SerializeField] private DetailView _wheelsView;
+        [SerializeField] private DetailView _capacityView;
 
         private void OnEnable()
         {
             _upgrader.UpgradeZoneReached += OnUpgradeZoneReach;
-            _upgrader.CharacteristiscsChanged += _magnetView.OnInfoChange;
-            _upgrader.CharacteristiscsChanged += _wheelsView.OnInfoChange;
-            _upgrader.CharacteristiscsChanged += _capacityView.OnInfoChange;
+            _upgrader.CharacteristiscsChanged += _magnetView.ChangeInfo;
+            _upgrader.CharacteristiscsChanged += _wheelsView.ChangeInfo;
+            _upgrader.CharacteristiscsChanged += _capacityView.ChangeInfo;
         }
 
         private void OnDisable()
         {
             _upgrader.UpgradeZoneReached -= OnUpgradeZoneReach;
-            _upgrader.CharacteristiscsChanged -= _magnetView.OnInfoChange;
-            _upgrader.CharacteristiscsChanged -= _wheelsView.OnInfoChange;
-            _upgrader.CharacteristiscsChanged -= _capacityView.OnInfoChange;
+            _upgrader.CharacteristiscsChanged -= _magnetView.ChangeInfo;
+            _upgrader.CharacteristiscsChanged -= _wheelsView.ChangeInfo;
+            _upgrader.CharacteristiscsChanged -= _capacityView.ChangeInfo;
         }
 
         private void OnUpgradeZoneReach(bool isActive)
@@ -36,9 +36,9 @@ namespace Assets.Scripts.UI
             _wheelsPanel.SetActive(isActive);
             _capacityPanel.SetActive(isActive);
 
-            _magnetView.OnInfoChange();
-            _wheelsView.OnInfoChange();
-            _capacityView.OnInfoChange();
+            _magnetView.ChangeInfo((int)_magnetView.Upgrader.PriceUpgradeMagnet, _magnetView.PlayerCar.MagnetLevel);
+            _wheelsView.ChangeInfo((int)_wheelsView.Upgrader.PriceUpgradeWheels, _wheelsView.PlayerCar.WheelsLevel);
+            _capacityView.ChangeInfo((int)_capacityView.Upgrader.PriceUpgradeCapacity, _capacityView.PlayerCar.CapacityLevel);
         }
     }
 }

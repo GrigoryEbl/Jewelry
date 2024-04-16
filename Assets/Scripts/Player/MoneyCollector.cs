@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using Sounds;
 using System;
 using UnityEngine;
@@ -6,7 +7,7 @@ using Wallet;
 namespace Domain
 {
     [RequireComponent(typeof(Attractor))]
-    public class MoneyCollector : MonoBehaviour
+    public class MoneyCollector : MonoBehaviour 
     {
         [SerializeField] private float _force = 400f;
         [SerializeField] private float _minCatchDistance = 2f;
@@ -28,13 +29,17 @@ namespace Domain
             if (other.TryGetComponent(out Money money))
             {
                 _attractor.Attract(money.transform, _transform, _force);
+                Catch(money);
+            }
+        }
 
-                if (Vector3.Distance(money.transform.position, _transform.position) <= _minCatchDistance)
-                {
-                    MoneyCatched?.Invoke(money.Value);
-                    Destroy(money.gameObject);
-                    _playerEffect.Play();
-                }
+        private void Catch(Money money)
+        {
+            if (Vector3.Distance(money.transform.position, _transform.position) <= _minCatchDistance)
+            {
+                MoneyCatched?.Invoke(money.Value);
+                Destroy(money.gameObject);
+                _playerEffect.Play();
             }
         }
     }

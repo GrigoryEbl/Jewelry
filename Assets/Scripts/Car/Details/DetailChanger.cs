@@ -1,9 +1,10 @@
 using Sounds;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Car.Details
 {
-    public class DetailChanger : MonoBehaviour, IDetailChanger
+    public class DetailChanger : MonoBehaviour
     {
         private const int _levelToMiddleDetail = 15;
         private const int _levelToHighDetail = 25;
@@ -19,11 +20,18 @@ namespace Assets.Scripts.Car.Details
 
         [SerializeField] private PlayerEffect _playerEffect;
 
+        public event Action DetailChanged;
+
         public int LevelToMiddleDetail => _levelToMiddleDetail;
 
-        public void Change(int level, int capacityLevel)
+        private void Awake()
         {
-            if (level < _levelToMiddleDetail && capacityLevel >= _levelToHighDetail)
+            _lowDetail.SetActive(true);
+        }
+
+        public void ChangeMagnet(int level, int capacityLevel)
+        {
+            if (level < _levelToMiddleDetail && capacityLevel >= _levelToHighDetail && _lowDetailModifyVariant != null)
             {
                 _lowDetail.SetActive(false);
                 _lowDetailModifyVariant.SetActive(true);
@@ -35,7 +43,7 @@ namespace Assets.Scripts.Car.Details
                 _lowDetailModifyVariant.SetActive(false);
                 _middleDetail.SetActive(true);
             }
-            else if (level == Mathf.Clamp(level, _levelToMiddleDetail, _levelToHighDetail - 1) && capacityLevel >= _levelToHighDetail)
+            else if (level == Mathf.Clamp(level, _levelToMiddleDetail, _levelToHighDetail - 1) && capacityLevel >= _levelToHighDetail && _middleDetailModifyVariant != null)
             {
                 _lowDetail.SetActive(false);
                 _lowDetailModifyVariant.SetActive(false);
@@ -43,7 +51,7 @@ namespace Assets.Scripts.Car.Details
                 _middleDetailModifyVariant.SetActive(true);
             }
 
-            if (level >= _levelToHighDetail && capacityLevel < _levelToHighDetail)
+            if (level >= _levelToHighDetail && capacityLevel < _levelToHighDetail && _highDetailModifyVariant != null)
             {
                 _middleDetailModifyVariant.SetActive(false);
                 _middleDetail.SetActive(false);
@@ -59,6 +67,29 @@ namespace Assets.Scripts.Car.Details
 
             if (level == _levelToMiddleDetail || level == _levelToHighDetail)
                 _playerEffect.Play();
+
+            DetailChanged?.Invoke();
+        }
+
+        public void Change(int level)
+        {
+            if (level == _levelToMiddleDetail)
+            {
+                _lowDetail.SetActive(false);
+                _middleDetail.SetActive(true);
+
+                _playerEffect.Play();
+            }
+
+            if (level == _levelToHighDetail)
+            {
+                _middleDetail.SetActive(false);
+                _highDetail.SetActive(true);
+
+                _playerEffect.Play();
+            }
+
+            DetailChanged?.Invoke();
         }
     }
 }

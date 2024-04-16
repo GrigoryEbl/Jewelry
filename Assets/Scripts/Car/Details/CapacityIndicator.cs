@@ -6,7 +6,7 @@ namespace Assets.Scripts.Car.Details
     {
         [SerializeField] private Magnet _magnet;
         [SerializeField] private Transform[] _lamps;
-
+        
         private void OnEnable() => _magnet.ResourceChangedCount += ChangeIndicator;
 
         private void OnDisable() => _magnet.ResourceChangedCount -= ChangeIndicator;
