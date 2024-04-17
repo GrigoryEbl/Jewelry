@@ -5,6 +5,7 @@ namespace Assets.Scripts.Car.Details
     public class CapacityIndicator : MonoBehaviour
     {
         [SerializeField] private Magnet _magnet;
+        [SerializeField] private Capacity _capacity;
         [SerializeField] private Transform[] _lamps;
         
         private void OnEnable() => _magnet.ResourceChangedCount += ChangeIndicator;
@@ -24,7 +25,7 @@ namespace Assets.Scripts.Car.Details
         private float CalculatePercent(int value)
         {
             int multiplier = 100;
-            float percent = ((float)value / (float)_magnet.MaxCapacityCount) * multiplier;
+            float percent = ((float)value / (float)_capacity.Level) * multiplier;
             return percent;
         }
     }

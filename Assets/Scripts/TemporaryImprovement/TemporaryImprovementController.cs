@@ -18,8 +18,8 @@ namespace TemporaryImprovement
         [SerializeField] private Timer _timerLifeTime;
 
         private Magnet _magnetCar;
-        private Magnet _capacityCar;
         private Movement _wheelsCar;
+        private Capacity _capacityCar;
 
         private string[] _details = new string[3];
         private int _upgradeValue = 3;
@@ -34,7 +34,7 @@ namespace TemporaryImprovement
         private void Awake()
         {
             _magnetCar = FindObjectOfType<Magnet>();
-            _capacityCar = FindObjectOfType<Magnet>();
+            _capacityCar = FindObjectOfType<Capacity>();
             _wheelsCar = FindObjectOfType<Movement>();
 
             _details[0] = _magnet;

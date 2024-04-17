@@ -13,8 +13,8 @@ namespace Assets.Scripts.Car.Details
         [SerializeField] private float _force;
         [SerializeField] private float _catchDistance;
         [SerializeField] private PlayerEffect _playerEffect;
+        [SerializeField] private Capacity _capacity;
 
-        private int _maxCapacityCount;
         private Attractor _attractor;
         private Transform _transform;
         private float _startCatchDistance = 0.4f;
@@ -23,7 +23,6 @@ namespace Assets.Scripts.Car.Details
         public Action<int> ResourceChangedCount;
 
         public int Level { get; private set; }
-        public int MaxCapacityCount => _maxCapacityCount;
 
         private void Awake()
         {
@@ -34,12 +33,6 @@ namespace Assets.Scripts.Car.Details
         public void Init()
         {
             Level = YandexGame.savesData.MagnetLevel;
-            _maxCapacityCount = YandexGame.savesData.CapacityLevel;
-        }
-
-        public void ChangeMaxCapacityCount(int value)
-        {
-            _maxCapacityCount += value;
         }
 
         public void ChangeLevel(int level)
@@ -57,7 +50,7 @@ namespace Assets.Scripts.Car.Details
             if (other.transform.parent == _transform)
                 return;
 
-            if (_transform.childCount >= _maxCapacityCount)
+            if (_transform.childCount >= _capacity.Level)
                 return;
 
             if (other.TryGetComponent(out CollectedItem item) && item.TryGetComponent(out Rigidbody rigidbody))

@@ -12,12 +12,11 @@ namespace Assets.Scripts.Car
 
         [SerializeField] private Movement _wheels;
         [SerializeField] private Magnet _magnet;
+        [SerializeField] private Capacity _capacity;
 
         [SerializeField] private DetailChanger _capacityChanger;
         [SerializeField] private DetailChanger _wheelsChanger;
         [SerializeField] private DetailChanger _magnetChanger;
-
-        private string[] _details = new string[3];
 
         public int WheelsLevel { get; private set; }
         public int MagnetLevel { get; private set; }
@@ -26,13 +25,6 @@ namespace Assets.Scripts.Car
         private void OnEnable() => YandexGame.GetDataEvent += OnGetData;
 
         private void OnDisable() => YandexGame.GetDataEvent -= OnGetData;
-
-        private void Awake()
-        {
-            _details[0] = _magnetName;
-            _details[1] = _wheelsName;
-            _details[2] = _capacityName;
-        }
 
         public void IncreaseLevelDetail(string detail)
         {
@@ -54,9 +46,8 @@ namespace Assets.Scripts.Car
                     break;
 
                 case _capacityName:
-                    int addedCapacity = 1;
                     CapacityLevel++;
-                    _magnet.ChangeMaxCapacityCount(addedCapacity);
+                    _capacity.Upgrade();
                     _magnetChanger.Change(MagnetLevel);
                     _capacityChanger.Change(CapacityLevel);
                     SaveData();
@@ -64,40 +55,15 @@ namespace Assets.Scripts.Car
             }
         }
 
-        public void IncreaseLevelWheels(float addedSpeedWheels)
-        {
-            WheelsLevel++;
-            _wheels.Upgrade(addedSpeedWheels);
-            _wheelsChanger.Change(WheelsLevel);
-            SaveData();
-        }
-
-        public void IncreaseLevelMagnet()
-        {
-            MagnetLevel++;
-            _magnet.ChangeLevel(MagnetLevel);
-            _magnetChanger.ChangeMagnet(MagnetLevel, CapacityLevel);
-            SaveData();
-        }
-
-        public void IncreaseLevelCapacity()
-        {
-            int addedCapacity = 1;
-            CapacityLevel++;
-            _magnet.ChangeMaxCapacityCount(addedCapacity);
-            _magnetChanger.Change(MagnetLevel);
-            _capacityChanger.Change(CapacityLevel);
-            SaveData();
-        }
-
         private void OnGetData()
         {
             _wheels.Init();
             _magnet.Init();
+            _capacity.Init();
 
             MagnetLevel = _magnet.Level;
             WheelsLevel = _wheels.Level;
-            CapacityLevel = _magnet.MaxCapacityCount;
+            CapacityLevel = _capacity.Level;
         }
 
         private void SaveData()

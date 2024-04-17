@@ -1,11 +1,12 @@
 using Assets.Scripts;
+using Assets.Scripts.Car.Details;
 using UnityEngine;
 using YG;
 
 namespace Assets.Scripts.Car
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class Movement : MonoBehaviour
+    public class Movement : MonoBehaviour, IImprovable
     {
         private Transform _transform;
         [SerializeField] private float _speed;
@@ -49,6 +50,11 @@ namespace Assets.Scripts.Car
         {
             _speed += addedSpeed;
             Level++;
+        }
+
+        public void Upgrade()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

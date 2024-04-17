@@ -17,17 +17,17 @@ namespace Assets.Scripts.UI
         private void OnEnable()
         {
             _upgrader.UpgradeZoneReached += OnUpgradeZoneReach;
-            _upgrader.CharacteristiscsChanged += _magnetView.ChangeInfo;
-            _upgrader.CharacteristiscsChanged += _wheelsView.ChangeInfo;
-            _upgrader.CharacteristiscsChanged += _capacityView.ChangeInfo;
+            _upgrader.MagnetCharacteristiscsChanged += _magnetView.ChangeInfo;
+            _upgrader.WheelsCharacteristiscsChanged += _wheelsView.ChangeInfo;
+            _upgrader.CapacityCharacteristiscsChanged += _capacityView.ChangeInfo;
         }
 
         private void OnDisable()
         {
             _upgrader.UpgradeZoneReached -= OnUpgradeZoneReach;
-            _upgrader.CharacteristiscsChanged -= _magnetView.ChangeInfo;
-            _upgrader.CharacteristiscsChanged -= _wheelsView.ChangeInfo;
-            _upgrader.CharacteristiscsChanged -= _capacityView.ChangeInfo;
+            _upgrader.MagnetCharacteristiscsChanged -= _magnetView.ChangeInfo;
+            _upgrader.WheelsCharacteristiscsChanged -= _wheelsView.ChangeInfo;
+            _upgrader.CapacityCharacteristiscsChanged -= _capacityView.ChangeInfo;
         }
 
         private void OnUpgradeZoneReach(bool isActive)
@@ -35,10 +35,6 @@ namespace Assets.Scripts.UI
             _magnetPanel.SetActive(isActive);
             _wheelsPanel.SetActive(isActive);
             _capacityPanel.SetActive(isActive);
-
-            _magnetView.ChangeInfo((int)_magnetView.Upgrader.PriceUpgradeMagnet, _magnetView.PlayerCar.MagnetLevel);
-            _wheelsView.ChangeInfo((int)_wheelsView.Upgrader.PriceUpgradeWheels, _wheelsView.PlayerCar.WheelsLevel);
-            _capacityView.ChangeInfo((int)_capacityView.Upgrader.PriceUpgradeCapacity, _capacityView.PlayerCar.CapacityLevel);
         }
     }
 }

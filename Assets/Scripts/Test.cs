@@ -24,6 +24,5 @@ public class Test : MonoBehaviour
         _fpsText.text = $"FPS:{(int)_fps}";
         _timeText.text = $"Play time: {Time.time.ToString("F2")}";
         _magnetLevel.text = $"Magnet: {_magnet.Level}";
-        _maxCapacity.text = $"Capacity: {_magnet.MaxCapacityCount}";
     }
 }

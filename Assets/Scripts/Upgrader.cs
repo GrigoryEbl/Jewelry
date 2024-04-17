@@ -9,13 +9,17 @@ namespace Assets.Scripts
 {
     public class Upgrader : MonoBehaviour
     {
+        private const string _magnetName = "Magnet";
+        private const string _wheelsName = "Wheels";
+        private const string _capacityName = "Capacity";
         private readonly int _maxLevel = 30;
 
         [SerializeField] private PlayerCar _car;
         [SerializeField] private Player _player;
+
         [SerializeField] private IImprovable _improvable;
 
-        private float _multiplier;
+        private float _multiplier = 1.3f;
         private float _basePrice = 30;
         private float _addedPowerEngine = 0.26f;
 
@@ -23,12 +27,15 @@ namespace Assets.Scripts
         private float _multiplierExtra = 0.03f;
 
         public event Action<bool> UpgradeZoneReached;
-        public event Action<int, int> CharacteristiscsChanged;
+        public event Action<float, int> MagnetCharacteristiscsChanged;
+        public event Action<float, int> WheelsCharacteristiscsChanged;
+        public event Action<float, int> CapacityCharacteristiscsChanged;
 
         public int MaxLevel => _maxLevel;
         public float PriceUpgradeWheels { get; private set; }
         public float PriceUpgradeMagnet { get; private set; }
         public float PriceUpgradeCapacity { get; private set; }
+
 
         private void OnEnable() => YandexGame.GetDataEvent += GetData;
 
@@ -39,6 +46,9 @@ namespace Assets.Scripts
             if (other.TryGetComponent(out Player player))
             {
                 UpgradeZoneReached?.Invoke(true);
+                MagnetCharacteristiscsChanged?.Invoke(PriceUpgradeMagnet, _car.MagnetLevel);
+                WheelsCharacteristiscsChanged?.Invoke(PriceUpgradeWheels, _car.WheelsLevel);
+                CapacityCharacteristiscsChanged?.Invoke(PriceUpgradeCapacity, _car.CapacityLevel);
             }
         }
 
@@ -50,40 +60,42 @@ namespace Assets.Scripts
             }
         }
 
-        public void UpgradeWheels()
+        public void Upgrade(string detailName)
         {
-            if (_car.WheelsLevel < _maxLevel && _player.Wallet.TryDecreaseMoney((uint)PriceUpgradeWheels))
+            switch (detailName)
             {
-                _car.IncreaseLevelWheels(_addedPowerEngine);
-                PriceUpgradeWheels = CalculateModifyPrice(_car.WheelsLevel);
-                CharacteristiscsChanged?.Invoke((int)PriceUpgradeWheels, _car.WheelsLevel);
-                SaveData();
+                case _magnetName:
+                    if (TryUpgrade(_car.MagnetLevel, PriceUpgradeMagnet))
+                    {
+                        _car.IncreaseLevelDetail(detailName);
+                        PriceUpgradeMagnet = CalculateModifyPrice(_car.MagnetLevel);
+                        MagnetCharacteristiscsChanged?.Invoke(PriceUpgradeMagnet, _car.MagnetLevel);
+                    }
+                    break;
+
+                case _wheelsName:
+                    if (TryUpgrade(_car.WheelsLevel, PriceUpgradeWheels))
+                    {
+                        _car.IncreaseLevelDetail(detailName);
+                        PriceUpgradeWheels = CalculateModifyPrice(_car.WheelsLevel);
+                        WheelsCharacteristiscsChanged?.Invoke(PriceUpgradeWheels, _car.WheelsLevel);
+                    }
+                    break;
+
+                case _capacityName:
+                    if (TryUpgrade(_car.CapacityLevel, PriceUpgradeCapacity))
+                    {
+                        _car.IncreaseLevelDetail(detailName);
+                        PriceUpgradeCapacity = CalculateModifyPrice(_car.CapacityLevel);
+                        CapacityCharacteristiscsChanged?.Invoke(PriceUpgradeCapacity, _car.CapacityLevel);
+                    }
+                    break;
             }
+
+            SaveData();
         }
 
-        public void UpgradeMagnet()
-        {
-            if (TryUpgrade(_car.MagnetLevel, (uint)PriceUpgradeMagnet))
-            {
-                _car.IncreaseLevelMagnet();
-                PriceUpgradeMagnet = CalculateModifyPrice(_car.MagnetLevel);
-                CharacteristiscsChanged?.Invoke((int)PriceUpgradeMagnet, _car.MagnetLevel);
-                SaveData();
-            }
-        }
-
-        public void UpgradeCapacity()
-        {
-            if (TryUpgrade(_car.CapacityLevel, (uint)PriceUpgradeCapacity))
-            {
-                _car.IncreaseLevelCapacity();
-                PriceUpgradeCapacity = CalculateModifyPrice(_car.CapacityLevel);
-                CharacteristiscsChanged?.Invoke((int)PriceUpgradeCapacity, _car.CapacityLevel);
-                SaveData();
-            }
-        }
-
-        private bool TryUpgrade(int detailLevel, uint price)
+        private bool TryUpgrade(int detailLevel, float price)
         {
             if (detailLevel < _maxLevel && _player.Wallet.TryDecreaseMoney((uint)price))
                 return true;

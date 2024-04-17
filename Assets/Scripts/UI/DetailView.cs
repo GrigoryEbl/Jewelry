@@ -23,7 +23,7 @@ namespace Assets.Scripts.UI
         public PlayerCar PlayerCar => _playerCar;
         public Upgrader Upgrader => _upgrader;
 
-        public void ChangeInfo(int priceUpgreadeDetail, int detailLevel)
+        public void ChangeInfo(float priceUpgreadeDetail, int detailLevel)
         {
             ChangeText(_priceText, priceUpgreadeDetail, _levelText, detailLevel, _label);
             SetImageDetail(detailLevel, _changer.LevelToMiddleDetail, _imageMiddleDetail, _imageHighDetail);
