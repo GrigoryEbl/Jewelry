@@ -2,7 +2,7 @@ using Assets.Scripts.Car;
 using System;
 using UnityEngine;
 
-namespace PlayerInput
+namespace Assets.Scripts.PlayerInput
 {
     public class JoystickInput : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Wallet
+namespace Assets.Scripts.Wallet
 {
     public class Money : MonoBehaviour
     {

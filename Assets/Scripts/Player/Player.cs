@@ -1,6 +1,6 @@
-using PlayerInput;
+using Assets.Scripts.PlayerInput;
 using UnityEngine;
-using Wallet;
+using Assets.Scripts.Wallet;
 
 namespace Domain.Player
 {

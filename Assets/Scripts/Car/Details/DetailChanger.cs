@@ -1,4 +1,4 @@
-using Sounds;
+using Assets.Scripts.Sounds;
 using System;
 using UnityEngine;
 

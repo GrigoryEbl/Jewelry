@@ -1,51 +1,54 @@
 using Assets.Scripts;
 using UnityEngine;
 
-public class Camera : MonoBehaviour
+namespace Assets.Scripts
 {
-    [SerializeField] private Transform _player;
-    [SerializeField] private int _cameraPositionZ;
-    [SerializeField] private int _cameraPositionY;
-    [SerializeField] private int _zoomValue;
-    [SerializeField] private Upgrader _upgrader;
-
-    private Vector3 _target;
-    private Transform _transform;
-    private int _positionZ;
-
-    private void Awake()
+    public class Camera : MonoBehaviour
     {
-        _transform = transform;
-        _positionZ = _cameraPositionZ;
-    }
+        [SerializeField] private Transform _player;
+        [SerializeField] private int _cameraPositionZ;
+        [SerializeField] private int _cameraPositionY;
+        [SerializeField] private int _zoomValue;
+        [SerializeField] private Upgrader _upgrader;
 
-    private void Update()
-    {
-        _target = _player.position;
-        _target.z += _cameraPositionZ;
-        _target.y += _cameraPositionY;
-        _transform.position = _target;
-    }
+        private Vector3 _target;
+        private Transform _transform;
+        private int _positionZ;
 
-    private void OnEnable()
-    {
-        _upgrader.UpgradeZoneReached += Zoom;
-    }
-
-    private void OnDisable()
-    {
-        _upgrader.UpgradeZoneReached -= Zoom;
-    }
-
-    private void Zoom(bool isReach)
-    {
-        if (isReach)
+        private void Awake()
         {
-            _cameraPositionZ = _zoomValue;
+            _transform = transform;
+            _positionZ = _cameraPositionZ;
         }
-        else
+
+        private void Update()
         {
-            _cameraPositionZ = _positionZ;
+            _target = _player.position;
+            _target.z += _cameraPositionZ;
+            _target.y += _cameraPositionY;
+            _transform.position = _target;
+        }
+
+        private void OnEnable()
+        {
+            _upgrader.UpgradeZoneReached += Zoom;
+        }
+
+        private void OnDisable()
+        {
+            _upgrader.UpgradeZoneReached -= Zoom;
+        }
+
+        private void Zoom(bool isReach)
+        {
+            if (isReach)
+            {
+                _cameraPositionZ = _zoomValue;
+            }
+            else
+            {
+                _cameraPositionZ = _positionZ;
+            }
         }
     }
 }

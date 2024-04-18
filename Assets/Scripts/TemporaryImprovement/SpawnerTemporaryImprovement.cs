@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TemporaryImprovement
+namespace Assets.Scripts.TemporaryImprovement
 {
     [RequireComponent(typeof(Timer))]
     public class SpawnerTemporaryImprovement : MonoBehaviour

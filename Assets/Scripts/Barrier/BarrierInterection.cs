@@ -2,7 +2,7 @@ using Domain.Player;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Barrier
+namespace Assets.Scripts.Barrier
 {
     [RequireComponent(typeof(BoxCollider))]
     public class BarrierInterection : MonoBehaviour

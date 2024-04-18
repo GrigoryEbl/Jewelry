@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Item
+namespace Assets.Scripts.Item
 {
     public class CollectedItem : MonoBehaviour
     {

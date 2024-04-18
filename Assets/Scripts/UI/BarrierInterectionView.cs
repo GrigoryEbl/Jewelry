@@ -1,8 +1,8 @@
-using Barrier;
+using Assets.Scripts.Barrier;
 using TMPro;
 using UnityEngine;
 
-namespace UI
+namespace Assets.Scripts.UI
 {
     public class BarrierInterectionView : MonoBehaviour
     {

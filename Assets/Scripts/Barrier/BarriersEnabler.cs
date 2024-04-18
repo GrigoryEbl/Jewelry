@@ -1,7 +1,7 @@
 using UnityEngine;
 using YG;
 
-namespace Barrier
+namespace Assets.Scripts.Barrier
 {
     public class BarriersEnabler : MonoBehaviour
     {

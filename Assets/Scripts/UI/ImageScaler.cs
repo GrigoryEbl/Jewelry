@@ -1,9 +1,9 @@
 using DG.Tweening;
-using TemporaryImprovement;
+using Assets.Scripts.TemporaryImprovement;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace Assets.Scripts.UI
 {
     public class ImageScaler : MonoBehaviour
     {
@@ -35,4 +35,4 @@ namespace UI
             image.rectTransform.DOScale(_scale, _duration).SetLoops(_repeats, _loopType).SetEase(Ease.Linear);
         }
     }
-}
+} 

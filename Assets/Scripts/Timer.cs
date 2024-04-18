@@ -2,25 +2,28 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Timer : MonoBehaviour
+namespace Assets.Scripts
 {
-    public float Time { get; private set; }
-    public float StartTime { get; private set; }
-
-    public Action TimeEmpty;
-
-    public IEnumerator Work(float startTime)
+    public class Timer : MonoBehaviour
     {
-        StartTime = startTime;
-        Time = startTime;
+        public float Time { get; private set; }
+        public float StartTime { get; private set; }
 
-        while (Time > 0)
+        public Action TimeEmpty;
+
+        public IEnumerator Work(float startTime)
         {
-            Time -= UnityEngine.Time.deltaTime;
+            StartTime = startTime;
+            Time = startTime;
 
-            yield return null;
+            while (Time > 0)
+            {
+                Time -= UnityEngine.Time.deltaTime;
+
+                yield return null;
+            }
+
+            TimeEmpty?.Invoke();
         }
-
-        TimeEmpty?.Invoke();
     }
 }

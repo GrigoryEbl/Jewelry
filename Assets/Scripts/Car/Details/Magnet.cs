@@ -1,8 +1,7 @@
-using Item;
-using Sounds;
+using Assets.Scripts.Item;
+using Assets.Scripts.Sounds;
 using System;
 using UnityEngine;
-using Wallet;
 using YG;
 
 namespace Assets.Scripts.Car.Details

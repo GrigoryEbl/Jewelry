@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using YG;
 
-namespace Wallet
+namespace Assets.Scripts.Wallet
 {
     public class PlayerWallet : MonoBehaviour
     {

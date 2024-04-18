@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Utilize
+namespace Assets.Scripts.Utilize
 {
     public class MoneyStacker : MonoBehaviour
     {
@@ -45,4 +45,4 @@ namespace Utilize
             }
         }
     }
-}
+} 

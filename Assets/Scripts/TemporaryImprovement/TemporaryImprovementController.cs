@@ -4,7 +4,7 @@ using Assets.Scripts.Car.Details;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace TemporaryImprovement
+namespace Assets.Scripts.TemporaryImprovement
 {
     public class TemporaryImprovementController : MonoBehaviour
     {

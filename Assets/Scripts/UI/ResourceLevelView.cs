@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace UI
+namespace Assets.Scripts.UI
 {
     public class ResourceLevelView : MonoBehaviour
     {
@@ -15,4 +15,4 @@ namespace UI
             _level.text = _spawner.Item.Level.ToString();
         }
     }
-}
+} 

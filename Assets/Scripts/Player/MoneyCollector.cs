@@ -1,8 +1,8 @@
 using Assets.Scripts;
-using Sounds;
+using Assets.Scripts.Sounds;
 using System;
 using UnityEngine;
-using Wallet;
+using Assets.Scripts.Wallet;
 
 namespace Domain
 {

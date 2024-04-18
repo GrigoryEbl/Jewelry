@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Sounds
+namespace Assets.Scripts.Sounds
 {
     public class PlayerEffect : MonoBehaviour
     {

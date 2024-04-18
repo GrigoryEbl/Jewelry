@@ -1,8 +1,8 @@
-using TemporaryImprovement;
+using Assets.Scripts.TemporaryImprovement;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace Assets.Scripts.UI
 {
     public class TimerView : MonoBehaviour
     {
@@ -31,4 +31,4 @@ namespace UI
             }
         }
     }
-}
+} 

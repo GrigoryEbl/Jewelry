@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Barrier
+namespace Assets.Scripts.Barrier
 {
     public class LampsEnabler : MonoBehaviour
     {

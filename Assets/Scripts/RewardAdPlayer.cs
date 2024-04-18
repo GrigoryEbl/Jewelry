@@ -1,17 +1,20 @@
 using UnityEngine;
 using YG;
 
-public class RewardAdPlayer : MonoBehaviour
+namespace Assets.Scripts
 {
-    private YandexGame _yandexGame;
-
-    private void Awake()
+    public class RewardAdPlayer : MonoBehaviour
     {
-        _yandexGame = FindObjectOfType<YandexGame>();
-    }
+        private YandexGame _yandexGame;
 
-    public void ShowAd()
-    {
-        _yandexGame._RewardedShow(0);
+        private void Awake()
+        {
+            _yandexGame = FindObjectOfType<YandexGame>();
+        }
+
+        public void ShowAd()
+        {
+            _yandexGame._RewardedShow(0);
+        }
     }
 }

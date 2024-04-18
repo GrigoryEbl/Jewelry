@@ -1,7 +1,7 @@
 using Assets.Scripts.Car;
 using UnityEngine;
 
-namespace Sounds
+namespace Assets.Scripts.Sounds
 {
     [RequireComponent(typeof(Movement))]
     public class SoundEngine : MonoBehaviour

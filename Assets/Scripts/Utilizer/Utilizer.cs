@@ -1,10 +1,9 @@
-using Assets.Scripts;
-using Item;
-using Sounds;
+using Assets.Scripts.Item;
+using Assets.Scripts.Sounds;
 using UnityEngine;
-using Wallet;
+using Assets.Scripts.Wallet;
 
-namespace Utilize
+namespace Assets.Scripts.Utilize
 {
     [RequireComponent(typeof(Attractor))]
     public class Utilizer : MonoBehaviour
@@ -54,4 +53,4 @@ namespace Utilize
             }
         }
     }
-}
+} 

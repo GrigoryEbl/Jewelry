@@ -1,8 +1,8 @@
 using TMPro;
 using UnityEngine;
-using Wallet;
+using Assets.Scripts.Wallet;
 
-namespace UI
+namespace Assets.Scripts.UI
 {
     public class WalletView : MonoBehaviour
     {
@@ -36,4 +36,4 @@ namespace UI
             }
         }
     }
-}
+} 

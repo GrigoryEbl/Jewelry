@@ -1,4 +1,3 @@
-using Assets.Scripts;
 using Assets.Scripts.Car.Details;
 using UnityEngine;
 using YG;

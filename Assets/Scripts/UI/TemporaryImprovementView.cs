@@ -1,8 +1,8 @@
 using DG.Tweening;
-using TemporaryImprovement;
+using Assets.Scripts.TemporaryImprovement;
 using UnityEngine;
 
-namespace UI
+namespace Assets.Scripts.UI
 {
     public class TemporaryImprovementView : MonoBehaviour
     {
@@ -35,4 +35,4 @@ namespace UI
             print("reach: " + isActive);
         }
     }
-}
+} 
